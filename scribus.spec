@@ -9,21 +9,20 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
 # Source0-md5:	7d2c2b228f9a6ff82c9401fd54bdbe16
-#Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
-##Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
-Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
-# Source2-md5:	799976e2191582faf0443a671374a67f
+Source1:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
+# Source1-md5:	799976e2191582faf0443a671374a67f
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
+Patch4:		%{name}-post12.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -73,11 +72,12 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -n %{name}-%{version} -a2
+%setup -q -n %{name}-%{version} -a1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
@@ -94,10 +94,6 @@ export QTDIR KDEDIR
 %configure \
 	--with-qt-libraries=%{_libdir}
 %{__make}
-#cd scribus-i18n-en
-#cp ../admin/config.sub admin
-#%%configure
-#%%{__make}
 cd scribus-samples-*
 cp ../admin/config.sub admin
 %configure2_13
@@ -176,7 +172,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/doc
 %dir %{_datadir}/%{name}/doc/en
 %{_datadir}/%{name}/doc/en/*
-#%{_datadir}/%{name}/doc/en/Scripter/*
 %{_datadir}/%{name}/icons
 %dir %{_datadir}/%{name}/samples
 %{_datadir}/%{name}/samples/*
