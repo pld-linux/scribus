@@ -6,7 +6,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.4
-Release:	2
+Release:	2.1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
@@ -33,6 +33,8 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	python-devel
+BuildRequires:	python-devel-src
+BuildRequires:	python-static
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 Obsoletes:	scribus-svg
