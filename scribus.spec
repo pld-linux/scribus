@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without cups	# build without CUPS support
+%bcond_without	cups	# build without CUPS support
 #
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
@@ -25,8 +25,11 @@ Patch4:		%{name}-gcc2.patch
 URL:		http://www.scribus.org.uk/
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?with_cups:BuildRequires:	cups-devel}
-%{?without_cups:BuildConflicts:	cups-devel}
+%if %{with cups}
+BuildRequires:	cups-devel
+%else
+BuildConflicts:	cups-devel
+%endif
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	lcms-devel >= 1.09
 BuildRequires:	libart_lgpl-devel >= 2.3.14
