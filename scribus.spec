@@ -5,12 +5,12 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.0
+Version:	1.0.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Publishing
 Source0:	http://scribus.planetmirror.com/%{name}-%{version}.tar.gz
-# Source0-md5:	2ee654e6196229081871c8c1ea8163f2
+# Source0-md5:	2d5b464ffe606ac5339494336dd247ac
 Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
