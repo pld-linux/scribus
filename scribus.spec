@@ -1,7 +1,7 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	0.7.3
+Version:	0.7.5
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Graphics
