@@ -47,7 +47,7 @@ Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		specflags_ia32	"-fomit-frame-pointer"
+%define		specflags_ia32	-fomit-frame-pointer
 %define		_ulibdir	%{_prefix}/lib
 
 %description
