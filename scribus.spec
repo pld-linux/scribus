@@ -22,18 +22,22 @@ Source4:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
+Patch3:		%{name}-python.patch
+Patch4:		%{name}-gcc2.patch
 URL:		http://www.scribus.org.uk/
 %{!?_without_cups:BuildRequires:	cups-devel}
 %{?_without_cups:BuildConflicts:	cups-devel}
+BuildRequires:	freetype-devel
 BuildRequires:	lcms-devel >= 1.08-2
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
+BuildRequires:	python-devel
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
-BuildRequires:	freetype-devel
 Obsoletes:	scribus-svg
+Obsoletes:	scribus-scripting
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	"-fomit-frame-pointer"
@@ -66,6 +70,8 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 QTDIR=%{_prefix}
