@@ -1,0 +1,35 @@
+--- scribus-1.2/configure.in.orig	2004-12-25 18:19:39.353250168 +0100
++++ scribus-1.2/configure.in	2004-12-25 18:21:28.108716824 +0100
+@@ -139,7 +139,11 @@
+ 	COMPILE_PYTHON=no
+ fi
+ if test $hapy = yes; then
+-  AC_CHECK_HEADER(python2.3/Python.h, [foo=""],[hapython=no])
++  AC_CHECK_HEADER(python2.4/Python.h, [foo=""],[hapython=no])
++  if test $hapython = no; then
++    hapython=yes
++    AC_CHECK_HEADER(python2.3/Python.h, [foo=""],[hapython=no])
++  fi
+    if test $hapython = yes; then
+     AC_DEFINE_UNQUOTED(HAVE_PYTHON_23, 1, [Python])
+    fi
+--- scribus-1.2/acinclude.m4.orig	2004-12-25 18:30:07.514755104 +0100
++++ scribus-1.2/acinclude.m4	2004-12-25 18:29:26.582977680 +0100
+@@ -3982,11 +3982,12 @@
+ 
+ AC_DEFUN(KDE_CHECK_PYTHON,
+ [
+-  KDE_CHECK_PYTHON_INTERN("2.3",
+-    [KDE_CHECK_PYTHON_INTERN("2.2",
+-      [KDE_CHECK_PYTHON_INTERN("2.1",
+-        [KDE_CHECK_PYTHON_INTERN("2.0", [ KDE_CHECK_PYTHON_INTERN($1, $2) ])
+-  ])])])
++  KDE_CHECK_PYTHON_INTERN("2.4",
++    [KDE_CHECK_PYTHON_INTERN("2.3",
++      [KDE_CHECK_PYTHON_INTERN("2.2",
++        [KDE_CHECK_PYTHON_INTERN("2.1",
++          [KDE_CHECK_PYTHON_INTERN("2.0", [ KDE_CHECK_PYTHON_INTERN($1, $2) ])
++  ])])])])
+ ])
+ 
+ AC_DEFUN(KDE_CHECK_STL_SGI,
