@@ -11,7 +11,7 @@ Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2.1
 %define	_snap	21092004
-Release:	0.%{_snap}.1
+Release:	0.%{_snap}.2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 #Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
