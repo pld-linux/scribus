@@ -10,7 +10,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.7
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/%{name}-%{version}.tar.bz2
@@ -80,6 +80,8 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch2 -p1
 %patch3 -p1
 
+%{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
+
 %build
 QTDIR=%{_prefix}
 KDEDIR=%{_prefix}
@@ -104,10 +106,7 @@ cp ../admin/config.sub admin
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_ulibdir}/%{name}/doc
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
-
-ln -sf $RPM_BUILD_ROOT%{_ulibdir} $RPM_BUILD_ROOT%{_datadir}
 
 for dir in . scribus-samples; do
 	[ ! -d "$dir" ] && continue
@@ -132,8 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/%{name}/import.prolog
 # don't mark dictionaries with lang() --misiek
 %{_ulibdir}/%{name}/dicts
-#%dir %{_ulibdir}/%{name}/doc
-#%{_ulibdir}/%{name}/doc/en
 %dir %{_datadir}/%{name}/doc/en
 %{_datadir}/%{name}/doc/en/*
 #%{_datadir}/%{name}/doc/en/Scripter/*
@@ -142,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_ulibdir}/%{name}/libs/*.so*
 %{_ulibdir}/%{name}/libs/*.la
 %dir %{_ulibdir}/%{name}/plugins
-#%%lang(da) %{_libdir}/%{name}/plugins/*.da.qm
+#%lang(da) %{_datadir}/%{name}/plugins/*.da.qm
 #%lang(nb) %{_datadir}/%{name}/plugins/*.no.qm
 #%lang(sk) %{_datadir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
@@ -151,8 +148,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/scribus/rgb*
 %dir %{_datadir}/%{name}/samples
 %{_datadir}/%{name}/samples/*
-#%dir %{_ulibdir}/%{name}/samples
-#%{_ulibdir}/scribus/samples/*
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
