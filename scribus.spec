@@ -221,5 +221,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/scribus
 
 %files docs
+%defattr(644,root,root,755)
 %dir %{_datadir}/%{name}/doc/en
 %{_datadir}/%{name}/doc/en/*
