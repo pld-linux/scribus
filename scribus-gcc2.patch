@@ -1,0 +1,11 @@
+--- scribus-1.1.2/scribus/scribus.cpp.orig	Fri Oct 31 10:26:40 2003
++++ scribus-1.1.2/scribus/scribus.cpp	Tue Nov  4 12:03:22 2003
+@@ -5828,7 +5828,7 @@
+ 		dia.setSelection(defNa);
+ 	if (dia.exec() == QDialog::Accepted)
+ 		{
+-			LoadEnc = cod ? dia.TxCodeM->currentText() : "";
++			LoadEnc = cod ? dia.TxCodeM->currentText() : QString("");
+ 			return dia.selectedFile();
+ 		}
+ 	return "";
