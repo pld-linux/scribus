@@ -11,17 +11,18 @@ Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2
 %define		_pre	RC1
-Release:	0.%{_pre}.1
+Release:	0.%{_pre}.2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}%{_pre}.tar.bz2
 # Source0-md5:	6074ae3d83225fa3d214a33ab4fe28db
 #Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
-# Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
+##Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source2-md5:	799976e2191582faf0443a671374a67f
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
+Source7:	%{name}.pl.qm
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
@@ -121,6 +122,8 @@ done
 #Install .desktop and .icon (temporary)
 install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
+#Temporary hack for RC1 release, delete it afterwards
+install %{SOURCE7} $RPM_BUILD_ROOT%{_ulibdir}/scribus/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
