@@ -11,7 +11,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2.1
-Release:	4
+Release:	6
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
@@ -48,7 +48,6 @@ Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
 # temporary workaround ?
-Obsoletes:	scribus-templates
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
@@ -89,6 +88,20 @@ On-line user documentation for Scribus.
 
 %description docs -l pl
 Dokumentacja u¿ytkownika dla Scribusa.
+
+%package templates-base
+Summary:	Default document templates
+Summary(pl):	Domy¶lne szablony dokumentów
+License:	GPL v2
+Group:		X11/Applications/Publishing
+Requires:	scribus
+Obsoletes:      scribus-templates < 1.2.1
+
+%description templates-base
+Default document templates shipped with Scribus.
+
+%description templates-base -l pl
+Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
 %setup -q -a1
@@ -202,18 +215,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/samples/*
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*
-%dir %{_datadir}/%{name}/templates
-%{_datadir}/%{name}/templates/*.xml
-%dir %{_datadir}/%{name}/templates/br1
-%{_datadir}/%{name}/templates/br1/*
-%dir %{_datadir}/%{name}/templates/nl1
-%{_datadir}/%{name}/templates/nl1/*
-%dir %{_datadir}/%{name}/templates/nl2
-%{_datadir}/%{name}/templates/nl2/*
-%dir %{_datadir}/%{name}/templates/sc_presentation
-%{_datadir}/%{name}/templates/sc_presentation/*
-%dir %{_datadir}/%{name}/templates/textbased
-%{_datadir}/%{name}/templates/textbased/*
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/%{name}.*
 %lang(pl) %{_mandir}/pl/man1/%{name}.*
@@ -227,3 +228,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_datadir}/%{name}/doc/en
 %{_datadir}/%{name}/doc/en/*
+
+%files templates-base
+%defattr(644,root,root,755)
+%dir %{_datadir}/%{name}/templates
+%{_datadir}/%{name}/templates/*.xml
+%dir %{_datadir}/%{name}/templates/br1
+%{_datadir}/%{name}/templates/br1/*
+%dir %{_datadir}/%{name}/templates/nl1
+%{_datadir}/%{name}/templates/nl1/*
+%dir %{_datadir}/%{name}/templates/nl2
+%{_datadir}/%{name}/templates/nl2/*
+%dir %{_datadir}/%{name}/templates/sc_presentation
+%{_datadir}/%{name}/templates/sc_presentation/*
+%dir %{_datadir}/%{name}/templates/textbased
+%{_datadir}/%{name}/templates/textbased/*
