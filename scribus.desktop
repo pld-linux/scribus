@@ -50,5 +50,5 @@ Terminal=false
 Icon=scribusicon.png
 Type=Application
 X-StandardInstall=false
-Categories=Office;X-Misc;
+Categories=Qt;Office;X-Misc;
 # vi: encoding=utf-8
