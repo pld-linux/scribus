@@ -10,12 +10,12 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.7
-Release:	0.2
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/%{name}-%{version}.tar.bz2
 # Source0-md5:	1786f2ee59d1c80af4b52f287d449bbe
-Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
+#Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source2-md5:	799976e2191582faf0443a671374a67f
@@ -74,7 +74,7 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -a1 -a2
+%setup -q -a2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -93,10 +93,10 @@ export QTDIR KDEDIR
 %configure \
 	--with-qt-libraries=%{_libdir}
 %{__make}
-cd scribus-i18n-en
-cp ../admin/config.sub admin
-%configure
-%{__make}
+#cd scribus-i18n-en
+#cp ../admin/config.sub admin
+#%configure
+#%{__make}
 cd ../scribus-samples-*
 cp ../admin/config.sub admin
 %configure2_13
@@ -109,7 +109,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 ln -sf $RPM_BUILD_ROOT%{_ulibdir} $RPM_BUILD_ROOT%{_datadir}
 
-for dir in . scribus-*; do
+for dir in . scribus-samples; do
 	[ ! -d "$dir" ] && continue
 	olddir=$(pwd)
 	cd $dir
