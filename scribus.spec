@@ -131,7 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/%{name}/libs/*.la
 %dir %{_ulibdir}/%{name}/plugins
 #%%lang(da) %{_libdir}/%{name}/plugins/*.da.qm
-%lang(no) %{_ulibdir}/%{name}/plugins/*.no.qm
+%lang(nb) %{_ulibdir}/%{name}/plugins/*.no.qm
 %lang(sk) %{_ulibdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
@@ -153,7 +153,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %{_ulibdir}/scribus/scribus.it.qm
 #%lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
-%lang(no) %{_ulibdir}/scribus/scribus.no.qm
+%lang(nb) %{_ulibdir}/scribus/scribus.no.qm
 %lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
 %lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
 %lang(sk) %{_ulibdir}/scribus/scribus.sk.qm
