@@ -2,14 +2,14 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	0.7.3
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	qt-devel >= 3.0.2
+BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -28,8 +28,6 @@ Adobe(R) InDesign(TM), ale opublikowany na licencji GNU GPL.
 %prep
 %setup -q
 
-#%patch
-
 %build
 %configure2_13 \
 	--prefix=%{_prefix} \
@@ -40,14 +38,23 @@ Adobe(R) InDesign(TM), ale opublikowany na licencji GNU GPL.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
+
+#rm -rf $RPM_BUILD_ROOT%{_datadir}/scribus/doc/
 	  
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-%postun
-
 %files
 %defattr(644,root,root,755)
-#%doc
-#%attr(,,)
+%attr(755,root,root) %{_bindir}/scribus
+%{_datadir}/scribus/scribus.*.qm
+%{_datadir}/scribus/*.enc
+%{_datadir}/scribus/plugins/*
+%{_datadir}/scribus/libs/*
+%{_datadir}/scribus/icons/*.png
+%{_datadir}/scribus/icons/*.xpm
+%{_datadir}/scribus/icons/*.jpg
+%{_datadir}/scribus/doc/
+
+%{_includedir}/scribus/*.h
+%{_includedir}/scribus/libpostscript/*.h
