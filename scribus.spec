@@ -5,12 +5,12 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	0.9.10
+Version:	0.9.11
 Release:	1
 License:	GPL
 Group:		X11/Applications/Publishing
 Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
-# Source0-md5:	cb082cd04fe0196dc634bb3eeaad1526
+# Source0-md5:	4a0da6547129abfaa154147c18a54bac
 Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
 # Source1-md5:	5cd3b7df9c3e5ec2f8cc563d1c5a05a5
 Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
@@ -124,6 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(da) %{_libdir}/%{name}/plugins/*.da.qm
 %lang(de) %{_libdir}/%{name}/plugins/*.de.qm
 %lang(sk) %{_libdir}/%{name}/plugins/*.sk.qm
+%lang(no) %{_libdir}/%{name}/plugins/*.no.qm
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.la
 %{_libdir}/scribus/profiles
@@ -141,6 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(hu) %{_libdir}/scribus/scribus.hu.qm
 %lang(it) %{_libdir}/scribus/scribus.it.qm
 #%lang(lt) %{_libdir}/scribus/scribus.lt.qm
+%lang(no) %{_libdir}/scribus/scribus.no.qm
 %lang(pl) %{_libdir}/scribus/scribus.pl.qm
 %lang(sk) %{_libdir}/scribus/scribus.sk.qm
 %lang(tr) %{_libdir}/scribus/scribus.tr.qm
