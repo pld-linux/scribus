@@ -120,6 +120,8 @@ done
 install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 
+rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -163,7 +165,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
 %lang(nb) %{_ulibdir}/scribus/scribus.nb.qm
-%lang(no) %{_ulibdir}/scribus/scribus.no.qm
 %lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
 %lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
 %lang(se) %{_ulibdir}/scribus/scribus.se.qm
