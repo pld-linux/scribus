@@ -10,7 +10,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.7
-Release:	0.1
+Release:	0.2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/%{name}-%{version}.tar.bz2
@@ -129,51 +129,55 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/scribus
 %dir %{_ulibdir}/%{name}
+%{_ulibdir}/%{name}/import.prolog
 # don't mark dictionaries with lang() --misiek
 %{_ulibdir}/%{name}/dicts
-%dir %{_ulibdir}/%{name}/doc
-%{_ulibdir}/%{name}/doc/en
+#%dir %{_ulibdir}/%{name}/doc
+#%{_ulibdir}/%{name}/doc/en
 %dir %{_datadir}/%{name}/doc/en
-%{_datadir}/%{name}/doc/en/Scripter/*
-%{_ulibdir}/%{name}/icons
+%{_datadir}/%{name}/doc/en/*
+#%{_datadir}/%{name}/doc/en/Scripter/*
+%{_datadir}/%{name}/icons
 %dir %{_ulibdir}/%{name}/libs
 %attr(755,root,root) %{_ulibdir}/%{name}/libs/*.so*
 %{_ulibdir}/%{name}/libs/*.la
 %dir %{_ulibdir}/%{name}/plugins
 #%%lang(da) %{_libdir}/%{name}/plugins/*.da.qm
-%lang(nb) %{_ulibdir}/%{name}/plugins/*.no.qm
-%lang(sk) %{_ulibdir}/%{name}/plugins/*.sk.qm
+#%lang(nb) %{_datadir}/%{name}/plugins/*.no.qm
+#%lang(sk) %{_datadir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
 %{_ulibdir}/scribus/profiles
 %{_ulibdir}/scribus/rgb*
 %dir %{_datadir}/%{name}/samples
 %{_datadir}/%{name}/samples/*
-%dir %{_ulibdir}/%{name}/samples
-%{_ulibdir}/scribus/samples/*
+#%dir %{_ulibdir}/%{name}/samples
+#%{_ulibdir}/scribus/samples/*
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
 %lang(br) %{_ulibdir}/scribus/scribus.br.qm
-#%lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
+%lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
 %lang(cs) %{_ulibdir}/scribus/scribus.cs.qm
 %lang(cy) %{_ulibdir}/scribus/scribus.cy.qm
 %lang(da) %{_ulibdir}/scribus/scribus.da.qm
 %lang(de) %{_ulibdir}/scribus/scribus.de.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
+%lang(eu) %{_ulibdir}/scribus/scribus.eu.qm
 %lang(fi) %{_ulibdir}/scribus/scribus.fi.qm
 %lang(fr) %{_ulibdir}/scribus/scribus.fr.qm
 %lang(gl) %{_ulibdir}/scribus/scribus.gl.qm
 %lang(hu) %{_ulibdir}/scribus/scribus.hu.qm
 %lang(id) %{_ulibdir}/scribus/scribus.id.qm
 %lang(it) %{_ulibdir}/scribus/scribus.it.qm
-#%lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
+%lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
 %lang(nb) %{_ulibdir}/scribus/scribus.no.qm
 %lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
 %lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
 %lang(sk) %{_ulibdir}/scribus/scribus.sk.qm
+%lang(sl) %{_ulibdir}/scribus/scribus.sl.qm
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %{_desktopdir}/%{name}.desktop
