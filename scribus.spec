@@ -39,7 +39,7 @@ BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	"-fomit-frame-pointer"
 
