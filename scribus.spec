@@ -6,7 +6,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.0
-Release:	0.9
+Release:	1
 License:	GPL
 Group:		X11/Applications/Publishing
 Source0:	http://scribus.planetmirror.com/%{name}-%{version}.tar.gz
@@ -52,8 +52,7 @@ Adobe(R) InDesign(TM), ale opublikowany na licencji GNU GPL.
 Summary:	Header files for Scribus plugins development
 Summary(pl):	Pliki nag³ówkowe do tworzenia wtyczek Scribusa
 Group:		Development/Libraries
-# for now it doesn't require base
-#Requires:       %{name} = %{version}
+# currently it doesn't require base
 Requires:	qt-devel
 
 %description devel
@@ -126,7 +125,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/libs/*.la
 %dir %{_libdir}/%{name}/plugins
 %lang(da) %{_libdir}/%{name}/plugins/*.da.qm
-#%lang(de) %{_libdir}/%{name}/plugins/*.de.qm
 %lang(no) %{_libdir}/%{name}/plugins/*.no.qm
 %lang(sk) %{_libdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
@@ -149,6 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 #%lang(lt) %{_libdir}/scribus/scribus.lt.qm
 %lang(no) %{_libdir}/scribus/scribus.no.qm
 %lang(pl) %{_libdir}/scribus/scribus.pl.qm
+%lang(ru) %{_libdir}/scribus/scribus.ru.qm
 %lang(sk) %{_libdir}/scribus/scribus.sk.qm
 %lang(tr) %{_libdir}/scribus/scribus.tr.qm
 %lang(uk) %{_libdir}/scribus/scribus.uk.qm
