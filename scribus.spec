@@ -35,6 +35,8 @@ BuildRequires:	zlib-devel
 Requires:	XFree86-fonts
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		specflags_ia32	"-fomit-frame-pointer"
+
 %description
 Scribus is a Layout program for Linux(R), similar to Adobe(R)
 PageMaker(TM), QuarkXPress(TM) or Adobe(R) InDesign(TM), except that
