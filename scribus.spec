@@ -1,16 +1,20 @@
 #
+# TODO:
+#	- check why de & fr docs suddenly install in /usr/share not /usr/lib
+#	- fix it :>
+#
 # Conditional build:
 # _without_cups	- without CUPS support
 #
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.1.2
-Release:	2
+Version:	1.1.3
+Release:	0.9
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
-# Source0-md5:	e9a07ca1c62a7aa30a0f91767ebce6d5
+# Source0-md5:	af1a8b29f55364553e2e42dc39955f55
 Source1:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-de.tar.gz
@@ -26,7 +30,6 @@ Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
 Patch3:		%{name}-python.patch
 Patch4:		%{name}-gcc2.patch
-Patch5:		%{name}-python-vs-qt.patch
 URL:		http://www.scribus.org.uk/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -77,7 +80,6 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 QTDIR=%{_prefix}
@@ -135,8 +137,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/dicts
 %dir %{_libdir}/%{name}/doc
 %{_libdir}/%{name}/doc/en
-%lang(de) %{_libdir}/%{name}/doc/de
-%lang(fr) %{_libdir}/%{name}/doc/fr
+#%lang(de) %{_libdir}/%{name}/doc/de
+#%lang(fr) %{_libdir}/%{name}/doc/fr
 %{_libdir}/%{name}/icons
 %dir %{_libdir}/%{name}/libs
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.so*
