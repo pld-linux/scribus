@@ -1,0 +1,39 @@
+diff -ur scribus-1.2.1/scribus/helpbrowser.cpp scribus-1.2.1-help/scribus/helpbrowser.cpp
+--- scribus-1.2.1/scribus/helpbrowser.cpp	2005-01-06 21:18:30.000000000 +0100
++++ scribus-1.2.1-help/scribus/helpbrowser.cpp	2005-01-08 22:44:17.000000000 +0100
+@@ -187,6 +187,7 @@
+ void HelpBrowser::jumpToHelpSection(QString jumpToSection, QString jumpToFile)
+ {
+ 	QString toLoad;
++	bool noDocs=false;
+ 
+ 	if (jumpToFile=="") 
+ 	{
+@@ -194,8 +195,13 @@
+ 		toLoad = pfad + language + "/"; //clean this later to handle 5 char locales
+ 		if (jumpToSection=="") 
+ 		{
+-			toLoad+=listView->firstChild()->text(1);
+-			listView->setSelected( listView->firstChild(), true );
++			if (listView->firstChild())
++			{
++				toLoad+=listView->firstChild()->text(1);
++				listView->setSelected( listView->firstChild(), true );
++			}
++			else
++				noDocs=true;
+ 		}
+ 		else if (jumpToSection=="scripter") 
+ 		{
+@@ -214,7 +220,10 @@
+ 	else
+ 		toLoad=jumpToFile;
+ 
+-	loadHelp(toLoad);
++	if (!noDocs)
++		loadHelp(toLoad);
++	else
++		textBrowser->setText("<h2>"+ tr("Sorry, no manual available! Please see: http://docs.scribus.net for updated docs\nand www.scribus.net for downloads.")+"</h2>");
+ }
+ 
+ void HelpBrowser::loadHelp(QString filename)
