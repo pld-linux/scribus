@@ -6,7 +6,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
@@ -19,6 +19,8 @@ Source3:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-fr.tar.gz
 # Source3-md5:	688db072ffbf3bb1fceee3e763e4fc48
 Source4:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source4-md5:	799976e2191582faf0443a671374a67f
+Source5:	%{name}.desktop
+Source6:	%{name}icon.png
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
@@ -105,6 +107,7 @@ cd ../scribus-samples-*
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/doc
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 ln -sf $RPM_BUILD_ROOT%{_libdir} $RPM_BUILD_ROOT%{_datadir}
 
@@ -116,6 +119,10 @@ for dir in . scribus-*; do
 		DESTDIR=$RPM_BUILD_ROOT
 	cd $olddir
 done
+
+#Install .desktop and .icon (temporary)
+install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -163,6 +170,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sk) %{_libdir}/scribus/scribus.sk.qm
 %lang(tr) %{_libdir}/scribus/scribus.tr.qm
 %lang(uk) %{_libdir}/scribus/scribus.uk.qm
+%{_desktopdir}/%{name}.desktop
+%{_pixmapsdir}/%{name}icon.png
 
 %files devel
 %defattr(644,root,root,755)
