@@ -1,12 +1,12 @@
 #
 # Conditional build:
-# _without_cups	- without CUPS support
+%bcond_without cups	# build without CUPS support
 #
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.4
-Release:	2.1
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
@@ -17,15 +17,16 @@ Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source2-md5:	799976e2191582faf0443a671374a67f
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
-Patch0:		%{name}-standard-font-paths.patch
-Patch1:		%{name}-module-fixes.patch
-Patch2:		%{name}-nolibs.patch
-Patch3:		%{name}-gcc2.patch
+Patch0:		%{name}-python.patch
+Patch1:		%{name}-standard-font-paths.patch
+Patch2:		%{name}-module-fixes.patch
+Patch3:		%{name}-nolibs.patch
+Patch4:		%{name}-gcc2.patch
 URL:		http://www.scribus.org.uk/
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{!?_without_cups:BuildRequires:	cups-devel}
-%{?_without_cups:BuildConflicts:	cups-devel}
+%{?with_cups:BuildRequires:	cups-devel}
+%{?without_cups:BuildConflicts:	cups-devel}
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	lcms-devel >= 1.09
 BuildRequires:	libart_lgpl-devel >= 2.3.14
@@ -33,8 +34,6 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	python-devel
-BuildRequires:	python-devel-src
-BuildRequires:	python-static
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 Obsoletes:	scribus-svg
@@ -73,6 +72,7 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 QTDIR=%{_prefix}
