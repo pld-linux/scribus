@@ -95,7 +95,7 @@ export QTDIR KDEDIR
 %{__make}
 #cd scribus-i18n-en
 #cp ../admin/config.sub admin
-#%configure
+#%%configure
 #%{__make}
 cd ../scribus-samples-*
 cp ../admin/config.sub admin
