@@ -10,13 +10,11 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2.1
-%define	_snap	20041221
-Release:	0.%{_snap}.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-#Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
-Source0:	%{name}-%{version}-%{_snap}.tar.bz2
-# Source0-md5:	b8b9bcb3f9e0f62fa53923aa3ee57e75
+Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	002cb629e817722f4123df7a41fc824b
 Source1:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source1-md5:	799976e2191582faf0443a671374a67f
 Source5:	%{name}.desktop
@@ -157,6 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/%{name}/plugins/gettext/*.la
 %{_ulibdir}/scribus/profiles
 %{_ulibdir}/scribus/rgb*
+%lang(af) %{_ulibdir}/scribus/scribus.af.qm
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
 %lang(br) %{_ulibdir}/scribus/scribus.br.qm
 %lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
@@ -209,7 +208,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/templates/textbased/*
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/%{name}.*
-%{_mandir}/pl/man1/%{name}.*
+%lang(pl) %{_mandir}/pl/man1/%{name}.*
 %{_pixmapsdir}/%{name}icon.png
 
 %files devel
