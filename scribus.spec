@@ -6,7 +6,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.0
-Release:	0.9
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://scribus.planetmirror.com/%{name}-%{version}.tar.gz
@@ -17,7 +17,7 @@ Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
 # Source2-md5:	e142431cee352abd2e5278ea4b748264
 Source3:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
 # Source3-md5:	688db072ffbf3bb1fceee3e763e4fc48
-#Source4:	http://web2.altmuehlnet.de/fschmid/%{name}-samples-0.1.tar.gz
+Source4:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source4-md5:	799976e2191582faf0443a671374a67f
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
@@ -89,9 +89,9 @@ cd ../scribus-i18n-de
 cd ../scribus-i18n-fr
 %configure2_13
 %{__make}
-#cd ../scribus-samples-0.1
-#%configure2_13
-#%{__make}
+cd ../scribus-samples-0.1
+%configure2_13
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -131,7 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
 %{_libdir}/%{name}/plugins/*.la
 %{_libdir}/scribus/profiles
-#%{_libdir}/scribus/samples
+%{_libdir}/scribus/samples
 %{_libdir}/scribus/*.enc
 %{_libdir}/scribus/*enc.txt
 %lang(bg) %{_libdir}/scribus/scribus.bg.qm
