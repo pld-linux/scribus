@@ -46,7 +46,7 @@ for developing programs using the %{libname} library.
 %setup -q
 %setup -q -T -D -a1 -a2 -a3 -a4
 %patch0 -p1
-#%patch1 -p1
+%patch1 -p1
 
 %build
 QTDIR=%{_prefix}
