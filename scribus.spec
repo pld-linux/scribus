@@ -141,6 +141,9 @@ rm -rf $RPM_BUILD_ROOT
 #%lang(sk) %{_ulibdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
+%dir %{_ulibdir}/%{name}/plugins/gettext
+%attr(755,root,root) %{_ulibdir}/%{name}/plugins/gettext/*.so*
+%{_ulibdir}/%{name}/plugins/gettext/*.la
 %{_ulibdir}/scribus/profiles
 %{_ulibdir}/scribus/rgb*
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
@@ -161,13 +164,22 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %{_ulibdir}/scribus/scribus.it.qm
 %lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
-%lang(nb) %{_ulibdir}/scribus/scribus.no.qm
+%lang(nb) %{_ulibdir}/scribus/scribus.nb_NO.qm
+%lang(no) %{_ulibdir}/scribus/scribus.no_NO.qm
 %lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
 %lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
 %lang(sk) %{_ulibdir}/scribus/scribus.sk.qm
 %lang(sl) %{_ulibdir}/scribus/scribus.sl.qm
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
+%dir %{_datadir}/%{name}/templates
+%{_datadir}/%{name}/templates/template.xml
+%dir %{_datadir}/%{name}/templates/br1
+%{_datadir}/%{name}/templates/br1/*
+%dir %{_datadir}/%{name}/templates/nl1
+%{_datadir}/%{name}/templates/nl1/*
+%dir %{_datadir}/%{name}/templates/nl2
+%{_datadir}/%{name}/templates/nl2/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/doc
 %dir %{_datadir}/%{name}/doc/en
