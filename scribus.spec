@@ -1,8 +1,4 @@
 #
-# TODO:
-#	- check why de & fr docs suddenly install in /usr/share not /usr/lib
-#	- fix it :>
-#
 # Conditional build:
 # _without_cups	- without CUPS support
 #
@@ -10,19 +6,15 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.4
-Release:	0.9
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
 # Source0-md5:	7e9577ce56b0a5955ed9b37bb2a8c7a1
 Source1:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
-Source2:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-de.tar.gz
-# Source2-md5:	e142431cee352abd2e5278ea4b748264
-Source3:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-fr.tar.gz
-# Source3-md5:	688db072ffbf3bb1fceee3e763e4fc48
-Source4:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
-# Source4-md5:	799976e2191582faf0443a671374a67f
+Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
+# Source2-md5:	799976e2191582faf0443a671374a67f
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
 Patch0:		%{name}-standard-font-paths.patch
@@ -73,7 +65,7 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -a1 -a2 -a3 -a4
+%setup -q -a1 -a2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -93,12 +85,6 @@ export QTDIR KDEDIR
 %{__make}
 cd scribus-i18n-en
 %configure
-%{__make}
-cd ../scribus-i18n-de
-%configure2_13
-%{__make}
-cd ../scribus-i18n-fr
-%configure2_13
 %{__make}
 cd ../scribus-samples-*
 %configure2_13
@@ -135,8 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/dicts
 %dir %{_libdir}/%{name}/doc
 %{_libdir}/%{name}/doc/en
-#%lang(de) %{_libdir}/%{name}/doc/de
-#%lang(fr) %{_libdir}/%{name}/doc/fr
 %{_libdir}/%{name}/icons
 %dir %{_libdir}/%{name}/libs
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.so*
