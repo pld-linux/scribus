@@ -14,7 +14,7 @@ Version:	1.2
 Release:	0.%{_pre}.1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/scribus/%{name}-%{version}%{_pre}.tar.bz2
+Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}%{_pre}.tar.bz2
 # Source0-md5:	6074ae3d83225fa3d214a33ab4fe28db
 #Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
