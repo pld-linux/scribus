@@ -85,4 +85,4 @@ rm -rf $RPM_BUILD_ROOT
 #%lang(fr) %{_datadir}/scribus/doc/fr
 
 # -devel package?
-#%{_includedir}/scribus
+#%%{_includedir}/scribus
