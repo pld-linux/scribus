@@ -1,7 +1,8 @@
 #
 # TODO:
 # - seperate scripts subpackage
-# - seperate templates add proper obsoletes for it
+# - seperate templates add proper obsoletes for it (and remove O: in main
+#   package then)
 #
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
@@ -10,7 +11,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2.1
-Release:	5
+Release:	7
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
@@ -24,6 +25,7 @@ Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
 Patch4:		%{name}-destdir.patch
+Patch5:		%{name}-helpbrowser.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -41,9 +43,11 @@ BuildRequires:	libtiff-devel
 BuildRequires:	python-devel
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
+Requires:	python-Imaging
 Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
+# temporary workaround ?
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
@@ -85,6 +89,20 @@ On-line user documentation for Scribus.
 %description docs -l pl
 Dokumentacja u¿ytkownika dla Scribusa.
 
+%package templates-base
+Summary:	Default document templates
+Summary(pl):	Domy¶lne szablony dokumentów
+License:	GPL v2
+Group:		X11/Applications/Publishing
+Requires:	scribus
+Obsoletes:      scribus-templates < 1.2.1
+
+%description templates-base
+Default document templates shipped with Scribus.
+
+%description templates-base -l pl
+Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
+
 %prep
 %setup -q -a1
 %patch0 -p1
@@ -92,6 +110,7 @@ Dokumentacja u¿ytkownika dla Scribusa.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
@@ -196,6 +215,22 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/samples/*
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*
+%{_desktopdir}/%{name}.desktop
+%{_mandir}/man1/%{name}.*
+%lang(pl) %{_mandir}/pl/man1/%{name}.*
+%{_pixmapsdir}/%{name}icon.png
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/scribus
+
+%files docs
+%defattr(644,root,root,755)
+%dir %{_datadir}/%{name}/doc/en
+%{_datadir}/%{name}/doc/en/*
+
+%files templates-base
+%defattr(644,root,root,755)
 %dir %{_datadir}/%{name}/templates
 %{_datadir}/%{name}/templates/*.xml
 %dir %{_datadir}/%{name}/templates/br1
@@ -208,15 +243,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/templates/sc_presentation/*
 %dir %{_datadir}/%{name}/templates/textbased
 %{_datadir}/%{name}/templates/textbased/*
-%{_desktopdir}/%{name}.desktop
-%{_mandir}/man1/%{name}.*
-%lang(pl) %{_mandir}/pl/man1/%{name}.*
-%{_pixmapsdir}/%{name}icon.png
-
-%files devel
-%defattr(644,root,root,755)
-%{_includedir}/scribus
-
-%files docs
-%dir %{_datadir}/%{name}/doc/en
-%{_datadir}/%{name}/doc/en/*
