@@ -5,17 +5,17 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://scribus.planetmirror.com/%{name}-%{version}.tar.gz
-# Source0-md5:	3a776ee7057292065ffa50614309aad6
-Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
+Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
+# Source0-md5:	e9a07ca1c62a7aa30a0f91767ebce6d5
+Source1:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
-Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
+Source2:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-de.tar.gz
 # Source2-md5:	e142431cee352abd2e5278ea4b748264
-Source3:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
+Source3:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-fr.tar.gz
 # Source3-md5:	688db072ffbf3bb1fceee3e763e4fc48
 Source4:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source4-md5:	799976e2191582faf0443a671374a67f
