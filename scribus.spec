@@ -143,8 +143,10 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fr) %{_libdir}/scribus/scribus.fr.qm
 %lang(gl) %{_libdir}/scribus/scribus.gl.qm
 %lang(hu) %{_libdir}/scribus/scribus.hu.qm
+%lang(id) %{_libdir}/scribus/scribus.id.qm
 %lang(it) %{_libdir}/scribus/scribus.it.qm
 #%lang(lt) %{_libdir}/scribus/scribus.lt.qm
+%lang(nl) %{_libdir}/scribus/scribus.nl.qm
 %lang(no) %{_libdir}/scribus/scribus.no.qm
 %lang(pl) %{_libdir}/scribus/scribus.pl.qm
 %lang(ru) %{_libdir}/scribus/scribus.ru.qm
