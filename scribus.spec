@@ -33,6 +33,7 @@ BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 # fonts are required locally!
 Requires:	XFree86-fonts
+Obsoletes:	scribus-svg
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	"-fomit-frame-pointer"
@@ -121,14 +122,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/icons
 %dir %{_libdir}/%{name}/libs
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.so*
-%attr(755,root,root) %{_libdir}/%{name}/libs/*.la
+%{_libdir}/%{name}/libs/*.la
 %dir %{_libdir}/%{name}/plugins
 %lang(da) %{_libdir}/%{name}/plugins/*.da.qm
 #%lang(de) %{_libdir}/%{name}/plugins/*.de.qm
 %lang(no) %{_libdir}/%{name}/plugins/*.no.qm
 %lang(sk) %{_libdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
-%attr(755,root,root) %{_libdir}/%{name}/plugins/*.la
+%{_libdir}/%{name}/plugins/*.la
 %{_libdir}/scribus/profiles
 %{_libdir}/scribus/samples
 %{_libdir}/scribus/*.enc
