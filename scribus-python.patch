@@ -6,7 +6,7 @@ diff -ur scribus-1.2.1/acinclude.m4 scribus-1.2.1-patch/acinclude.m4
  PYTHONINC=-I$python_incdir
  
 -python_libdirs="$ac_python_dir/lib$kdelibsuff /usr/lib$kdelibsuff /usr/local /usr/lib$kdelibsuff $kde_extra_libs"
-+python_libdirs="$ac_python_dir/lib$kdelibsuff /usr/lib$kdelibsuff /usr/share /usr/local /usr/lib$kdelibsuff $kde_extra_libs"
++python_libdirs="$ac_python_dir/lib$kdelibsuff /usr/lib$kdelibsuff /usr/share /usr/local /usr/lib64 /usr/lib$kdelibsuff $kde_extra_libs"
  AC_FIND_FILE(libpython$version.so, $python_libdirs, python_libdir)
  if test ! -r $python_libdir/libpython$version.so; then
    AC_FIND_FILE(libpython$version.a, $python_libdirs, python_libdir)
