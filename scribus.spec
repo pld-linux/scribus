@@ -107,7 +107,7 @@ export QTDIR KDEDIR
 %{__perl} admin/am_edit
 %configure \
 	--with-qt-libraries=%{_libdir} \
-	--with-libdir=%{_ulibdir}
+	--libdir=%{_ulibdir}
 %{__make}
 cd scribus-samples-*
 cp ../admin/config.sub admin
