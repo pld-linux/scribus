@@ -123,7 +123,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.so*
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.la
 %dir %{_libdir}/%{name}/plugins
-%lang(cs) %{_libdir}/%{name}/plugins/*.cs.qm
 %lang(da) %{_libdir}/%{name}/plugins/*.da.qm
 #%lang(de) %{_libdir}/%{name}/plugins/*.de.qm
 %lang(no) %{_libdir}/%{name}/plugins/*.no.qm
@@ -136,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/scribus/*enc.txt
 %lang(bg) %{_libdir}/scribus/scribus.bg.qm
 #%lang(ca) %{_libdir}/scribus/scribus.ca.qm
+%lang(cs) %{_libdir}/scribus/scribus.cs.qm
 %lang(da) %{_libdir}/scribus/scribus.da.qm
 %lang(de) %{_libdir}/scribus/scribus.de.qm
 %lang(en_GB) %{_libdir}/scribus/scribus.en_GB.qm
