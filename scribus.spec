@@ -28,8 +28,7 @@ Source6:	%{name}icon.png
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
-Patch3:		%{name}-python.patch
-Patch4:		%{name}-gcc2.patch
+Patch3:		%{name}-gcc2.patch
 URL:		http://www.scribus.org.uk/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -78,8 +77,7 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%%patch3 -p1
-%patch4 -p1
+%patch3 -p1
 
 %build
 QTDIR=%{_prefix}
