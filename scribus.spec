@@ -5,13 +5,13 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.1.4
-Release:	3
+Version:	1.1.5
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
-# Source0-md5:	7e9577ce56b0a5955ed9b37bb2a8c7a1
-Source1:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-en.tar.gz
+Source0:	http://ahnews.music.salford.ac.uk/scribus/%{name}-%{version}.tar.gz
+# Source0-md5:	72cfbf106d075accde6623a646033436
+Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source2-md5:	799976e2191582faf0443a671374a67f
@@ -138,6 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
 %{_ulibdir}/scribus/profiles
+%{_ulibdir}/scribus/rgbscribus*
 %{_ulibdir}/scribus/samples
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
 %lang(br) %{_ulibdir}/scribus/scribus.br.qm
@@ -148,6 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de) %{_ulibdir}/scribus/scribus.de.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
+%lang(fi) %{_ulibdir}/scribus/scribus.fi.qm
 %lang(fr) %{_ulibdir}/scribus/scribus.fr.qm
 %lang(gl) %{_ulibdir}/scribus/scribus.gl.qm
 %lang(hu) %{_ulibdir}/scribus/scribus.hu.qm
