@@ -1,7 +1,7 @@
 #
 # TODO:
-#   - seperate scripts subpackage
-#   - seperate templates add proper obsoletes for it
+# - seperate scripts subpackage
+# - seperate templates add proper obsoletes for it
 #
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
