@@ -5,12 +5,12 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.1.0
+Version:	1.1.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://scribus.planetmirror.com/%{name}-%{version}.tar.gz
-# Source0-md5:	29c5cbdd1c7de56d569a61a8b986d8ae
+# Source0-md5:	3a776ee7057292065ffa50614309aad6
 Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
@@ -22,7 +22,7 @@ Source4:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
-URL:		http://web2.altmuehlnet.de/fschmid/
+URL:		http://www.scribus.org.uk/
 %{!?_without_cups:BuildRequires:	cups-devel}
 %{?_without_cups:BuildConflicts:	cups-devel}
 BuildRequires:	lcms-devel >= 1.08-2
@@ -32,8 +32,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
-# fonts are required locally!
-Requires:	XFree86-fonts
+BuildRequires:	freetype-devel
 Obsoletes:	scribus-svg
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,7 +62,7 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -a1 -a2 -a3
+%setup -q -a1 -a2 -a3 -a4
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -89,7 +88,7 @@ cd ../scribus-i18n-de
 cd ../scribus-i18n-fr
 %configure2_13
 %{__make}
-cd ../scribus-samples-0.1
+cd ../scribus-samples-*
 %configure2_13
 %{__make}
 
@@ -100,6 +99,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/doc
 ln -sf $RPM_BUILD_ROOT%{_libdir} $RPM_BUILD_ROOT%{_datadir}
 
 for dir in . scribus-*; do
+	[ ! -d "$dir" ] && continue
 	olddir=$(pwd)
 	cd $dir
 	%{__make} install \
@@ -132,11 +132,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/plugins/*.la
 %{_libdir}/scribus/profiles
 %{_libdir}/scribus/samples
-%{_libdir}/scribus/*.enc
-%{_libdir}/scribus/*enc.txt
 %lang(bg) %{_libdir}/scribus/scribus.bg.qm
 #%lang(ca) %{_libdir}/scribus/scribus.ca.qm
 %lang(cs) %{_libdir}/scribus/scribus.cs.qm
+%lang(cy) %{_libdir}/scribus/scribus.cy.qm
 %lang(da) %{_libdir}/scribus/scribus.da.qm
 %lang(de) %{_libdir}/scribus/scribus.de.qm
 %lang(en_GB) %{_libdir}/scribus/scribus.en_GB.qm
