@@ -4,7 +4,7 @@ Name:		scribus
 Version:	0.9.3
 Release:	1
 License:	GPL
-Group:		X11/Applications/Graphics
+Group:		X11/Applications/Publishing
 Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
