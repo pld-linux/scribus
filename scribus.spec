@@ -6,13 +6,13 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.0
-Release:	0.RC1
+Release:	0.9
 License:	GPL
 Group:		X11/Applications/Publishing
-Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}RC1.tar.gz
-# Source0-md5:	6ccac9ad8820b368887786fa1b1326f0
+Source0:	http://scribus.planetmirror.com/%{name}-%{version}.tar.gz
+# Source0-md5:	2ee654e6196229081871c8c1ea8163f2
 Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
-# Source1-md5:	5cd3b7df9c3e5ec2f8cc563d1c5a05a5
+# Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
 # Source2-md5:	e142431cee352abd2e5278ea4b748264
 Source3:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
@@ -63,7 +63,7 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -a1 -a2 -a3 -a4 -n %{name}-%{version}RC1
+%setup -q -a1 -a2 -a3 -a4
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
