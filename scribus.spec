@@ -1,8 +1,12 @@
+#
+# Conditional build:
+# _without_cups	- without CUPS support
+#
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	0.9.9
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		X11/Applications/Publishing
 Source0:        http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
@@ -14,6 +18,8 @@ Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
 URL:		http://web2.altmuehlnet.de/fschmid/
+%{!?_without_cups:BuildRequires:	cups-devel}
+%{?_without_cups:BuildConflicts:	cups-devel}
 BuildRequires:	lcms-devel >= 1.08-2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
