@@ -10,7 +10,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.7
-Release:	0.9
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/%{name}-%{version}.tar.bz2
@@ -96,8 +96,8 @@ export QTDIR KDEDIR
 #cd scribus-i18n-en
 #cp ../admin/config.sub admin
 #%%configure
-#%{__make}
-cd ../scribus-samples-*
+#%%{__make}
+cd scribus-samples-*
 cp ../admin/config.sub admin
 %configure2_13
 %{__make}
