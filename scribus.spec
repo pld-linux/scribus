@@ -9,7 +9,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
@@ -23,6 +23,7 @@ Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
 Patch4:		%{name}-post12.patch
+Patch5:		%{name}-python24.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -78,6 +79,7 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
