@@ -24,6 +24,7 @@ Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
 Patch3:		%{name}-python.patch
 Patch4:		%{name}-gcc2.patch
+Patch5:		%{name}-python-vs-qt.patch
 URL:		http://www.scribus.org.uk/
 %{!?_without_cups:BuildRequires:	cups-devel}
 %{?_without_cups:BuildConflicts:	cups-devel}
@@ -72,6 +73,7 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 QTDIR=%{_prefix}
