@@ -1,7 +1,8 @@
 #
 # TODO:
 # - seperate scripts subpackage
-# - seperate templates add proper obsoletes for it
+# - seperate templates add proper obsoletes for it (and remove O: in main
+#   package then)
 #
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
@@ -10,7 +11,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2.1
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
@@ -46,6 +47,8 @@ Requires:	python-Imaging
 Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
+# temporary workaround ?
+Obsoletes:	scribus-templates
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
