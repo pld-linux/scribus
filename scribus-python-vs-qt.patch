@@ -1,0 +1,109 @@
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmddialog.cpp.orig	Sun Oct 26 22:39:06 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmddialog.cpp	Thu Nov  6 10:30:50 2003
+@@ -1,5 +1,6 @@
+-#include "cmdvar.h"
++/* get <Python.h> before any qt includes ("slots" issue) */
+ #include "cmddialog.h"
++#include "cmdvar.h"
+ 
+ PyObject *scribus_newdocdia(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmddoc.cpp.orig	Sun Oct 26 22:39:06 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmddoc.cpp	Thu Nov  6 10:40:02 2003
+@@ -1,6 +1,6 @@
++#include "cmddoc.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmddoc.h"
+ 
+ PyObject *scribus_newdoc(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdpage.cpp.orig	Tue Jul  8 23:04:41 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdpage.cpp	Thu Nov  6 10:40:38 2003
+@@ -1,5 +1,5 @@
+-#include "cmdvar.h"
+ #include "cmdpage.h"
++#include "cmdvar.h"
+ 
+ PyObject *scribus_actualpage(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdobj.cpp.orig	Sun Oct 26 22:39:06 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdobj.cpp	Thu Nov  6 10:41:09 2003
+@@ -1,6 +1,6 @@
++#include "cmdobj.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmdobj.h"
+ 
+ PyObject *scribus_newrect(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdgetprop.cpp.orig	Sun Oct 26 23:13:05 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdgetprop.cpp	Thu Nov  6 10:41:44 2003
+@@ -1,6 +1,6 @@
++#include "cmdgetprop.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmdgetprop.h"
+ 
+ PyObject *scribus_getfillcolor(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdsetprop.cpp.orig	Sun Oct 26 22:39:06 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdsetprop.cpp	Thu Nov  6 10:44:18 2003
+@@ -1,6 +1,6 @@
++#include "cmdsetprop.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmdsetprop.h"
+ 
+ PyObject *scribus_setgradfill(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdtext.cpp.orig	Sun Oct 26 23:15:24 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdtext.cpp	Thu Nov  6 10:45:24 2003
+@@ -1,6 +1,6 @@
++#include "cmdtext.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmdtext.h"
+ 
+ PyObject *scribus_getfontsize(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdmani.cpp.orig	Sun Oct 26 22:39:06 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdmani.cpp	Thu Nov  6 10:47:32 2003
+@@ -1,6 +1,6 @@
++#include "cmdmani.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmdmani.h"
+ 
+ PyObject *scribus_loadimage(PyObject *self, PyObject* args)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdcolor.cpp.orig	Sun Oct 26 22:39:06 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdcolor.cpp	Thu Nov  6 10:48:10 2003
+@@ -1,6 +1,6 @@
++#include "cmdcolor.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmdcolor.h"
+ 
+ void ReplaceColor(QString col, QString rep)
+ {
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdcolor.h.orig	Sun Jul  6 12:23:11 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdcolor.h	Thu Nov  6 10:48:48 2003
+@@ -2,6 +2,7 @@
+ #define CMDCOLOR_H
+ 
+ #include <Python.h>
++#include "cmdvar.h"
+ 
+ /** Managing Colors */
+ void ReplaceColor(QString col, QString rep);
+--- scribus-1.1.2/scribus/plugins/scriptplugin/cmdmisc.cpp.orig	Fri Oct 31 09:10:49 2003
++++ scribus-1.1.2/scribus/plugins/scriptplugin/cmdmisc.cpp	Thu Nov  6 10:49:28 2003
+@@ -1,6 +1,6 @@
++#include "cmdmisc.h"
+ #include "cmdvar.h"
+ #include "cmdutil.h"
+-#include "cmdmisc.h"
+ 
+ PyObject *scribus_setredraw(PyObject *self, PyObject* args)
+ {
