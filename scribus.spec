@@ -1,7 +1,8 @@
 #
 # TODO:
 # - seperate scripts subpackage
-# - seperate templates add proper obsoletes for it
+# - seperate templates add proper obsoletes for it (and remove O: in main
+#   package then)
 #
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
@@ -10,7 +11,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2.1
-Release:	2
+Release:	4
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
@@ -24,6 +25,7 @@ Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
 Patch4:		%{name}-destdir.patch
+Patch5:		%{name}-helpbrowser.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -41,9 +43,12 @@ BuildRequires:	libtiff-devel
 BuildRequires:	python-devel
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
+Requires:	python-Imaging
 Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
+# temporary workaround ?
+Obsoletes:	scribus-templates
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
@@ -92,6 +97,7 @@ Dokumentacja u¿ytkownika dla Scribusa.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
@@ -218,5 +224,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/scribus
 
 %files docs
+%defattr(644,root,root,755)
 %dir %{_datadir}/%{name}/doc/en
 %{_datadir}/%{name}/doc/en/*
