@@ -35,6 +35,7 @@ BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
+BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
