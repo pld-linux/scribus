@@ -1,7 +1,6 @@
 #
 # TODO:
-# - seperate scripts subpackage
-# - seperate templates add proper obsoletes for it
+#   - seperate scripts subpackage
 #
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
@@ -9,14 +8,12 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.2.1
-%define	_snap	21092004
-Release:	0.%{_snap}.2
+Version:	1.2
+Release:	4
 License:	GPL v2
 Group:		X11/Applications/Publishing
-#Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
-Source0:	%{name}-%{version}-%{_snap}.tar.bz2
-# Source0-md5:	f0dcc5b177535f160074f52e14b25c07
+Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
+# Source0-md5:	7d2c2b228f9a6ff82c9401fd54bdbe16
 Source1:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source1-md5:	799976e2191582faf0443a671374a67f
 Source5:	%{name}.desktop
@@ -25,6 +22,7 @@ Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
+Patch4:		%{name}-post12.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -48,6 +46,7 @@ Obsoletes:	scribus-scripting
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
+%define		_ulibdir	%{_prefix}/lib
 
 %description
 Scribus is a Layout program for Linux(R), similar to Adobe(R)
@@ -73,11 +72,12 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -n Scribus -a1
+%setup -q -n %{name}-%{version} -a1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
@@ -124,50 +124,50 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/scribus
-%dir %{_libdir}/%{name}
-%{_libdir}/%{name}/import.prolog
+%dir %{_ulibdir}/%{name}
+%{_ulibdir}/%{name}/import.prolog
 # don't mark dictionaries with lang() --misiek
-%{_libdir}/%{name}/dicts
-%dir %{_libdir}/%{name}/libs
-%attr(755,root,root) %{_libdir}/%{name}/libs/*.so*
-%{_libdir}/%{name}/libs/*.la
-%dir %{_libdir}/%{name}/plugins
+%{_ulibdir}/%{name}/dicts
+%dir %{_ulibdir}/%{name}/libs
+%attr(755,root,root) %{_ulibdir}/%{name}/libs/*.so*
+%{_ulibdir}/%{name}/libs/*.la
+%dir %{_ulibdir}/%{name}/plugins
 #%lang(da) %{_ulibdir}/%{name}/plugins/*.da.qm
 #%lang(nb) %{_ulibdir}/%{name}/plugins/*.no.qm
 #%lang(sk) %{_ulibdir}/%{name}/plugins/*.sk.qm
-%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
-%{_libdir}/%{name}/plugins/*.la
-%dir %{_libdir}/%{name}/plugins/gettext
-%attr(755,root,root) %{_libdir}/%{name}/plugins/gettext/*.so*
-%{_libdir}/%{name}/plugins/gettext/*.la
-%{_libdir}/scribus/profiles
-%{_libdir}/scribus/rgb*
-%lang(bg) %{_libdir}/scribus/scribus.bg.qm
-%lang(br) %{_libdir}/scribus/scribus.br.qm
-%lang(ca) %{_libdir}/scribus/scribus.ca.qm
-%lang(cs) %{_libdir}/scribus/scribus.cs.qm
-%lang(cy) %{_libdir}/scribus/scribus.cy.qm
-%lang(da) %{_libdir}/scribus/scribus.da.qm
-%lang(de) %{_libdir}/scribus/scribus.de.qm
-%lang(en_GB) %{_libdir}/scribus/scribus.en_GB.qm
-%lang(es) %{_libdir}/scribus/scribus.es.qm
-%lang(eu) %{_libdir}/scribus/scribus.eu.qm
-%lang(fi) %{_libdir}/scribus/scribus.fi.qm
-%lang(fr) %{_libdir}/scribus/scribus.fr.qm
-%lang(gl) %{_libdir}/scribus/scribus.gl.qm
-%lang(hu) %{_libdir}/scribus/scribus.hu.qm
-%lang(id) %{_libdir}/scribus/scribus.id.qm
-%lang(it) %{_libdir}/scribus/scribus.it.qm
-%lang(lt) %{_libdir}/scribus/scribus.lt.qm
-%lang(nl) %{_libdir}/scribus/scribus.nl.qm
-%lang(nb) %{_libdir}/scribus/scribus.nb.qm
-%lang(pl) %{_libdir}/scribus/scribus.pl.qm
-%lang(ru) %{_libdir}/scribus/scribus.ru.qm
-%lang(se) %{_libdir}/scribus/scribus.se.qm
-%lang(sk) %{_libdir}/scribus/scribus.sk.qm
-%lang(sl) %{_libdir}/scribus/scribus.sl.qm
-%lang(tr) %{_libdir}/scribus/scribus.tr.qm
-%lang(uk) %{_libdir}/scribus/scribus.uk.qm
+%attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
+%{_ulibdir}/%{name}/plugins/*.la
+%dir %{_ulibdir}/%{name}/plugins/gettext
+%attr(755,root,root) %{_ulibdir}/%{name}/plugins/gettext/*.so*
+%{_ulibdir}/%{name}/plugins/gettext/*.la
+%{_ulibdir}/scribus/profiles
+%{_ulibdir}/scribus/rgb*
+%lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
+%lang(br) %{_ulibdir}/scribus/scribus.br.qm
+%lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
+%lang(cs) %{_ulibdir}/scribus/scribus.cs.qm
+%lang(cy) %{_ulibdir}/scribus/scribus.cy.qm
+%lang(da) %{_ulibdir}/scribus/scribus.da.qm
+%lang(de) %{_ulibdir}/scribus/scribus.de.qm
+%lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
+%lang(es) %{_ulibdir}/scribus/scribus.es.qm
+%lang(eu) %{_ulibdir}/scribus/scribus.eu.qm
+%lang(fi) %{_ulibdir}/scribus/scribus.fi.qm
+%lang(fr) %{_ulibdir}/scribus/scribus.fr.qm
+%lang(gl) %{_ulibdir}/scribus/scribus.gl.qm
+%lang(hu) %{_ulibdir}/scribus/scribus.hu.qm
+%lang(id) %{_ulibdir}/scribus/scribus.id.qm
+%lang(it) %{_ulibdir}/scribus/scribus.it.qm
+%lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
+%lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
+%lang(nb) %{_ulibdir}/scribus/scribus.nb.qm
+%lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
+%lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
+%lang(se) %{_ulibdir}/scribus/scribus.se.qm
+%lang(sk) %{_ulibdir}/scribus/scribus.sk.qm
+%lang(sl) %{_ulibdir}/scribus/scribus.sl.qm
+%lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
+%lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/doc
 %dir %{_datadir}/%{name}/doc/en
@@ -178,13 +178,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*
 %dir %{_datadir}/%{name}/templates
-%{_datadir}/%{name}/templates/*.xml
-%dir %{_datadir}/%{name}/templates/br1
-%{_datadir}/%{name}/templates/br1/*
-%dir %{_datadir}/%{name}/templates/nl1
-%{_datadir}/%{name}/templates/nl1/*
-%dir %{_datadir}/%{name}/templates/nl2
-%{_datadir}/%{name}/templates/nl2/*
+%{_datadir}/%{name}/templates/Readme
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}icon.png
 
