@@ -1,7 +1,7 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	0.9.7
+Version:	0.9.9
 Release:	1
 License:	GPL
 Group:		X11/Applications/Publishing
@@ -12,6 +12,7 @@ Source3:        http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
 Source4:        http://web2.altmuehlnet.de/fschmid/%{name}-samples-0.1.tar.gz
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
+Patch2:		%{name}-nolibs.patch
 URL:		http://web2.altmuehlnet.de/fschmid/
 BuildRequires:	lcms-devel >= 1.08-2
 BuildRequires:	libjpeg-devel
@@ -22,7 +23,6 @@ BuildRequires:	zlib-devel
 # fonts are required locally!
 Requires:	XFree86-fonts
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 Scribus is a Layout program for Linux(R), similar to Adobe(R)
@@ -44,23 +44,34 @@ The package includes the header files and static libraries necessary
 for developing programs using the %{libname} library.
 
 %prep
-%setup -q
-%setup -q -T -D -a1 -a2 -a3 -a4
+%setup -q -a1 -a2 -a3 -a4
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 QTDIR=%{_prefix}
 KDEDIR=%{_prefix}
 export QTDIR KDEDIR
 
-for dir in . scribus-*; do
-        olddir=$(pwd)
-	cd $dir
-        %configure2_13
-        %{__make}
-        cd $olddir
-done
+%{__aclocal}
+%{__autoconf}
+# don't regenerate Makefile.ins, they are broken by kdevelop
+touch Makefile.in */Makefile.in */*/Makefile.in */*/*/Makefile.in
+%configure
+%{__make}
+cd scribus-i18n-en
+%configure
+%{__make}
+cd ../scribus-i18n-de
+%configure2_13
+%{__make}
+cd ../scribus-i18n-fr
+%configure2_13
+%{__make}
+cd ../scribus-samples-0.1
+%configure2_13
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -71,10 +82,9 @@ ln -s $RPM_BUILD_ROOT%{_libdir} $RPM_BUILD_ROOT%{_datadir}
 for dir in . scribus-*; do
 	olddir=$(pwd)
 	cd $dir
-        %{__make} \
-                DESTDIR=$RPM_BUILD_ROOT \
-                install
-        cd $olddir
+	%{__make} install \
+		DESTDIR=$RPM_BUILD_ROOT
+	cd $olddir
 done
 
 %clean
@@ -105,16 +115,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/scribus/*.enc
 %{_libdir}/scribus/*enc.txt
 %lang(bg) %{_libdir}/scribus/scribus.bg.qm
-%lang(ca) %{_libdir}/scribus/scribus.ca.qm
-%lang(de) %{_libdir}/scribus/scribus.de.qm
+#%lang(ca) %{_libdir}/scribus/scribus.ca.qm
 %lang(da) %{_libdir}/scribus/scribus.da.qm
+%lang(de) %{_libdir}/scribus/scribus.de.qm
 %lang(en_GB) %{_libdir}/scribus/scribus.en_GB.qm
 %lang(es) %{_libdir}/scribus/scribus.es.qm
 %lang(fr) %{_libdir}/scribus/scribus.fr.qm
 %lang(gl) %{_libdir}/scribus/scribus.gl.qm
-%lang(hu) %{_libdir}/scribus/scribus.hu.qm
+#%lang(hu) %{_libdir}/scribus/scribus.hu.qm
 %lang(it) %{_libdir}/scribus/scribus.it.qm
-%lang(lt) %{_libdir}/scribus/scribus.lt.qm
+#%lang(lt) %{_libdir}/scribus/scribus.lt.qm
 %lang(pl) %{_libdir}/scribus/scribus.pl.qm
 %lang(sk) %{_libdir}/scribus/scribus.sk.qm
 %lang(tr) %{_libdir}/scribus/scribus.tr.qm
