@@ -12,6 +12,7 @@ Source3:        http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
 Source4:        http://web2.altmuehlnet.de/fschmid/%{name}-samples-0.1.tar.gz
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
+URL:		http://web2.altmuehlnet.de/fschmid/
 BuildRequires:	lcms-devel >= 1.08-2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
