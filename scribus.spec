@@ -9,12 +9,12 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.1.3
+Version:	1.1.4
 Release:	0.9
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk:82/%{name}-%{version}.tar.gz
-# Source0-md5:	af1a8b29f55364553e2e42dc39955f55
+# Source0-md5:	7e9577ce56b0a5955ed9b37bb2a8c7a1
 Source1:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	http://ahnews.music.salford.ac.uk:82/%{name}-i18n-de.tar.gz
@@ -36,7 +36,7 @@ BuildRequires:	automake
 %{!?_without_cups:BuildRequires:	cups-devel}
 %{?_without_cups:BuildConflicts:	cups-devel}
 BuildRequires:	freetype-devel
-BuildRequires:	lcms-devel >= 1.08-2
+BuildRequires:	lcms-devel >= 1.09
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
@@ -78,7 +78,7 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%%patch3 -p1
 %patch4 -p1
 
 %build
@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.so*
 %{_libdir}/%{name}/libs/*.la
 %dir %{_libdir}/%{name}/plugins
-%lang(da) %{_libdir}/%{name}/plugins/*.da.qm
+#%%lang(da) %{_libdir}/%{name}/plugins/*.da.qm
 %lang(no) %{_libdir}/%{name}/plugins/*.no.qm
 %lang(sk) %{_libdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
@@ -152,6 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/scribus/profiles
 %{_libdir}/scribus/samples
 %lang(bg) %{_libdir}/scribus/scribus.bg.qm
+%lang(br) %{_libdir}/scribus/scribus.br.qm
 #%lang(ca) %{_libdir}/scribus/scribus.ca.qm
 %lang(cs) %{_libdir}/scribus/scribus.cs.qm
 %lang(cy) %{_libdir}/scribus/scribus.cy.qm
