@@ -1,7 +1,6 @@
 #
 # TODO:
 #   - seperate scripts subpackage
-#   - check dirs
 #
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
@@ -10,19 +9,17 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2
-%define		_pre	RC1
-Release:	0.%{_pre}.2
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}%{_pre}.tar.bz2
-# Source0-md5:	6074ae3d83225fa3d214a33ab4fe28db
+Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
+# Source0-md5:	7d2c2b228f9a6ff82c9401fd54bdbe16
 #Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
 ##Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source2-md5:	799976e2191582faf0443a671374a67f
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
-Source7:	%{name}.pl.qm
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
@@ -76,7 +73,7 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -n %{name}-%{version}%{_pre} -a2
+%setup -q -n %{name}-%{version} -a2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -122,8 +119,6 @@ done
 #Install .desktop and .icon (temporary)
 install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
-#Temporary hack for RC1 release, delete it afterwards
-install %{SOURCE7} $RPM_BUILD_ROOT%{_ulibdir}/scribus/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -167,22 +162,15 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %{_ulibdir}/scribus/scribus.it.qm
 %lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
-%lang(nb) %{_ulibdir}/scribus/scribus.nb_NO.qm
-%lang(no) %{_ulibdir}/scribus/scribus.no_NO.qm
+%lang(nb) %{_ulibdir}/scribus/scribus.nb.qm
+%lang(no) %{_ulibdir}/scribus/scribus.no.qm
 %lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
 %lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
+%lang(se) %{_ulibdir}/scribus/scribus.se.qm
 %lang(sk) %{_ulibdir}/scribus/scribus.sk.qm
 %lang(sl) %{_ulibdir}/scribus/scribus.sl.qm
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
-%dir %{_datadir}/%{name}/templates
-%{_datadir}/%{name}/templates/template.xml
-%dir %{_datadir}/%{name}/templates/br1
-%{_datadir}/%{name}/templates/br1/*
-%dir %{_datadir}/%{name}/templates/nl1
-%{_datadir}/%{name}/templates/nl1/*
-%dir %{_datadir}/%{name}/templates/nl2
-%{_datadir}/%{name}/templates/nl2/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/doc
 %dir %{_datadir}/%{name}/doc/en
@@ -193,6 +181,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/samples/*
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*
+%dir %{_datadir}/%{name}/templates
+%{_datadir}/%{name}/templates/Readme
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}icon.png
 
