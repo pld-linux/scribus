@@ -1,16 +1,19 @@
 #
+# TODO:
+#   - seperate scripts subpackage
+#
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
 #
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.1.5
-Release:	1
+Version:	1.1.6
+Release:	0.9
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/%{name}-%{version}.tar.gz
-# Source0-md5:	72cfbf106d075accde6623a646033436
+# Source0-md5:	e7227085febfc00bbb1b2527a5559022
 Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
@@ -21,7 +24,6 @@ Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
-Patch4:		%{name}-gcc2.patch
 URL:		http://www.scribus.org.uk/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -39,6 +41,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	python-devel
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
+Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -75,7 +78,6 @@ Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 QTDIR=%{_prefix}
@@ -130,6 +132,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/%{name}/dicts
 %dir %{_ulibdir}/%{name}/doc
 %{_ulibdir}/%{name}/doc/en
+%{_ulibdir}/%{name}/doc/en/Scripter/*
 %{_ulibdir}/%{name}/icons
 %dir %{_ulibdir}/%{name}/libs
 %attr(755,root,root) %{_ulibdir}/%{name}/libs/*.so*
@@ -141,8 +144,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
 %{_ulibdir}/scribus/profiles
-%{_ulibdir}/scribus/rgbscribus*
-%{_ulibdir}/scribus/samples
+%{_ulibdir}/scribus/rgb*
+%dir %{_ulibdir}/%{name}/samples
+%{_ulibdir}/scribus/samples/*
+%dir %{_ulibdir}/%{name}/scripts
+%{_ulibdir}/%{name}/scripts/*
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
 %lang(br) %{_ulibdir}/scribus/scribus.br.qm
 #%lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
