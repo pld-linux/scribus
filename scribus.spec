@@ -35,13 +35,18 @@ podobny do programów Adobe(R) PageMaker(TM), QuarkXPress(TM) czy
 Adobe(R) InDesign(TM), ale opublikowany na licencji GNU GPL.
 
 %package devel
-Summary:        Development tools for programs which will use the scribus library
+Summary:	Header files for Scribus plugins development
+Summary(pl):	Pliki nag³ówkowe do tworzenia wtyczek Scribusa
 Group:          Development/Libraries
-Requires:       %{name} = %{version}
+# for now it doesn't require base
+#Requires:       %{name} = %{version}
+Requires:	qt-devel
 
 %description devel
-The package includes the header files and static libraries necessary
-for developing programs using the %{libname} library.
+Header files for Scribus plugins development.
+
+%description devel -l pl
+Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
 %setup -q -a1 -a2 -a3 -a4
