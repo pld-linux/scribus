@@ -75,8 +75,9 @@ export QTDIR KDEDIR
 
 %{__aclocal}
 %{__autoconf}
-# don't regenerate Makefile.ins, they are broken by kdevelop
-touch Makefile.in */Makefile.in */*/Makefile.in */*/*/Makefile.in
+%{__autoheader}
+%{__automake}
+%{__perl} admin/am_edit
 %configure
 %{__make}
 cd scribus-i18n-en
@@ -94,9 +95,9 @@ cd ../scribus-samples-0.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/doc
-ln -s $RPM_BUILD_ROOT%{_libdir} $RPM_BUILD_ROOT%{_datadir}
+
+ln -sf $RPM_BUILD_ROOT%{_libdir} $RPM_BUILD_ROOT%{_datadir}
 
 for dir in . scribus-*; do
 	olddir=$(pwd)
