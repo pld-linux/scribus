@@ -9,11 +9,11 @@ Version:	0.9.10
 Release:	1
 License:	GPL
 Group:		X11/Applications/Publishing
-Source0:        http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
-Source1:        http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
-Source2:        http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
-Source3:        http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
-Source4:        http://web2.altmuehlnet.de/fschmid/%{name}-samples-0.1.tar.gz
+Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
+Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
+Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
+Source3:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
+Source4:	http://web2.altmuehlnet.de/fschmid/%{name}-samples-0.1.tar.gz
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
@@ -34,7 +34,7 @@ Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Scribus is a Layout program for Linux(R), similar to Adobe(R)
 PageMaker(TM), QuarkXPress(TM) or Adobe(R) InDesign(TM), except that
 it is published under the GNU GPL.
-			
+
 %description -l pl
 Scribus to program dla systemu Linux(R) do tworzenia publikacji,
 podobny do programów Adobe(R) PageMaker(TM), QuarkXPress(TM) czy
@@ -43,7 +43,7 @@ Adobe(R) InDesign(TM), ale opublikowany na licencji GNU GPL.
 %package devel
 Summary:	Header files for Scribus plugins development
 Summary(pl):	Pliki nag³ówkowe do tworzenia wtyczek Scribusa
-Group:          Development/Libraries
+Group:		Development/Libraries
 # for now it doesn't require base
 #Requires:       %{name} = %{version}
 Requires:	qt-devel
