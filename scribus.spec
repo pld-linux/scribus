@@ -5,8 +5,8 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	0.9.9
-Release:	1.1
+Version:	0.9.10
+Release:	1
 License:	GPL
 Group:		X11/Applications/Publishing
 Source0:        http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
@@ -133,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(es) %{_libdir}/scribus/scribus.es.qm
 %lang(fr) %{_libdir}/scribus/scribus.fr.qm
 %lang(gl) %{_libdir}/scribus/scribus.gl.qm
-#%lang(hu) %{_libdir}/scribus/scribus.hu.qm
+%lang(hu) %{_libdir}/scribus/scribus.hu.qm
 %lang(it) %{_libdir}/scribus/scribus.it.qm
 #%lang(lt) %{_libdir}/scribus/scribus.lt.qm
 %lang(pl) %{_libdir}/scribus/scribus.pl.qm
