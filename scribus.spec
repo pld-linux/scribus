@@ -10,10 +10,15 @@ Release:	1
 License:	GPL
 Group:		X11/Applications/Publishing
 Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
+# Source0-md5:	cb082cd04fe0196dc634bb3eeaad1526
 Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
+# Source1-md5:	5cd3b7df9c3e5ec2f8cc563d1c5a05a5
 Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
+# Source2-md5:	e142431cee352abd2e5278ea4b748264
 Source3:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-fr.tar.gz
+# Source3-md5:	688db072ffbf3bb1fceee3e763e4fc48
 Source4:	http://web2.altmuehlnet.de/fschmid/%{name}-samples-0.1.tar.gz
+# Source4-md5:	799976e2191582faf0443a671374a67f
 Patch0:		%{name}-standard-font-paths.patch
 Patch1:		%{name}-module-fixes.patch
 Patch2:		%{name}-nolibs.patch
