@@ -26,6 +26,8 @@ Patch3:		%{name}-python.patch
 Patch4:		%{name}-gcc2.patch
 Patch5:		%{name}-python-vs-qt.patch
 URL:		http://www.scribus.org.uk/
+BuildRequires:	autoconf
+BuildRequires:	automake
 %{!?_without_cups:BuildRequires:	cups-devel}
 %{?_without_cups:BuildConflicts:	cups-devel}
 BuildRequires:	freetype-devel
