@@ -58,7 +58,7 @@ for dir in . scribus-*; do
 	cd $dir
         %configure2_13
         %{__make}
-        cd $(olddir)
+        cd $olddir
 done
 
 %install
