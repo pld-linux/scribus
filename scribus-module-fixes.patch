@@ -1,14 +1,8 @@
-diff -Nur scribus-0.8.orig/scribus/libabout/Makefile.am scribus-0.8/scribus/libabout/Makefile.am
---- scribus-0.8.orig/scribus/libabout/Makefile.am	Sat Sep 28 09:34:39 2002
-+++ scribus-0.8/scribus/libabout/Makefile.am	Thu Oct 24 12:47:03 2002
-@@ -1,4 +1,4 @@
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libabout.la
- 
+diff -Nur scribus-0.9.7/scribus/libabout/Makefile.am scribus-0.9.7-patch/scribus/libabout/Makefile.am
+--- scribus-0.9.7/scribus/libabout/Makefile.am	Sat Feb  8 09:42:42 2003
++++ scribus-0.9.7-patch/scribus/libabout/Makefile.am	Fri Mar 14 14:34:19 2003
 @@ -9,7 +9,7 @@
- LDFLAGS =  -s        -export-dynamic 
+ LDFLAGS =  -s                    -export-dynamic 
  
  
 -libabout_la_LDFLAGS = -version-info 0:0:0
@@ -16,38 +10,23 @@ diff -Nur scribus-0.8.orig/scribus/libabout/Makefile.am scribus-0.8/scribus/liba
  
  libabout_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/libabout/Makefile.in scribus-0.8/scribus/libabout/Makefile.in
---- scribus-0.8.orig/scribus/libabout/Makefile.in	Sat Sep 28 12:30:30 2002
-+++ scribus-0.8/scribus/libabout/Makefile.in	Thu Oct 24 12:47:22 2002
-@@ -225,7 +225,7 @@
- x_includes = @x_includes@
- x_libraries = @x_libraries@
- 
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libabout.la
- 
-@@ -233,7 +233,7 @@
- 
- LDFLAGS = -s        -export-dynamic 
+diff -Nur scribus-0.9.7/scribus/libabout/Makefile.in scribus-0.9.7-patch/scribus/libabout/Makefile.in
+--- scribus-0.9.7/scribus/libabout/Makefile.in	Sat Feb  8 14:11:04 2003
++++ scribus-0.9.7-patch/scribus/libabout/Makefile.in	Fri Mar 14 14:31:04 2003
+@@ -235,7 +235,7 @@
+ ####### kdevelop will overwrite this part!!! (end)############
+ LDFLAGS = -s  
  
 -libabout_la_LDFLAGS = -version-info 0:0:0
 +libabout_la_LDFLAGS = -avoid-version
  
  #>- libabout_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/libpdf/Makefile.am scribus-0.8/scribus/libpdf/Makefile.am
---- scribus-0.8.orig/scribus/libpdf/Makefile.am	Sat Sep 28 09:34:39 2002
-+++ scribus-0.8/scribus/libpdf/Makefile.am	Thu Oct 24 12:43:24 2002
-@@ -1,4 +1,4 @@
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libpdf.la
+diff -Nur scribus-0.9.7/scribus/libpdf/Makefile.am scribus-0.9.7-patch/scribus/libpdf/Makefile.am
+--- scribus-0.9.7/scribus/libpdf/Makefile.am	Sat Feb  8 09:42:42 2003
++++ scribus-0.9.7-patch/scribus/libpdf/Makefile.am	Fri Mar 14 14:34:06 2003
 @@ -10,7 +10,7 @@
- LDFLAGS =  -s        -export-dynamic 
+ LDFLAGS =  -s                    -export-dynamic 
  
  
 -libpdf_la_LDFLAGS = -version-info 0:0:0
@@ -55,38 +34,23 @@ diff -Nur scribus-0.8.orig/scribus/libpdf/Makefile.am scribus-0.8/scribus/libpdf
  
  libpdf_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/libpdf/Makefile.in scribus-0.8/scribus/libpdf/Makefile.in
---- scribus-0.8.orig/scribus/libpdf/Makefile.in	Sat Sep 28 12:30:31 2002
-+++ scribus-0.8/scribus/libpdf/Makefile.in	Thu Oct 24 12:43:49 2002
-@@ -225,7 +225,7 @@
- x_includes = @x_includes@
- x_libraries = @x_libraries@
- 
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libpdf.la
-@@ -234,7 +234,7 @@
- 
- LDFLAGS = -s        -export-dynamic 
+diff -Nur scribus-0.9.7/scribus/libpdf/Makefile.in scribus-0.9.7-patch/scribus/libpdf/Makefile.in
+--- scribus-0.9.7/scribus/libpdf/Makefile.in	Sat Feb  8 14:11:04 2003
++++ scribus-0.9.7-patch/scribus/libpdf/Makefile.in	Fri Mar 14 14:31:45 2003
+@@ -236,7 +236,7 @@
+ ####### kdevelop will overwrite this part!!! (end)############
+ LDFLAGS = -s 
  
 -libpdf_la_LDFLAGS = -version-info 0:0:0
 +libpdf_la_LDFLAGS = -avoid-version
  
  #>- libpdf_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/libpostscript/Makefile.am scribus-0.8/scribus/libpostscript/Makefile.am
---- scribus-0.8.orig/scribus/libpostscript/Makefile.am	Sat Sep 28 09:34:39 2002
-+++ scribus-0.8/scribus/libpostscript/Makefile.am	Thu Oct 24 12:44:08 2002
-@@ -1,4 +1,4 @@
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libpostscript.la
+diff -Nur scribus-0.9.7/scribus/libpostscript/Makefile.am scribus-0.9.7-patch/scribus/libpostscript/Makefile.am
+--- scribus-0.9.7/scribus/libpostscript/Makefile.am	Sat Feb  8 09:42:42 2003
++++ scribus-0.9.7-patch/scribus/libpostscript/Makefile.am	Fri Mar 14 14:33:50 2003
 @@ -10,7 +10,7 @@
- LDFLAGS =  -s        -export-dynamic 
+ LDFLAGS =  -s                    -export-dynamic 
  
  
 -libpostscript_la_LDFLAGS = -version-info 0:0:0
@@ -94,38 +58,23 @@ diff -Nur scribus-0.8.orig/scribus/libpostscript/Makefile.am scribus-0.8/scribus
  
  libpostscript_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/libpostscript/Makefile.in scribus-0.8/scribus/libpostscript/Makefile.in
---- scribus-0.8.orig/scribus/libpostscript/Makefile.in	Sat Sep 28 12:30:31 2002
-+++ scribus-0.8/scribus/libpostscript/Makefile.in	Thu Oct 24 12:44:26 2002
-@@ -225,7 +225,7 @@
- x_includes = @x_includes@
- x_libraries = @x_libraries@
- 
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libpostscript.la
-@@ -234,7 +234,7 @@
- 
- LDFLAGS = -s        -export-dynamic 
+diff -Nur scribus-0.9.7/scribus/libpostscript/Makefile.in scribus-0.9.7-patch/scribus/libpostscript/Makefile.in
+--- scribus-0.9.7/scribus/libpostscript/Makefile.in	Sat Feb  8 14:11:04 2003
++++ scribus-0.9.7-patch/scribus/libpostscript/Makefile.in	Fri Mar 14 14:33:11 2003
+@@ -236,7 +236,7 @@
+ ####### kdevelop will overwrite this part!!! (end)############
+ LDFLAGS = -s 
  
 -libpostscript_la_LDFLAGS = -version-info 0:0:0
 +libpostscript_la_LDFLAGS = -avoid-version
  
  #>- libpostscript_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/libprefs/Makefile.am scribus-0.8/scribus/libprefs/Makefile.am
---- scribus-0.8.orig/scribus/libprefs/Makefile.am	Sat Sep 28 09:34:39 2002
-+++ scribus-0.8/scribus/libprefs/Makefile.am	Thu Oct 24 12:45:54 2002
-@@ -1,4 +1,4 @@
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libpreferences.la
+diff -Nur scribus-0.9.7/scribus/libprefs/Makefile.am scribus-0.9.7-patch/scribus/libprefs/Makefile.am
+--- scribus-0.9.7/scribus/libprefs/Makefile.am	Sat Feb  8 09:42:42 2003
++++ scribus-0.9.7-patch/scribus/libprefs/Makefile.am	Fri Mar 14 14:34:32 2003
 @@ -10,7 +10,7 @@
- LDFLAGS =  -s        -export-dynamic 
+ LDFLAGS =  -s                    -export-dynamic 
  
  
 -libpreferences_la_LDFLAGS = -version-info 0:0:0
@@ -133,38 +82,23 @@ diff -Nur scribus-0.8.orig/scribus/libprefs/Makefile.am scribus-0.8/scribus/libp
  
  libpreferences_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/libprefs/Makefile.in scribus-0.8/scribus/libprefs/Makefile.in
---- scribus-0.8.orig/scribus/libprefs/Makefile.in	Sat Sep 28 12:30:31 2002
-+++ scribus-0.8/scribus/libprefs/Makefile.in	Thu Oct 24 12:46:16 2002
-@@ -225,7 +225,7 @@
- x_includes = @x_includes@
- x_libraries = @x_libraries@
- 
--libdir = $(prefix)/share/scribus/libs
-+libdir = $(prefix)/lib/scribus
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libpreferences.la
-@@ -234,7 +234,7 @@
- 
- LDFLAGS = -s        -export-dynamic 
+diff -Nur scribus-0.9.7/scribus/libprefs/Makefile.in scribus-0.9.7-patch/scribus/libprefs/Makefile.in
+--- scribus-0.9.7/scribus/libprefs/Makefile.in	Sat Feb  8 14:11:04 2003
++++ scribus-0.9.7-patch/scribus/libprefs/Makefile.in	Fri Mar 14 14:34:50 2003
+@@ -236,7 +236,7 @@
+ ####### kdevelop will overwrite this part!!! (end)############
+ LDFLAGS = -s 
  
 -libpreferences_la_LDFLAGS = -version-info 0:0:0
 +libpreferences_la_LDFLAGS = -avoid-version
  
  #>- libpreferences_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/plugins/libchar/Makefile.am scribus-0.8/scribus/plugins/libchar/Makefile.am
---- scribus-0.8.orig/scribus/plugins/libchar/Makefile.am	Sat Sep 28 09:34:39 2002
-+++ scribus-0.8/scribus/plugins/libchar/Makefile.am	Thu Oct 24 12:44:57 2002
-@@ -1,4 +1,4 @@
--libdir = $(prefix)/share/scribus/plugins
-+libdir = $(prefix)/lib/scribus/plugins
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libcharselect.la
+diff -Nur scribus-0.9.7/scribus/plugins/libchar/Makefile.am scribus-0.9.7-patch/scribus/plugins/libchar/Makefile.am
+--- scribus-0.9.7/scribus/plugins/libchar/Makefile.am	Sat Feb  8 09:42:42 2003
++++ scribus-0.9.7-patch/scribus/plugins/libchar/Makefile.am	Fri Mar 14 14:35:35 2003
 @@ -10,7 +10,7 @@
- LDFLAGS =  -s        -export-dynamic 
+ LDFLAGS =  -s                    -export-dynamic 
  
  
 -libcharselect_la_LDFLAGS = -version-info 0:0:0
@@ -172,90 +106,15 @@ diff -Nur scribus-0.8.orig/scribus/plugins/libchar/Makefile.am scribus-0.8/scrib
  
  libcharselect_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/plugins/libchar/Makefile.in scribus-0.8/scribus/plugins/libchar/Makefile.in
---- scribus-0.8.orig/scribus/plugins/libchar/Makefile.in	Sat Sep 28 12:30:31 2002
-+++ scribus-0.8/scribus/plugins/libchar/Makefile.in	Thu Oct 24 12:45:38 2002
-@@ -225,7 +225,7 @@
- x_includes = @x_includes@
- x_libraries = @x_libraries@
- 
--libdir = $(prefix)/share/scribus/plugins
-+libdir = $(prefix)/lib/scribus/plugins
- CPPFLAGS = -I$(top_builddir)/scribus
- ####### kdevelop will overwrite this part!!! (begin)##########
- lib_LTLIBRARIES = libcharselect.la
-@@ -234,7 +234,7 @@
- 
- LDFLAGS = -s        -export-dynamic 
+diff -Nur scribus-0.9.7/scribus/plugins/libchar/Makefile.in scribus-0.9.7-patch/scribus/plugins/libchar/Makefile.in
+--- scribus-0.9.7/scribus/plugins/libchar/Makefile.in	Sat Feb  8 14:11:05 2003
++++ scribus-0.9.7-patch/scribus/plugins/libchar/Makefile.in	Fri Mar 14 14:35:52 2003
+@@ -236,7 +236,7 @@
+ ####### kdevelop will overwrite this part!!! (end)############
+ LDFLAGS = -s 
  
 -libcharselect_la_LDFLAGS = -version-info 0:0:0
 +libcharselect_la_LDFLAGS = -avoid-version
  
  #>- libcharselect_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.8.orig/scribus/scribus.cpp scribus-0.8/scribus/scribus.cpp
---- scribus-0.8.orig/scribus/scribus.cpp	Tue Sep 24 22:09:45 2002
-+++ scribus-0.8/scribus/scribus.cpp	Thu Oct 24 12:42:26 2002
-@@ -2361,7 +2361,7 @@
- 	typedef About* (*sdem)(QWidget *d);
- 	sdem demo;
- 	QString pfad = PREL;
--	pfad += "/share/scribus/libs/libabout.so";
-+	pfad += "/lib/scribus/libabout.so";
- 	mo = dlopen(pfad, RTLD_LAZY);
- 	if (!mo)
- 		{
-@@ -3840,7 +3840,7 @@
- 	typedef Preferences* (*sdem)(QWidget *d, preV *Vor);
- 	sdem demo;
- 	QString pfad = PREL;
--	pfad += "/share/scribus/libs/libpreferences.so";
-+	pfad += "/lib/scribus/libpreferences.so";
- 	mo = dlopen(pfad, RTLD_LAZY);
- 	if (!mo)
- 		{
-@@ -4250,7 +4250,7 @@
- 	typedef PSLib* (*sdem)(bool psart, SCFonts &AllFonts, QMap<QString,QFont> DocFonts, CListe DocColors, bool pdf);
- 	sdem demo;
- 	QString pfad = PREL;
--	pfad += "/share/scribus/libs/libpostscript.so";
-+	pfad += "/lib/scribus/libpostscript.so";
- 	PSDriver = dlopen(pfad, RTLD_LAZY);
- 	if (!PSDriver)
- 		{
-@@ -4280,7 +4280,7 @@
- 	typedef PDFlib* (*sdem)();
- 	sdem demo;
- 	QString pfad = PREL;
--	pfad += "/share/scribus/libs/libpdf.so";
-+	pfad += "/lib/scribus/libpdf.so";
- 	PDFDriver = dlopen(pfad, RTLD_LAZY);
- 	if (!PDFDriver)
- 		{
-@@ -4676,7 +4676,7 @@
- 	QString nam = "";
- 	int ty = 0;
- 	struct PlugData pda;
--	pfad += "/share/scribus/plugins/";
-+	pfad += "/lib/scribus/plugins/";
- 	QDir d(pfad, "*.so*", QDir::Name, QDir::Files | QDir::Executable | QDir::NoSymLinks);
- 	if ((d.exists()) && (d.count() != 0))
- 		{
-@@ -4719,7 +4719,7 @@
- 	QString pfad = PREL;
- 	if (pda.Typ != 4)
- 		{
--		pfad += "/share/scribus/plugins/" + pda.Datei;
-+		pfad += "/lib/scribus/plugins/" + pda.Datei;
- 		mo = dlopen(pfad, RTLD_LAZY | RTLD_GLOBAL);
- 		if (!mo)
- 			{
-@@ -4753,7 +4753,7 @@
- 	sdem1 demo1;
- 	sdem2 demo2;
- 	QString pfad = PREL;
--	pfad += "/share/scribus/plugins/" + name;
-+	pfad += "/lib/scribus/plugins/" + name;
- 	mo = dlopen(pfad, RTLD_LAZY | RTLD_GLOBAL);
- 	if (!mo)
- 		return false;
