@@ -26,9 +26,9 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 %{!?_without_cups:BuildRequires:	cups-devel}
 %{?_without_cups:BuildConflicts:	cups-devel}
-BuildRequires:	freetype-devel
+BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	lcms-devel >= 1.09
-BuildRequires:	libart_lgpl-devel
+BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
