@@ -9,26 +9,23 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.1.6
-Release:	2
+Version:	1.1.7
+Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://ahnews.music.salford.ac.uk/scribus/%{name}-%{version}.tar.gz
-# Source0-md5:	e7227085febfc00bbb1b2527a5559022
+Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/%{name}-%{version}.tar.bz2
+# Source0-md5:	1786f2ee59d1c80af4b52f287d449bbe
 Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source2-md5:	799976e2191582faf0443a671374a67f
-#SOURCE3 IS A TEMPORARLY HACK
-Source3:	http://linux.hanski.info/tests/download/1.1.6.tar.gz
-# Source3-md5:	fa995efb348608a20c1769bca55e2eab
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
-URL:		http://www.scribus.org.uk/
+URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 %if %{with cups}
@@ -77,18 +74,13 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -a1 -a2 -a3
+%setup -q -a1 -a2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
 %build
-#DIRTY HACK UNTIL NEXT RELEASE#
-rm -f scribus/qm/{scribus.pl.qm,scribus.pl_PL.ts}
-install 1.1.6/{scribus.pl.qm,scribus.pl_PL.ts} scribus/qm/
-#END OF HACK#
-
 QTDIR=%{_prefix}
 KDEDIR=%{_prefix}
 export QTDIR KDEDIR
