@@ -1,0 +1,5 @@
+- Release: 2
+- AMD64 fixes:
+  - explicit qt library directory for configure
+  - scribus files are installed in %{_ulibdir} (always %{_prefix}/lib) not %{_libdir}
+    (this is ok, as scribus is an application not a library)
