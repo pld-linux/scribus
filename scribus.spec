@@ -10,7 +10,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.1.6
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/%{name}-%{version}.tar.gz
@@ -19,6 +19,9 @@ Source1:	http://ahnews.music.salford.ac.uk/scribus/%{name}-i18n-en.tar.gz
 # Source1-md5:	cccfe4ddd9c646813cd9c5b12cf79138
 Source2:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
 # Source2-md5:	799976e2191582faf0443a671374a67f
+#SOURCE3 IS A TEMPORARLY HACK
+Source3:	http://linux.hanski.info/tests/download/1.1.6.tar.gz
+# Source3-md5:	fa995efb348608a20c1769bca55e2eab
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -74,13 +77,18 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -a1 -a2
+%setup -q -a1 -a2 -a3
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
 %build
+#DIRTY HACK UNTIL NEXT RELEASE#
+rm -f scribus/qm/{scribus.pl.qm,scribus.pl_PL.ts}
+install 1.1.6/{scribus.pl.qm,scribus.pl_PL.ts} scribus/qm/
+#END OF HACK#
+
 QTDIR=%{_prefix}
 KDEDIR=%{_prefix}
 export QTDIR KDEDIR
