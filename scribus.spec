@@ -1,9 +1,4 @@
 #
-# TODO:
-# - seperate scripts subpackage
-# - seperate templates add proper obsoletes for it (and remove O: in main
-#   package then)
-#
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
 #
@@ -47,7 +42,6 @@ Requires:	python-Imaging
 Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
-# temporary workaround ?
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
