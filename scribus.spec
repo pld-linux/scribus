@@ -5,12 +5,12 @@
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	0.9.11
-Release:	1
+Version:	1.0
+Release:	0.RC1
 License:	GPL
 Group:		X11/Applications/Publishing
-Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}.tar.gz
-# Source0-md5:	4a0da6547129abfaa154147c18a54bac
+Source0:	http://web2.altmuehlnet.de/fschmid/%{name}-%{version}RC1.tar.gz
+# Source0-md5:	6ccac9ad8820b368887786fa1b1326f0
 Source1:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-en.tar.gz
 # Source1-md5:	5cd3b7df9c3e5ec2f8cc563d1c5a05a5
 Source2:	http://web2.altmuehlnet.de/fschmid/%{name}-i18n-de.tar.gz
@@ -60,7 +60,7 @@ Header files for Scribus plugins development.
 Pliki nag³ówkowe do tworzenia wtyczek Scribusa.
 
 %prep
-%setup -q -a1 -a2 -a3 -a4
+%setup -q -a1 -a2 -a3 -a4 -n %{name}-%{version}RC1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -121,10 +121,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.so*
 %attr(755,root,root) %{_libdir}/%{name}/libs/*.la
 %dir %{_libdir}/%{name}/plugins
+%lang(cs) %{_libdir}/%{name}/plugins/*.cs.qm
 %lang(da) %{_libdir}/%{name}/plugins/*.da.qm
-%lang(de) %{_libdir}/%{name}/plugins/*.de.qm
-%lang(sk) %{_libdir}/%{name}/plugins/*.sk.qm
+#%lang(de) %{_libdir}/%{name}/plugins/*.de.qm
 %lang(no) %{_libdir}/%{name}/plugins/*.no.qm
+%lang(sk) %{_libdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.la
 %{_libdir}/scribus/profiles
