@@ -9,7 +9,7 @@ Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
 Version:	1.2
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://ahnews.music.salford.ac.uk/scribus/downloads/1.2/%{name}-%{version}.tar.bz2
