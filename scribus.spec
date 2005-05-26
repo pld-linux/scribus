@@ -2,25 +2,24 @@
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
 #
+
+%define		_snap	20050522
+
 Summary:	Scribus - Desktop Publishing for Linux
 Summary(pl):	Scribus - DTP dla Linuksa
 Name:		scribus
-Version:	1.2.1
-Release:	7
+Version:	1.2.2
+Release:	0.%{_snap}.1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	002cb629e817722f4123df7a41fc824b
-Source1:	ftp://ftp.ntua.gr/pub/gnu/scribus/%{name}-samples-0.1.tar.gz
-# Source1-md5:	799976e2191582faf0443a671374a67f
+Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}cvs.tar.bz2
+# Source0-md5:	9bd002274e5b42080f41790a9355e3de
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
-Patch4:		%{name}-destdir.patch
-Patch5:		%{name}-helpbrowser.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -37,12 +36,14 @@ BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	openssl-devel
 BuildRequires:	python-devel
+BuildRequires:	python-modules
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 Requires:	python-Imaging
 Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
+Obsoletes:	scribus-short-words
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
@@ -99,13 +100,11 @@ Default document templates shipped with Scribus.
 Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
-%setup -q -a1
+%setup -q -n %{name}-%{version}cvs
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
@@ -123,32 +122,33 @@ export QTDIR KDEDIR
 	--with-qt-libraries=%{_libdir} \
 	--libdir=%{_ulibdir}
 %{__make}
-cd scribus-samples-*
-cp ../admin/config.sub admin
-%configure2_13
-%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_datadir}/mime/packages/}
 
-for dir in . scribus-samples; do
-	[ ! -d "$dir" ] && continue
-	olddir=$(pwd)
-	cd $dir
-	%{__make} install \
-		DESTDIR=$RPM_BUILD_ROOT
-	cd $olddir
-done
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-#Install .desktop and .icon (temporary)
+#Install .desktop, .icon and .xml
 install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
+install scribus.xml $RPM_BUILD_ROOT%{_datadir}/mime/packages/scribus.xml
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+umask 022
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+
+%postun 
+umask 022
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
 
 %files
 %defattr(644,root,root,755)
@@ -173,7 +173,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/scribus/rgb*
 %lang(af) %{_ulibdir}/scribus/scribus.af.qm
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
-%lang(br) %{_ulibdir}/scribus/scribus.br.qm
 %lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
 %lang(cs) %{_ulibdir}/scribus/scribus.cs.qm
 %lang(cy) %{_ulibdir}/scribus/scribus.cy.qm
@@ -194,6 +193,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
 %lang(nb) %{_ulibdir}/scribus/scribus.nb.qm
 %lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
+%lang(pt_BR) %{_ulibdir}/scribus/scribus.pt_BR.qm
 %lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
 %lang(se) %{_ulibdir}/scribus/scribus.se.qm
 %lang(sk) %{_ulibdir}/scribus/scribus.sk.qm
@@ -206,6 +206,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/icons
+%{_datadir}/mime/packages/scribus.xml
+%dir %{_datadir}/%{name}/plugins
+%{_datadir}/%{name}/plugins/*.rc
 %dir %{_datadir}/%{name}/samples
 %{_datadir}/%{name}/samples/*
 %dir %{_datadir}/%{name}/scripts
@@ -223,6 +226,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_datadir}/%{name}/doc/en
 %{_datadir}/%{name}/doc/en/*
+%lang(cs) %dir %{_datadir}/%{name}/doc/cs
+%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials
+%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words
+%lang(cs) %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words/*
+%lang(fr) %dir %{_datadir}/%{name}/doc/fr
+%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials
+%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words
+%lang(fr) %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words/*
+%lang(pl) %dir %{_datadir}/%{name}/doc/pl
+%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
+%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
+%lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
 
 %files templates-base
 %defattr(644,root,root,755)
