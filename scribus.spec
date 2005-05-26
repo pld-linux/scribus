@@ -12,7 +12,7 @@ Version:	1.2.2
 Release:	0.%{_snap}.1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}cvs.tar.bz2
+Source0:	%{name}-%{version}cvs.tar.bz2
 # Source0-md5:	9bd002274e5b42080f41790a9355e3de
 Source5:	%{name}.desktop
 Source6:	%{name}icon.png
