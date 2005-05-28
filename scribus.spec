@@ -5,8 +5,8 @@
 
 %define		_snap	20050522
 
-Summary:	Scribus - Desktop Publishing for Linux
-Summary(pl):	Scribus - DTP dla Linuksa
+Summary:	Scribus - Open Source Desktop Publishing
+Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.2.2
 Release:	0.%{_snap}.1
@@ -14,8 +14,8 @@ License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	%{name}-%{version}cvs.tar.bz2
 # Source0-md5:	9bd002274e5b42080f41790a9355e3de
-Source5:	%{name}.desktop
-Source6:	%{name}icon.png
+Source1:	%{name}.desktop
+Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
@@ -50,14 +50,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_ulibdir	%{_prefix}/lib
 
 %description
-Scribus is a Layout program for Linux(R), similar to Adobe(R)
-PageMaker(TM), QuarkXPress(TM) or Adobe(R) InDesign(TM), except that
-it is published under the GNU GPL.
+Scribus is an open source desktop page layout program with the aim of
+producing commerical grade output in PDF and Postscript, primarily,
+though not exclusively for Linux(R).
 
 %description -l pl
-Scribus to program dla systemu Linux(R) do tworzenia publikacji,
-podobny do programów Adobe(R) PageMaker(TM), QuarkXPress(TM) czy
-Adobe(R) InDesign(TM), ale opublikowany na licencji GNU GPL.
+Scribus jest to program do tworzenia publikacji z za³o¿enia generuj±cy
+dokumenty PDF oraz Postscript nadaj±ce siê do u¿ytku komercyjnego,
+przeznaczony g³ównie, lecz nie tylko, dla systemu Linux(R).
 
 %package devel
 Summary:	Header files for Scribus plugins development
@@ -91,7 +91,7 @@ Summary(pl):	Domy¶lne szablony dokumentów
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Requires:	scribus
-Obsoletes:      scribus-templates < 1.2.1
+Obsoletes:	scribus-templates < 1.2.1
 
 %description templates-base
 Default document templates shipped with Scribus.
@@ -131,8 +131,8 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_datadir}/mime/packag
 	DESTDIR=$RPM_BUILD_ROOT
 
 #Install .desktop, .icon and .xml
-install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 install scribus.xml $RPM_BUILD_ROOT%{_datadir}/mime/packages/scribus.xml
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
@@ -145,7 +145,7 @@ umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 [ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
 
-%postun 
+%postun
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 [ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
