@@ -3,17 +3,15 @@
 %bcond_without	cups	# build without CUPS support
 #
 
-%define		_snap	20050522
-
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.2.2
-Release:	0.%{_snap}.1
+Version:	1.2.2.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	%{name}-%{version}cvs.tar.bz2
-# Source0-md5:	9bd002274e5b42080f41790a9355e3de
+Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	8c2eac0a358b04c39252586d9d85ab24
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -100,7 +98,7 @@ Default document templates shipped with Scribus.
 Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
-%setup -q -n %{name}-%{version}cvs
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
