@@ -23,13 +23,3 @@
  LIBCUPS=""
  hacups=
  AC_CHECK_LIB(cups, httpConnect, [LIBCUPS="-lcups";hacups=yes],[LIBCUPS="";hacups=no])
---- scribus-0.9.9/acinclude.m4.orig	Sat Apr 19 20:31:18 2003
-+++ scribus-0.9.9/acinclude.m4	Wed May  7 12:51:16 2003
-@@ -705,7 +705,6 @@
- res_init(); 
- ],
-         LIBRESOLV="-lresolv"
--        X_EXTRA_LIBS="$X_EXTRA_LIBS $LIBRESOLV"
-         AC_DEFINE(HAVE_RES_INIT, 1, [Define if you have the res_init function])
-      )
-      LIBS=$kde_libs_safe
