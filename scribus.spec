@@ -6,18 +6,19 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.2.2.1
-Release:	2
+Version:	1.3.0
+Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	8c2eac0a358b04c39252586d9d85ab24
+# Source0-md5:	eb7ea966af6c84c5cd0b99ca545fd54f
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
+Patch4:		%{name}-configure.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -101,8 +102,9 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
+#%%patch2 -p1
+#%%patch3 -p1
+%patch4 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
@@ -155,13 +157,11 @@ umask 022
 %{_ulibdir}/%{name}/import.prolog
 # don't mark dictionaries with lang() --misiek
 %{_ulibdir}/%{name}/dicts
+%{_ulibdir}/%{name}/keysets
 %dir %{_ulibdir}/%{name}/libs
 %attr(755,root,root) %{_ulibdir}/%{name}/libs/*.so*
 %{_ulibdir}/%{name}/libs/*.la
 %dir %{_ulibdir}/%{name}/plugins
-#%lang(da) %{_ulibdir}/%{name}/plugins/*.da.qm
-#%lang(nb) %{_ulibdir}/%{name}/plugins/*.no.qm
-#%lang(sk) %{_ulibdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
 %dir %{_ulibdir}/%{name}/plugins/gettext
@@ -179,6 +179,7 @@ umask 022
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
 %lang(eo) %{_ulibdir}/scribus/scribus.eo.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
+%lang(es_LA) %{_ulibdir}/scribus/scribus.es_LA.qm
 %lang(eu) %{_ulibdir}/scribus/scribus.eu.qm
 %lang(fi) %{_ulibdir}/scribus/scribus.fi.qm
 %lang(fr) %{_ulibdir}/scribus/scribus.fr.qm
@@ -203,7 +204,9 @@ umask 022
 %lang(zh_CN) %{_ulibdir}/scribus/scribus.zh.qm
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/doc
+%{_datadir}/%{name}/dtd
 %{_datadir}/%{name}/icons
+%{_datadir}/%{name}/loremipsum
 %{_datadir}/mime/packages/scribus.xml
 %dir %{_datadir}/%{name}/plugins
 %{_datadir}/%{name}/plugins/*.rc
