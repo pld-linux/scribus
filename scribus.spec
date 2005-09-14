@@ -6,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.2.2.1
+Version:	1.2.3
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	8c2eac0a358b04c39252586d9d85ab24
+# Source0-md5:	ced1e74d4be30482b48bd04d52e47d46
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -32,6 +32,7 @@ BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
+BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
@@ -82,6 +83,22 @@ On-line user documentation for Scribus.
 
 %description docs -l pl
 Dokumentacja u¿ytkownika dla Scribusa.
+
+%package icc
+Summary:	ICC profiles for Scribus
+Summary(pl):	Profile ICC dla Scribusa
+License:	freely distributable
+Group:		X11/Applications.Publishing
+Requires:	scribus >= 1.2.3
+
+%description icc
+Some standard ICM CMYK and RGB profiles for use with Scribus.
+You should take care to use custom ones!
+
+%description icc -l pl
+Standardowe profile ICM w formacie CMYK i RGB do u¿ycia
+w Scribusie.
+Zalecane jest u¿ywanie w³asnych profili zamiast nich!
 
 %package templates-base
 Summary:	Default document templates
@@ -167,7 +184,7 @@ umask 022
 %dir %{_ulibdir}/%{name}/plugins/gettext
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/gettext/*.so*
 %{_ulibdir}/%{name}/plugins/gettext/*.la
-%{_ulibdir}/scribus/profiles
+%dir %{_ulibdir}/scribus/profiles
 %{_ulibdir}/scribus/rgb*
 %lang(af) %{_ulibdir}/scribus/scribus.af.qm
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
@@ -236,6 +253,10 @@ umask 022
 %lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
 %lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
 %lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
+
+%files icc
+%defattr(644,root,root,755)
+%{_ulibdir}/scribus/profiles/*
 
 %files templates-base
 %defattr(644,root,root,755)
