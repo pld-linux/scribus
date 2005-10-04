@@ -6,19 +6,19 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.0
-Release:	0.1
+Version:	1.3.1
+Release:	0.9
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	eb7ea966af6c84c5cd0b99ca545fd54f
+# Source0-md5:	ad36f7de1bba1229d143b93d2b6cd8e9
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
-Patch4:		%{name}-configure.patch
+Patch4:		%{name}-DESTDIR.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -33,6 +33,7 @@ BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
+BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
@@ -84,6 +85,22 @@ On-line user documentation for Scribus.
 %description docs -l pl
 Dokumentacja u¿ytkownika dla Scribusa.
 
+%package icc
+Summary:	ICC profiles for Scribus
+Summary(pl):	Profile ICC dla Scribusa
+License:	freely distributable
+Group:		X11/Applications.Publishing
+Requires:	scribus >= 1.2.3
+
+%description icc
+Some standard ICM CMYK and RGB profiles for use with Scribus.
+You should take care to use custom ones!
+
+%description icc -l pl
+Standardowe profile ICM w formacie CMYK i RGB do u¿ycia
+w Scribusie.
+Zalecane jest u¿ywanie w³asnych profili zamiast nich!
+
 %package templates-base
 Summary:	Default document templates
 Summary(pl):	Domy¶lne szablony dokumentów
@@ -102,8 +119,8 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#%%patch2 -p1
-#%%patch3 -p1
+%patch2 -p1
+#%patch3 -p1
 %patch4 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
@@ -158,16 +175,16 @@ umask 022
 # don't mark dictionaries with lang() --misiek
 %{_ulibdir}/%{name}/dicts
 %{_ulibdir}/%{name}/keysets
-%dir %{_ulibdir}/%{name}/libs
-%attr(755,root,root) %{_ulibdir}/%{name}/libs/*.so*
-%{_ulibdir}/%{name}/libs/*.la
 %dir %{_ulibdir}/%{name}/plugins
+#%lang(da) %{_ulibdir}/%{name}/plugins/*.da.qm
+#%lang(nb) %{_ulibdir}/%{name}/plugins/*.no.qm
+#%lang(sk) %{_ulibdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
 %dir %{_ulibdir}/%{name}/plugins/gettext
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/gettext/*.so*
 %{_ulibdir}/%{name}/plugins/gettext/*.la
-%{_ulibdir}/scribus/profiles
+%dir %{_ulibdir}/scribus/profiles
 %{_ulibdir}/scribus/rgb*
 %lang(af) %{_ulibdir}/scribus/scribus.af.qm
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
@@ -239,6 +256,10 @@ umask 022
 %lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
 %lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
 %lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
+
+%files icc
+%defattr(644,root,root,755)
+%{_ulibdir}/scribus/profiles/*
 
 %files templates-base
 %defattr(644,root,root,755)
