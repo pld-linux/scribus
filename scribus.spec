@@ -1,7 +1,7 @@
 #
 # Conditional build:
-%bcond_without	cups	# build without CUPS support
 %bcond_with	cairo	# build with cairo support
+%bcond_without	cups	# build without CUPS support
 #
 
 Summary:	Scribus - Open Source Desktop Publishing
