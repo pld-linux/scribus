@@ -1,13 +1,14 @@
 #
 # Conditional build:
 %bcond_without	cups	# build without CUPS support
+%bcond_with	cairo	# build with cairo support
 #
 
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.3.1
-Release:	0.9
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
@@ -22,6 +23,7 @@ Patch4:		%{name}-DESTDIR.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
+%{?with_cairo:BuildRequires:	cairo-devel}
 %if %{with cups}
 BuildRequires:	cups-devel
 %else
@@ -29,7 +31,7 @@ BuildConflicts:	cups-devel
 %endif
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	lcms-devel >= 1.09
-BuildRequires:	libart_lgpl-devel >= 2.3.14
+%{?without_cairo:BuildRequires:	libart_lgpl-devel >= 2.3.14}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
@@ -136,6 +138,7 @@ export QTDIR KDEDIR
 %{__automake}
 %{__perl} admin/am_edit
 %configure \
+	%{?with_cairo:--enable-cairo} \
 	--with-qt-libraries=%{_libdir} \
 	--libdir=%{_ulibdir}
 %{__make}
