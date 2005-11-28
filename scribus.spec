@@ -91,7 +91,7 @@ Dokumentacja u¿ytkownika dla Scribusa.
 Summary:	ICC profiles for Scribus
 Summary(pl):	Profile ICC dla Scribusa
 License:	freely distributable
-Group:		X11/Applications.Publishing
+Group:		X11/Applications/Publishing
 Requires:	scribus >= 1.2.3
 
 %description icc
