@@ -215,7 +215,7 @@ umask 022
 %lang(sl) %{_ulibdir}/scribus/scribus.sl.qm
 %lang(sq) %{_ulibdir}/scribus/scribus.sq.qm
 %lang(sr) %{_ulibdir}/scribus/scribus.sr.qm
-%lang(th_TH) %{_ulibdir}/scribus/scribus.th_TH.qm
+%lang(th) %{_ulibdir}/scribus/scribus.th_TH.qm
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %lang(zh_CN) %{_ulibdir}/scribus/scribus.zh.qm
