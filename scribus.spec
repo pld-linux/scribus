@@ -6,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.2.3
-Release:	1
+Version:	1.2.4
+Release:	0.9
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	ced1e74d4be30482b48bd04d52e47d46
+# Source0-md5:	163d740c4281d64e60be385934c77c4b
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -215,6 +215,7 @@ umask 022
 %lang(sl) %{_ulibdir}/scribus/scribus.sl.qm
 %lang(sq) %{_ulibdir}/scribus/scribus.sq.qm
 %lang(sr) %{_ulibdir}/scribus/scribus.sr.qm
+%lang(th_TH) %{_ulibdir}/scribus/scribus.th_TH.qm
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %lang(zh_CN) %{_ulibdir}/scribus/scribus.zh.qm
@@ -245,6 +246,8 @@ umask 022
 %lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials
 %lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words
 %lang(cs) %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words/*
+%lang(de) %dir %{_datadir}/%{name}/doc/de
+%lang(de) %{_datadir}/%{name}/doc/de/*
 %lang(fr) %dir %{_datadir}/%{name}/doc/fr
 %lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials
 %lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words
