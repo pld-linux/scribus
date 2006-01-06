@@ -6,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.2.4
+Version:	1.2.4.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	163d740c4281d64e60be385934c77c4b
+# Source0-md5:	d72ffe72b1d9ba1230557692af803927
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
