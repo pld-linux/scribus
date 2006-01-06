@@ -1,20 +1,20 @@
-diff -Nur scribus-0.9.7/scribus/libabout/Makefile.am scribus-0.9.7-patch/scribus/libabout/Makefile.am
---- scribus-0.9.7/scribus/libabout/Makefile.am	Sat Feb  8 09:42:42 2003
-+++ scribus-0.9.7-patch/scribus/libabout/Makefile.am	Fri Mar 14 14:34:19 2003
-@@ -9,7 +9,7 @@
- LDFLAGS =  -s                    -export-dynamic 
+diff -Nur scribus-1.2.4/scribus/libabout/Makefile.am scribus-1.2.4-module_fixes/scribus/libabout/Makefile.am
+--- scribus-1.2.4/scribus/libabout/Makefile.am	2004-12-11 22:53:41.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/libabout/Makefile.am	2006-01-04 15:15:55.000000000 +0100
+@@ -3,7 +3,7 @@
  
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
  
 -libabout_la_LDFLAGS = -version-info 0:0:0
 +libabout_la_LDFLAGS = -avoid-version
  
  libabout_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.9.7/scribus/libpdf/Makefile.am scribus-0.9.7-patch/scribus/libpdf/Makefile.am
---- scribus-0.9.7/scribus/libpdf/Makefile.am	Sat Feb  8 09:42:42 2003
-+++ scribus-0.9.7-patch/scribus/libpdf/Makefile.am	Fri Mar 14 14:34:06 2003
-@@ -10,7 +10,7 @@
- LDFLAGS =  -s                    -export-dynamic 
+diff -Nur scribus-1.2.4/scribus/libpdf/Makefile.am scribus-1.2.4-module_fixes/scribus/libpdf/Makefile.am
+--- scribus-1.2.4/scribus/libpdf/Makefile.am	2004-12-11 22:53:41.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/libpdf/Makefile.am	2006-01-04 15:15:55.000000000 +0100
+@@ -4,7 +4,7 @@
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
  
  
 -libpdf_la_LDFLAGS = -version-info 0:0:0
@@ -22,33 +22,130 @@ diff -Nur scribus-0.9.7/scribus/libpdf/Makefile.am scribus-0.9.7-patch/scribus/l
  
  libpdf_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.9.7/scribus/libpostscript/Makefile.am scribus-0.9.7-patch/scribus/libpostscript/Makefile.am
---- scribus-0.9.7/scribus/libpostscript/Makefile.am	Sat Feb  8 09:42:42 2003
-+++ scribus-0.9.7-patch/scribus/libpostscript/Makefile.am	Fri Mar 14 14:33:50 2003
-@@ -10,7 +10,7 @@
- LDFLAGS =  -s                    -export-dynamic 
+diff -Nur scribus-1.2.4/scribus/libpostscript/Makefile.am scribus-1.2.4-module_fixes/scribus/libpostscript/Makefile.am
+--- scribus-1.2.4/scribus/libpostscript/Makefile.am	2004-12-11 22:53:41.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/libpostscript/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -3,7 +3,7 @@
  
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
  
 -libpostscript_la_LDFLAGS = -version-info 0:0:0
 +libpostscript_la_LDFLAGS = -avoid-version
  
  libpostscript_la_METASOURCES = AUTO
  
-diff -Nur scribus-0.9.7/scribus/libprefs/Makefile.am scribus-0.9.7-patch/scribus/libprefs/Makefile.am
---- scribus-0.9.7/scribus/libprefs/Makefile.am	Sat Feb  8 09:42:42 2003
-+++ scribus-0.9.7-patch/scribus/libprefs/Makefile.am	Fri Mar 14 14:34:32 2003
-@@ -10,7 +10,7 @@
- LDFLAGS =  -s                    -export-dynamic 
+diff -Nur scribus-1.2.4/scribus/libprefs/Makefile.am scribus-1.2.4-module_fixes/scribus/libprefs/Makefile.am
+--- scribus-1.2.4/scribus/libprefs/Makefile.am	2004-12-11 22:53:41.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/libprefs/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -3,7 +3,7 @@
  
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
  
 -libpreferences_la_LDFLAGS = -version-info 0:0:0
 +libpreferences_la_LDFLAGS = -avoid-version
  
  libpreferences_la_METASOURCES = AUTO
  
---- scribus-1.1.2/scribus/plugins/libchar/Makefile.am.orig	Thu Jun 19 12:53:49 2003
-+++ scribus-1.1.2/scribus/plugins/libchar/Makefile.am	Tue Nov  4 11:47:35 2003
+diff -Nur scribus-1.2.4/scribus/plugins/fileloader/oodraw/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/fileloader/oodraw/Makefile.am
+--- scribus-1.2.4/scribus/plugins/fileloader/oodraw/Makefile.am	2005-03-03 17:52:44.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/fileloader/oodraw/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-liboodrawimp_la_LDFLAGS = -version-info 0:0:0
++liboodrawimp_la_LDFLAGS = -avoid-version
+ liboodrawimp_la_METASOURCES = AUTO
+ liboodrawimp_la_SOURCES = oodrawimp.cpp stylestack.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/fontpreview/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/fontpreview/Makefile.am
+--- scribus-1.2.4/scribus/plugins/fontpreview/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/fontpreview/Makefile.am	2006-01-04 15:15:56.000000000 +0100
 @@ -4,7 +4,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-libfontpreview_la_LDFLAGS = -version-info 0:0:0
++libfontpreview_la_LDFLAGS = -avoid-version
+ libfontpreview_la_METASOURCES = AUTO
+ libfontpreview_la_SOURCES = ui.cpp fontpreview.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/gettext/csvim/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/gettext/csvim/Makefile.am
+--- scribus-1.2.4/scribus/plugins/gettext/csvim/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/gettext/csvim/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-libcsvim_la_LDFLAGS = -version-info 0:0:0
++libcsvim_la_LDFLAGS = -avoid-version
+ libcsvim_la_METASOURCES = AUTO
+ libcsvim_la_SOURCES = csvdia.cpp csvim.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/gettext/htmlim/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/gettext/htmlim/Makefile.am
+--- scribus-1.2.4/scribus/plugins/gettext/htmlim/Makefile.am	2005-01-11 23:21:25.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/gettext/htmlim/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(XML_CFLAGS) $(all_includes)
+ 
+-libhtmlim_la_LDFLAGS = -version-info 0:0:0
++libhtmlim_la_LDFLAGS = -avoid-version
+ libhtmlim_la_METASOURCES = AUTO
+ libhtmlim_la_SOURCES = htmlim.cpp htmlreader.cpp 
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/gettext/odtim/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/gettext/odtim/Makefile.am
+--- scribus-1.2.4/scribus/plugins/gettext/odtim/Makefile.am	2005-03-03 18:02:43.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/gettext/odtim/Makefile.am	2006-01-04 15:18:44.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(XML_CFLAGS) $(all_includes)
+ 
+-libodtimplugin_la_LDFLAGS = -version-info 0:0:0
++libodtimplugin_la_LDFLAGS = -avoid-version
+ libodtimplugin_la_METASOURCES = AUTO
+ libodtimplugin_la_SOURCES = odtim.cpp odtdia.cpp stylereader.cpp contentreader.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/gettext/sxwim/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/gettext/sxwim/Makefile.am
+--- scribus-1.2.4/scribus/plugins/gettext/sxwim/Makefile.am	2005-03-03 17:44:46.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/gettext/sxwim/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(XML_CFLAGS) $(all_includes)
+ 
+-libsxwimplugin_la_LDFLAGS = -version-info 0:0:0
++libsxwimplugin_la_LDFLAGS = -avoid-version
+ libsxwimplugin_la_METASOURCES = AUTO
+ libsxwimplugin_la_SOURCES = sxwim.cpp sxwdia.cpp stylereader.cpp contentreader.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/gettext/textfilter/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/gettext/textfilter/Makefile.am
+--- scribus-1.2.4/scribus/plugins/gettext/textfilter/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/gettext/textfilter/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-libtextfilterplugin_la_LDFLAGS = -version-info 0:0:0
++libtextfilterplugin_la_LDFLAGS = -avoid-version
+ libtextfilterplugin_la_METASOURCES = AUTO
+ libtextfilterplugin_la_SOURCES = textfilter.cpp tfdia.cpp tffilter.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/gettext/txtim/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/gettext/txtim/Makefile.am
+--- scribus-1.2.4/scribus/plugins/gettext/txtim/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/gettext/txtim/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-libtxtim_la_LDFLAGS = -version-info 0:0:0
++libtxtim_la_LDFLAGS = -avoid-version
+ libtxtim_la_METASOURCES = AUTO
+ libtxtim_la_SOURCES = txtim.cpp 
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/libchar/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/libchar/Makefile.am
+--- scribus-1.2.4/scribus/plugins/libchar/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/libchar/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -3,7 +3,7 @@
  
  INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
  
@@ -57,31 +154,34 @@ diff -Nur scribus-0.9.7/scribus/libprefs/Makefile.am scribus-0.9.7-patch/scribus
  
  libcharselect_la_METASOURCES = AUTO
  
---- scribus-1.1.2/scribus/plugins/svgexplugin/Makefile.am.orig	Thu Jun 19 12:53:49 2003
-+++ scribus-1.1.2/scribus/plugins/svgexplugin/Makefile.am	Tue Nov  4 12:05:50 2003
-@@ -3,7 +3,7 @@
- plugins_LTLIBRARIES = libsvgexplugin.la
+diff -Nur scribus-1.2.4/scribus/plugins/newfromtemplateplugin/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/newfromtemplateplugin/Makefile.am
+--- scribus-1.2.4/scribus/plugins/newfromtemplateplugin/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/newfromtemplateplugin/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
  INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
- AM_LDFLAGS =  -s $(LIBFREETYPE_LIBS)      
--libsvgexplugin_la_LDFLAGS = -version-info 0:0:0
-+libsvgexplugin_la_LDFLAGS = -avoid-version
- libsvgexplugin_la_METASOURCES = AUTO
- libsvgexplugin_la_SOURCES = svgexplugin.cpp 
- KDE_OPTIONS = qtonly
---- scribus-1.1.2/scribus/plugins/svgimplugin/Makefile.am.orig	Fri Aug 15 13:14:10 2003
-+++ scribus-1.1.2/scribus/plugins/svgimplugin/Makefile.am	Tue Nov  4 12:06:09 2003
-@@ -3,7 +3,7 @@
- plugins_LTLIBRARIES = libsvgimplugin.la
+ 
+-libnewfromtemplateplugin_la_LDFLAGS = -version-info 0:0:0
++libnewfromtemplateplugin_la_LDFLAGS = -avoid-version
+ libnewfromtemplateplugin_la_METASOURCES = AUTO
+ libnewfromtemplateplugin_la_SOURCES = nftemplate.cpp nftdialog.cpp nftrcreader.cpp nftsettings.cpp nfttemplate.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/pixmapexport/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/pixmapexport/Makefile.am
+--- scribus-1.2.4/scribus/plugins/pixmapexport/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/pixmapexport/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
  INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
- AM_LDFLAGS =  -s $(LIBFREETYPE_LIBS)      
--libsvgimplugin_la_LDFLAGS = -version-info 0:0:0
-+libsvgimplugin_la_LDFLAGS = -avoid-version
- libsvgimplugin_la_METASOURCES = AUTO
- libsvgimplugin_la_SOURCES = svgplugin.cpp 
- KDE_OPTIONS = qtonly
---- scribus-1.1.2/scribus/plugins/printpreview/Makefile.am.orig	Thu Jun 19 12:53:49 2003
-+++ scribus-1.1.2/scribus/plugins/printpreview/Makefile.am	Tue Nov  4 12:05:02 2003
-@@ -4,7 +4,7 @@
+ 
+-libscribusexportpixmap_la_LDFLAGS = -version-info 0:0:0
++libscribusexportpixmap_la_LDFLAGS = -avoid-version
+ libscribusexportpixmap_la_METASOURCES = AUTO
+ libscribusexportpixmap_la_SOURCES = export.cpp dialog.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/printpreview/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/printpreview/Makefile.am
+--- scribus-1.2.4/scribus/plugins/printpreview/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/printpreview/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -3,7 +3,7 @@
  
  INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
  
@@ -90,14 +190,75 @@ diff -Nur scribus-0.9.7/scribus/libprefs/Makefile.am scribus-0.9.7-patch/scribus
  
  libpreview_la_METASOURCES = AUTO
  
---- scribus-1.1.2/scribus/plugins/scriptplugin/Makefile.am.orig	Mon Oct 20 21:40:21 2003
-+++ scribus-1.1.2/scribus/plugins/scriptplugin/Makefile.am	Tue Nov  4 12:05:24 2003
-@@ -3,7 +3,7 @@
- AM_CPPFLAGS = -I$(top_builddir)/scribus $(PYTHONINC)
- plugins_LTLIBRARIES = libscriptplugin.la
+diff -Nur scribus-1.2.4/scribus/plugins/psimport/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/psimport/Makefile.am
+--- scribus-1.2.4/scribus/plugins/psimport/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/psimport/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
  INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-libimportps_la_LDFLAGS = -version-info 0:0:0
++libimportps_la_LDFLAGS = -avoid-version
+ libimportps_la_METASOURCES = AUTO
+ libimportps_la_SOURCES = importps.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/saveastemplateplugin/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/saveastemplateplugin/Makefile.am
+--- scribus-1.2.4/scribus/plugins/saveastemplateplugin/Makefile.am	2004-12-11 22:53:42.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/saveastemplateplugin/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-libsaveastemplateplugin_la_LDFLAGS = -version-info 0:0:0
++libsaveastemplateplugin_la_LDFLAGS = -avoid-version
+ libsaveastemplateplugin_la_METASOURCES = AUTO
+ libsaveastemplateplugin_la_SOURCES = satemplate.cpp satdialog.cpp 
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/scriptplugin/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/scriptplugin/Makefile.am
+--- scribus-1.2.4/scribus/plugins/scriptplugin/Makefile.am	2005-02-08 14:54:31.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/scriptplugin/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
 -libscriptplugin_la_LDFLAGS = -version-info 0:0:0
 +libscriptplugin_la_LDFLAGS = -avoid-version
  libscriptplugin_la_METASOURCES = AUTO
- libscriptplugin_la_SOURCES = cmdutil.cpp cmddialog.cpp cmddoc.cpp cmdpage.cpp cmdobj.cpp cmdgetprop.cpp cmdsetprop.cpp cmdtext.cpp cmdmani.cpp cmdcolor.cpp cmdmisc.cpp conswin.cpp pconsole.cpp scriptplugin.cpp 
- EXTRA_DIST = cmdvar.h cmdutil.cpp cmdutil.h cmddialog.cpp cmddialog.h cmddoc.cpp cmddoc.h cmdpage.cpp cmdpage.h cmdobj.cpp cmdobj.h cmdgetprop.cpp cmdgetprop.h cmdsetprop.cpp cmdsetprop.h cmdtext.cpp cmdtext.h cmdmani.cpp cmdmani.h cmdcolor.cpp cmdcolor.h cmdmisc.cpp cmdmisc.h scriptplugin.cpp scriptplugin.h pconsole.cpp pconsole.h conswin.cpp conswin.h 
+ libscriptplugin_la_SOURCES = valuedialog.cpp cmdutil.cpp cmddialog.cpp cmddoc.cpp cmdpage.cpp cmdobj.cpp cmdgetprop.cpp cmdsetprop.cpp cmdtext.cpp cmdmani.cpp cmdcolor.cpp cmdmisc.cpp objprinter.cpp objpdffile.cpp extmacro.cpp guiapp.cpp conswin.cpp pconsole.cpp scripterprefs.ui managemacrosdialog.ui editmacrodialog.ui macro.cpp macromanager.cpp scriptplugin.cpp objimageexport.cpp scriptercore.cpp
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/short-words/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/short-words/Makefile.am
+--- scribus-1.2.4/scribus/plugins/short-words/Makefile.am	2005-02-10 19:48:35.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/short-words/Makefile.am	2006-01-04 15:19:45.000000000 +0100
+@@ -4,7 +4,7 @@
+ 
+ INCLUDES = $(LIBFREETYPE_CFLAGS) $(all_includes)
+ 
+-libscribusshortwords_la_LDFLAGS = -version-info 0:0:0
++libscribusshortwords_la_LDFLAGS = -avoid-version
+ libscribusshortwords_la_METASOURCES = AUTO
+ libscribusshortwords_la_SOURCES = vlnadialog.cpp parse.cpp shortwords.cpp configuration.cpp version.h
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/svgexplugin/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/svgexplugin/Makefile.am
+--- scribus-1.2.4/scribus/plugins/svgexplugin/Makefile.am	2004-12-11 22:53:43.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/svgexplugin/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -11,7 +11,7 @@
+ endif
+ AM_LDFLAGS =  $(linkflag) $(LIBFREETYPE_LIBS)
+ 
+-libsvgexplugin_la_LDFLAGS = -version-info 0:0:0
++libsvgexplugin_la_LDFLAGS = -avoid-version
+ libsvgexplugin_la_METASOURCES = AUTO
+ libsvgexplugin_la_SOURCES = svgexplugin.cpp 
+ 
+diff -Nur scribus-1.2.4/scribus/plugins/svgimplugin/Makefile.am scribus-1.2.4-module_fixes/scribus/plugins/svgimplugin/Makefile.am
+--- scribus-1.2.4/scribus/plugins/svgimplugin/Makefile.am	2004-12-11 22:53:43.000000000 +0100
++++ scribus-1.2.4-module_fixes/scribus/plugins/svgimplugin/Makefile.am	2006-01-04 15:15:56.000000000 +0100
+@@ -12,7 +12,7 @@
+ 
+ AM_LDFLAGS =  $(linkflag) $(LIBFREETYPE_LIBS)
+ 
+-libsvgimplugin_la_LDFLAGS = -version-info 0:0:0
++libsvgimplugin_la_LDFLAGS = -avoid-version
+ libsvgimplugin_la_METASOURCES = AUTO
+ libsvgimplugin_la_SOURCES = svgplugin.cpp 
+ 
