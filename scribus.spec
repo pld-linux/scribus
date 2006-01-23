@@ -19,7 +19,6 @@ Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
-Patch4:		%{name}-DESTDIR.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -123,7 +122,6 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-#%%patch4 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
