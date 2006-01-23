@@ -7,12 +7,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.1
+Version:	1.3.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	ad36f7de1bba1229d143b93d2b6cd8e9
+# Source0-md5:	700b8ce377084e317aa9d34a2157428d
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -123,7 +123,7 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
+#%%patch4 -p1
 
 %{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
 
@@ -219,6 +219,7 @@ umask 022
 %lang(sl) %{_ulibdir}/scribus/scribus.sl.qm
 %lang(sq) %{_ulibdir}/scribus/scribus.sq.qm
 %lang(sr) %{_ulibdir}/scribus/scribus.sr.qm
+%lang(th) %{_ulibdir}/scribus/scribus.th_TH.qm
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %lang(zh_CN) %{_ulibdir}/scribus/scribus.zh.qm
