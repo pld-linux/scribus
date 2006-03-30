@@ -7,12 +7,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.2
+Version:	1.3.3
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	700b8ce377084e317aa9d34a2157428d
+# Source0-md5:	3d1dc7f13573243569b18239149b4e6c
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -30,7 +30,7 @@ BuildConflicts:	cups-devel
 %endif
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	lcms-devel >= 1.09
-%{?without_cairo:BuildRequires:	libart_lgpl-devel >= 2.3.14}
+%{!?with_cairo:BuildRequires:	libart_lgpl-devel >= 2.3.14}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
@@ -38,6 +38,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
+BuildRequires:	rpm-pythonprov
 BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 Requires:	python-Imaging
@@ -186,7 +187,6 @@ umask 022
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/gettext/*.so*
 %{_ulibdir}/%{name}/plugins/gettext/*.la
 %dir %{_ulibdir}/scribus/profiles
-%{_ulibdir}/scribus/rgb*
 %lang(af) %{_ulibdir}/scribus/scribus.af.qm
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
 %lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
@@ -194,6 +194,7 @@ umask 022
 %lang(cy) %{_ulibdir}/scribus/scribus.cy.qm
 %lang(da) %{_ulibdir}/scribus/scribus.da.qm
 %lang(de) %{_ulibdir}/scribus/scribus.de.qm
+%lang(de_OL) %{_ulibdir}/scribus/scribus.de_ol.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
 %lang(eo) %{_ulibdir}/scribus/scribus.eo.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
@@ -205,6 +206,7 @@ umask 022
 %lang(hu) %{_ulibdir}/scribus/scribus.hu.qm
 %lang(id) %{_ulibdir}/scribus/scribus.id.qm
 %lang(it) %{_ulibdir}/scribus/scribus.it.qm
+%lang(ja) %{_ulibdir}/scribus/scribus.ja.qm
 %lang(ko) %{_ulibdir}/scribus/scribus.ko.qm
 %lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
@@ -221,6 +223,8 @@ umask 022
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %lang(zh_CN) %{_ulibdir}/scribus/scribus.zh.qm
+%dir %{_ulibdir}/%{name}/swatches
+%{_ulibdir}/%{name}/swatches/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/dtd
@@ -228,7 +232,7 @@ umask 022
 %{_datadir}/%{name}/loremipsum
 %{_datadir}/mime/packages/scribus.xml
 %dir %{_datadir}/%{name}/plugins
-%{_datadir}/%{name}/plugins/*.rc
+%{_datadir}/%{name}/plugins/*
 %dir %{_datadir}/%{name}/samples
 %{_datadir}/%{name}/samples/*
 %dir %{_datadir}/%{name}/scripts
