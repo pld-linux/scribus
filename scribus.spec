@@ -3,16 +3,19 @@
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
 #
+# TODO:
+#	- get the docs right, I just don't know of any better way
+#
 
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3
-Release:	1
+Version:	1.3.3.1
+Release:	0.9
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	3d1dc7f13573243569b18239149b4e6c
+Source0:	http://www.scribus.net/downloads/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	73864eea86de686904f4741ef35152ca
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -226,7 +229,6 @@ umask 022
 %dir %{_ulibdir}/%{name}/swatches
 %{_ulibdir}/%{name}/swatches/*
 %dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/dtd
 %{_datadir}/%{name}/icons
 %{_datadir}/%{name}/loremipsum
@@ -248,20 +250,21 @@ umask 022
 
 %files docs
 %defattr(644,root,root,755)
-%dir %{_datadir}/%{name}/doc/en
-%{_datadir}/%{name}/doc/en/*
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words
-%lang(cs) %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words/*
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words
-%lang(fr) %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words/*
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
-%lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
+%dir %{_docdir}/%{name}-%{version}
+%dir %{_docdir}/%{name}-%{version}/en
+%{_docdir}/%{name}-%{version}/en/*
+%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs
+%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials
+%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words
+%lang(cs) %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words/*
+%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr
+%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials
+%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words
+%lang(fr) %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words/*
+%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl
+%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl/tutorials
+%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl/tutorials/scribus-short-words
+%lang(pl) %{_docdir}/%{name}-%{version}/pl/tutorials/scribus-short-words/*
 
 %files icc
 %defattr(644,root,root,755)
