@@ -42,7 +42,8 @@ BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	rpm-pythonprov
-BuildRequires:	qt-devel >= 3.0.5
+#BuildRequires:	qt-devel >= 3.0.5
+BuildRequires:	QtCore-devel
 BuildRequires:	zlib-devel
 Requires:	python-Imaging
 Requires:	python-tkinter
