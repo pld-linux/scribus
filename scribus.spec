@@ -10,12 +10,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.1
+Version:	1.3.3.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://www.scribus.net/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	73864eea86de686904f4741ef35152ca
+Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
+# Source0-md5:	fa5d0dbb675b41f3d56823943b06c84c
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -199,10 +199,13 @@ umask 022
 %lang(da) %{_ulibdir}/scribus/scribus.da.qm
 %lang(de) %{_ulibdir}/scribus/scribus.de.qm
 %lang(de_OL) %{_ulibdir}/scribus/scribus.de_ol.qm
+%lang(dz) %{_ulibdir}/scribus/scribus.dz.qm
+%lang(el) %{_ulibdir}/scribus/scribus.el.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
 %lang(eo) %{_ulibdir}/scribus/scribus.eo.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
 %lang(es_LA) %{_ulibdir}/scribus/scribus.es_LA.qm
+%lang(et) %{_ulibdir}/scribus/scribus.et.qm
 %lang(eu) %{_ulibdir}/scribus/scribus.eu.qm
 %lang(fi) %{_ulibdir}/scribus/scribus.fi.qm
 %lang(fr) %{_ulibdir}/scribus/scribus.fr.qm
@@ -258,6 +261,8 @@ umask 022
 %lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials
 %lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words
 %lang(cs) %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words/*
+%lang(de) %dir %{_docdir}/%{name}-%{version}/de
+%{_docdir}/%{name}-%{version}/de/*
 %lang(fr) %dir %{_docdir}/%{name}-%{version}/fr
 %lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials
 %lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words
