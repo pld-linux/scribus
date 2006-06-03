@@ -182,9 +182,6 @@ umask 022
 %{_ulibdir}/%{name}/dicts
 %{_ulibdir}/%{name}/keysets
 %dir %{_ulibdir}/%{name}/plugins
-#%lang(da) %{_ulibdir}/%{name}/plugins/*.da.qm
-#%lang(nb) %{_ulibdir}/%{name}/plugins/*.no.qm
-#%lang(sk) %{_ulibdir}/%{name}/plugins/*.sk.qm
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
 %{_ulibdir}/%{name}/plugins/*.la
 %dir %{_ulibdir}/%{name}/plugins/gettext
@@ -262,7 +259,7 @@ umask 022
 %lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words
 %lang(cs) %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words/*
 %lang(de) %dir %{_docdir}/%{name}-%{version}/de
-%{_docdir}/%{name}-%{version}/de/*
+%lang(de) %{_docdir}/%{name}-%{version}/de/*
 %lang(fr) %dir %{_docdir}/%{name}-%{version}/fr
 %lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials
 %lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words
