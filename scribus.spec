@@ -6,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.2.4.1
+Version:	1.2.5
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://www.scribus.org.uk/downloads/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	d72ffe72b1d9ba1230557692af803927
+Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
+# Source0-md5:	e005b1d616b8668bb23f0a130465385a
 Source1:	%{name}.desktop
 Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
@@ -37,6 +37,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	qt-devel >= 3.0.5
+BuildRequires:	rpm-pythonprov
 BuildRequires:	zlib-devel
 Requires:	python-Imaging
 Requires:	python-tkinter
@@ -193,6 +194,7 @@ umask 022
 %lang(cy) %{_ulibdir}/scribus/scribus.cy.qm
 %lang(da) %{_ulibdir}/scribus/scribus.da.qm
 %lang(de) %{_ulibdir}/scribus/scribus.de.qm
+%lang(dz) %{_ulibdir}/scribus/scribus.dz.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
 %lang(eo) %{_ulibdir}/scribus/scribus.eo.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
@@ -203,6 +205,7 @@ umask 022
 %lang(hu) %{_ulibdir}/scribus/scribus.hu.qm
 %lang(id) %{_ulibdir}/scribus/scribus.id.qm
 %lang(it) %{_ulibdir}/scribus/scribus.it.qm
+%lang(ja) %{_ulibdir}/scribus/scribus.ja.qm
 %lang(ko) %{_ulibdir}/scribus/scribus.ko.qm
 %lang(lt) %{_ulibdir}/scribus/scribus.lt.qm
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
@@ -220,7 +223,6 @@ umask 022
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %lang(zh_CN) %{_ulibdir}/scribus/scribus.zh.qm
 %dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/icons
 %{_datadir}/mime/packages/scribus.xml
 %dir %{_datadir}/%{name}/plugins
@@ -240,22 +242,23 @@ umask 022
 
 %files docs
 %defattr(644,root,root,755)
-%dir %{_datadir}/%{name}/doc/en
-%{_datadir}/%{name}/doc/en/*
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words
-%lang(cs) %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words/*
-%lang(de) %dir %{_datadir}/%{name}/doc/de
-%lang(de) %{_datadir}/%{name}/doc/de/*
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words
-%lang(fr) %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words/*
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
-%lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
+%dir %{_docdir}/%{name}-%{version}
+%dir %{_docdir}/%{name}-%{version}/en
+%{_docdir}/%{name}-%{version}/en/*
+%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs
+%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials
+%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words
+%lang(cs) %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words/*
+%lang(de) %dir %{_docdir}/%{name}-%{version}/de
+%lang(de) %{_docdir}/%{name}-%{version}/de/*
+%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr
+%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials
+%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words
+%lang(fr) %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words/*
+%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl
+%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl/tutorials
+%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl/tutorials/scribus-short-words
+%lang(pl) %{_docdir}/%{name}-%{version}/pl/tutorials/scribus-short-words/*
 
 %files icc
 %defattr(644,root,root,755)
