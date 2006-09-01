@@ -11,7 +11,7 @@ Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.3.3.3
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
@@ -45,7 +45,7 @@ BuildRequires:	rpm-pythonprov
 #BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	QtCore-devel
 BuildRequires:	zlib-devel
-Requires:	python-Imaging
+Requires:	python-PIL
 Requires:	python-tkinter
 Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
