@@ -1,0 +1,12 @@
+diff -urN arts-1.5.4.org/admin/libtool.m4.in arts-1.5.4/admin/libtool.m4.in
+--- arts-1.5.4.org/admin/libtool.m4.in	2006-07-24 09:06:24.000000000 +0200
++++ arts-1.5.4/admin/libtool.m4.in	2006-09-09 12:45:13.172062500 +0200
+@@ -3542,7 +3542,7 @@
+   # The `*' in the case matches for architectures that use `case' in
+   # $output_verbose_cmd can trigger glob expansion during the loop
+   # eval without this substitution.
+-  output_verbose_link_cmd="`$echo \"X$output_verbose_link_cmd\" | $Xsed -e \"$no_glob_subst\"`"
++  output_verbose_link_cmd=`$echo "X$output_verbose_link_cmd" | $Xsed -e "$no_glob_subst"`
+ 
+   for p in `eval $output_verbose_link_cmd`; do
+     case $p in
