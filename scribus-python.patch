@@ -22,3 +22,24 @@ diff -ur scribus-1.2.1/acinclude.m4 scribus-1.2.1-patch/acinclude.m4
    python_moddir=no
  fi
  
+diff -ur scribus-1.3.3.4-python/acinclude.m4 scribus-1.3.3.4/acinclude.m4
+--- scribus-1.3.3.4-python/acinclude.m4	2006-10-03 01:07:35.000000000 +0200
++++ scribus-1.3.3.4/acinclude.m4	2006-10-24 11:40:07.000000000 +0200
+@@ -4183,7 +4183,8 @@
+ 
+ AC_DEFUN([KDE_CHECK_PYTHON],
+ [
+-  KDE_CHECK_PYTHON_INTERN("2.4",
++ KDE_CHECK_PYTHON_INTERN("2.5",
++  [KDE_CHECK_PYTHON_INTERN("2.4",
+    [KDE_CHECK_PYTHON_INTERN("2.3", 
+     [KDE_CHECK_PYTHON_INTERN("2.2", 
+      [KDE_CHECK_PYTHON_INTERN("2.1", 
+@@ -4193,6 +4194,7 @@
+      ])
+     ])
+    ])
++  ])
+ ])
+ 
+ AC_DEFUN([KDE_CHECK_STL],
