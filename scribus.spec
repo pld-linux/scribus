@@ -153,7 +153,7 @@ rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
 
 rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,INSTALL,NEWS,PACKAGING,README,README.MacOSX,TODO}
 
-# can't use %{_docdir} and %doc in same specfile
+# can't use %{_docdir}/%{name}-%{version} and %doc in same specfile -- rpm removes the docdir
 mv $RPM_BUILD_ROOT%{_docdir}/%{name}{-%{version},}
 
 %clean
