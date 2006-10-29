@@ -1,12 +1,10 @@
+# TODO:
+#	- get the docs right, I just don't know of any better way
 #
 # Conditional build:
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
 #
-# TODO:
-#	- get the docs right, I just don't know of any better way
-#
-
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
@@ -21,6 +19,7 @@ Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
+Patch4:		kde-common-LD_quote.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -38,16 +37,18 @@ BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
+BuildRequires:	perl-base
 BuildRequires:	python-devel
 BuildRequires:	python-modules
+BuildRequires:	qt-devel >= 6:3.0.5
 BuildRequires:	rpm-pythonprov
-BuildRequires:	qt-devel >= 3.0.5
+BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 Requires:	python-PIL
 Requires:	python-tkinter
-Obsoletes:	scribus-svg
 Obsoletes:	scribus-scripting
 Obsoletes:	scribus-short-words
+Obsoletes:	scribus-svg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
@@ -97,12 +98,11 @@ Group:		X11/Applications/Publishing
 Requires:	scribus >= 1.2.3
 
 %description icc
-Some standard ICM CMYK and RGB profiles for use with Scribus.
-You should take care to use custom ones!
+Some standard ICM CMYK and RGB profiles for use with Scribus. You
+should take care to use custom ones!
 
 %description icc -l pl
-Standardowe profile ICM w formacie CMYK i RGB do u¿ycia
-w Scribusie.
+Standardowe profile ICM w formacie CMYK i RGB do u¿ycia w Scribusie.
 Zalecane jest u¿ywanie w³asnych profili zamiast nich!
 
 %package templates-base
@@ -125,13 +125,13 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
-%{__perl} -pi -e 's@(ac_python_dir/lib /usr/)lib@$1%{_lib}@' acinclude.m4
+%{__sed} -i -e 's@\(ac_python_dir/lib /usr/\)lib@\1%{_lib}@' acinclude.m4
 
 %build
-QTDIR=%{_prefix}
-KDEDIR=%{_prefix}
-export QTDIR KDEDIR
+export QTDIR=%{_prefix}
+export KDEDIR=%{_prefix}
 
 %{__aclocal}
 %{__autoconf}
@@ -151,10 +151,14 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_datadir}/mime/packag
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-#Install .desktop
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
+
+rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,INSTALL,NEWS,PACKAGING,README,README.MacOSX,TODO}
+
+# can't use %{_docdir} and %doc in same specfile
+mv $RPM_BUILD_ROOT%{_docdir}/%{name}{-%{version},}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -169,6 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc AUTHORS BUILDING ChangeLog ChangeLogCVS INSTALL NEWS README TODO
 %attr(755,root,root) %{_bindir}/scribus
 %dir %{_ulibdir}/%{name}
 %{_ulibdir}/%{name}/import.prolog
@@ -245,23 +250,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %files docs
 %defattr(644,root,root,755)
-%dir %{_docdir}/%{name}-%{version}
-%dir %{_docdir}/%{name}-%{version}/en
-%{_docdir}/%{name}-%{version}/en/*
-%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs
-%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials
-%lang(cs) %dir %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words
-%lang(cs) %{_docdir}/%{name}-%{version}/cs/tutorials/scribus-short-words/*
-%lang(de) %dir %{_docdir}/%{name}-%{version}/de
-%lang(de) %{_docdir}/%{name}-%{version}/de/*
-%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr
-%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials
-%lang(fr) %dir %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words
-%lang(fr) %{_docdir}/%{name}-%{version}/fr/tutorials/scribus-short-words/*
-%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl
-%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl/tutorials
-%lang(pl) %dir %{_docdir}/%{name}-%{version}/pl/tutorials/scribus-short-words
-%lang(pl) %{_docdir}/%{name}-%{version}/pl/tutorials/scribus-short-words/*
+%dir %{_docdir}/%{name}
+%dir %{_docdir}/%{name}/en
+%{_docdir}/%{name}/en/*
+%lang(cs) %dir %{_docdir}/%{name}/cs
+%lang(cs) %dir %{_docdir}/%{name}/cs/tutorials
+%lang(cs) %dir %{_docdir}/%{name}/cs/tutorials/scribus-short-words
+%lang(cs) %{_docdir}/%{name}/cs/tutorials/scribus-short-words/*
+%lang(de) %dir %{_docdir}/%{name}/de
+%lang(de) %{_docdir}/%{name}/de/*
+%lang(fr) %dir %{_docdir}/%{name}/fr
+%lang(fr) %dir %{_docdir}/%{name}/fr/tutorials
+%lang(fr) %dir %{_docdir}/%{name}/fr/tutorials/scribus-short-words
+%lang(fr) %{_docdir}/%{name}/fr/tutorials/scribus-short-words/*
+%lang(pl) %dir %{_docdir}/%{name}/pl
+%lang(pl) %dir %{_docdir}/%{name}/pl/tutorials
+%lang(pl) %dir %{_docdir}/%{name}/pl/tutorials/scribus-short-words
+%lang(pl) %{_docdir}/%{name}/pl/tutorials/scribus-short-words/*
 
 %files icc
 %defattr(644,root,root,755)
