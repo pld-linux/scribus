@@ -1,6 +1,3 @@
-# TODO:
-#	- get the docs right, I just don't know of any better way
-#
 # Conditional build:
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
@@ -9,7 +6,7 @@ Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.3.3.4
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
@@ -82,7 +79,7 @@ Summary:	Documentation for Scribus
 Summary(pl):	Dokumentacja dla Scribusa
 License:	custom OPL (see License),FDL
 Group:		X11/Applications/Publishing
-Requires:	scribus
+Requires:	%{name} = %{version}-%{release}
 
 %description docs
 On-line user documentation for Scribus.
@@ -95,7 +92,7 @@ Summary:	ICC profiles for Scribus
 Summary(pl):	Profile ICC dla Scribusa
 License:	freely distributable
 Group:		X11/Applications/Publishing
-Requires:	scribus >= 1.2.3
+Requires:	%{name} = %{version}-%{release}
 
 %description icc
 Some standard ICM CMYK and RGB profiles for use with Scribus. You
@@ -110,7 +107,7 @@ Summary:	Default document templates
 Summary(pl):	Domy¶lne szablony dokumentów
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Requires:	scribus
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	scribus-templates < 1.2.1
 
 %description templates-base
