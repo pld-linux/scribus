@@ -1,0 +1,3 @@
+- updated to 0.8, cleanups, updated %files
+- always look for Type1 and TTF in standard paths (patch)
+- install binary modules in libdir not datadir, use -avoid-version (patch)
