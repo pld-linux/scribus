@@ -79,10 +79,9 @@ Summary:	Documentation for Scribus
 Summary(pl):	Dokumentacja dla Scribusa
 License:	custom OPL (see License),FDL
 Group:		X11/Applications/Publishing
-Requires:	%{name} = %{version}-%{release}
 
 %description docs
-On-line user documentation for Scribus.
+User documentation for Scribus.
 
 %description docs -l pl
 Dokumentacja u¿ytkownika dla Scribusa.
