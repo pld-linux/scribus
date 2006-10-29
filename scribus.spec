@@ -10,14 +10,13 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.3
-Release:	3
+Version:	1.3.3.4
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	cde9a4342697a69de60b017f59d32488
+# Source0-md5:	ccd7fb34a77b7e3d83e902fb3f5b731b
 Source1:	%{name}.desktop
-Source2:	%{name}icon.png
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
@@ -42,8 +41,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	rpm-pythonprov
-#BuildRequires:	qt-devel >= 3.0.5
-BuildRequires:	QtCore-devel
+BuildRequires:	qt-devel >= 3.0.5
 BuildRequires:	zlib-devel
 Requires:	python-PIL
 Requires:	python-tkinter
@@ -153,10 +151,8 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_datadir}/mime/packag
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-#Install .desktop, .icon and .xml
+#Install .desktop
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-install scribus.xml $RPM_BUILD_ROOT%{_datadir}/mime/packages/scribus.xml
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
 
@@ -164,14 +160,12 @@ rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
 rm -rf $RPM_BUILD_ROOT
 
 %post
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
-[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+%update_desktop_database_post
+%update_mime_database
 
 %postun
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
-[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+%update_desktop_database_postun
+%update_mime_database
 
 %files
 %defattr(644,root,root,755)
@@ -236,10 +230,10 @@ umask 022
 %{_datadir}/mime/packages/scribus.xml
 %dir %{_datadir}/%{name}/plugins
 %{_datadir}/%{name}/plugins/*
-#dir %{_datadir}/%{name}/samples
-#{_datadir}/%{name}/samples/*
-#dir %{_datadir}/%{name}/scripts
-#{_datadir}/%{name}/scripts/*
+%dir %{_datadir}/%{name}/samples
+%{_datadir}/%{name}/samples/*.py
+%dir %{_datadir}/%{name}/scripts
+%{_datadir}/%{name}/scripts/*.py
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/%{name}.*
 %lang(pl) %{_mandir}/pl/man1/%{name}.*
