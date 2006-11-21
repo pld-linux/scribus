@@ -1,3 +1,4 @@
+#
 # Conditional build:
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
@@ -5,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.4
-Release:	2
+Version:	1.3.3.5
+Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	ccd7fb34a77b7e3d83e902fb3f5b731b
+# Source0-md5:	db4c06fa2b6f758aab17555d5253a632
 Source1:	%{name}.desktop
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
@@ -185,6 +186,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_ulibdir}/scribus/profiles
 %lang(af) %{_ulibdir}/scribus/scribus.af.qm
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
+%lang(br) %{_ulibdir}/scribus/scribus.br.qm
 %lang(ca) %{_ulibdir}/scribus/scribus.ca.qm
 %lang(cs) %{_ulibdir}/scribus/scribus.cs.qm
 %lang(cy) %{_ulibdir}/scribus/scribus.cy.qm
@@ -193,7 +195,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de_OL) %{_ulibdir}/scribus/scribus.de_ol.qm
 %lang(dz) %{_ulibdir}/scribus/scribus.dz.qm
 %lang(el) %{_ulibdir}/scribus/scribus.el.qm
+%lang(en_AU) %{_ulibdir}/scribus/scribus.en_AU.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
+%lang(en_US) %{_ulibdir}/scribus/scribus.en_US.qm
 %lang(eo) %{_ulibdir}/scribus/scribus.eo.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
 %lang(es_LA) %{_ulibdir}/scribus/scribus.es_LA.qm
@@ -256,6 +260,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de) %dir %{_docdir}/%{name}/de
 %lang(de) %{_docdir}/%{name}/de/*
 %lang(fr) %dir %{_docdir}/%{name}/fr
+%lang(fr) %{_docdir}/%{name}/fr/*.html
 %lang(fr) %dir %{_docdir}/%{name}/fr/tutorials
 %lang(fr) %dir %{_docdir}/%{name}/fr/tutorials/scribus-short-words
 %lang(fr) %{_docdir}/%{name}/fr/tutorials/scribus-short-words/*
