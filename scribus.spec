@@ -18,6 +18,7 @@ Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-module-fixes.patch
 Patch3:		%{name}-nolibs.patch
 Patch4:		kde-common-LD_quote.patch
+Patch5:		kde-ac260-lt.patch
 URL:		http://www.scribus.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -123,6 +124,7 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %{__sed} -i -e 's@\(ac_python_dir/lib /usr/\)lib@\1%{_lib}@' acinclude.m4
 
