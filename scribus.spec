@@ -126,7 +126,8 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %patch4 -p1
 %patch5 -p1
 
-%{__sed} -i -e 's@\(ac_python_dir/lib /usr/\)lib@\1%{_lib}@' acinclude.m4
+%{__sed} -i -e 's@\(ac_python_dir/lib /usr/\)lib@\1%{_lib}@' admin/acinclude.m4.in
+cat admin/acinclude.m4.in admin/libtool.m4.in > acinclude.m4
 
 %build
 export QTDIR=%{_prefix}
