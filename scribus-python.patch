@@ -1,6 +1,5 @@
-diff -ur scribus-1.2.1/acinclude.m4 scribus-1.2.1-patch/acinclude.m4
---- scribus-1.2.1/acinclude.m4	2004-11-17 10:49:56.000000000 +0100
-+++ scribus-1.2.1-patch/acinclude.m4	2004-11-18 13:30:11.421704096 +0100
+--- scribus-1.2.1/admin/acinclude.m4.in	2004-11-17 10:49:56.000000000 +0100
++++ scribus-1.2.1-patch/admin/acinclude.m4.in	2004-11-18 13:30:11.421704096 +0100
 @@ -4114,7 +4114,7 @@
  
  PYTHONINC=-I$python_incdir
