@@ -13,6 +13,7 @@ Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
 # Source0-md5:	a9a47ecdedb4032ccaa7612afd7f068c
 Source1:	%{name}.desktop
+Source2:	%{name}.pl.qm
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-cmake.patch
 Patch3:		%{name}-docdir.patch
@@ -145,6 +146,7 @@ install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribusicon.png $RPM_BUILD_ROOT
 mv $RPM_BUILD_ROOT%{_ulibdir}/scribus/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_ulibdir}/scribus/%{name}.lt.qm
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
+install %{SOURCE2} $RPM_BUILD_ROOT%{_ulibdir}/scribus/
 
 rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,INSTALL,NEWS,PACKAGING,README,README.MacOSX,TODO}
 
