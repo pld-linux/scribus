@@ -1,4 +1,7 @@
 #
+# TODO:
+#	- docs don't open in Scribus
+#
 # Conditional build:
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
@@ -6,23 +9,18 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.5
-Release:	0.1
+Version:	1.3.3.6
+Release:	0.9
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	db4c06fa2b6f758aab17555d5253a632
+# Source0-md5:	a9a47ecdedb4032ccaa7612afd7f068c
 Source1:	%{name}.desktop
-Patch0:		%{name}-python.patch
 Patch1:		%{name}-standard-font-paths.patch
-Patch2:		%{name}-module-fixes.patch
-Patch3:		%{name}-nolibs.patch
-Patch4:		kde-common-LD_quote.patch
-Patch5:		kde-ac260-lt.patch
+Patch2:		%{name}-cmake.patch
 URL:		http://www.scribus.net/
-BuildRequires:	autoconf
-BuildRequires:	automake
-%{?with_cairo:BuildRequires:	cairo-devel}
+%{?with_cairo:BuildRequires:	cairo-devel >= 1.2.0}
+BuildRequires:	cmake >= 2.4.5
 %if %{with cups}
 BuildRequires:	cups-devel
 %else
@@ -119,39 +117,33 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch1	-p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-
-%{__sed} -i -e 's@\(ac_python_dir/lib /usr/\)lib@\1%{_lib}@' admin/acinclude.m4.in
-cat admin/acinclude.m4.in admin/libtool.m4.in > acinclude.m4
 
 %build
 export QTDIR=%{_prefix}
 export KDEDIR=%{_prefix}
 
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%{__perl} admin/am_edit
-%configure \
-	%{?with_cairo:--enable-cairo} \
-	--with-qt-libraries=%{_libdir} \
-	--libdir=%{_ulibdir}
+cmake . -DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
+	%if %{with cairo }
+	-DWANT_CAIRO=1
+	%else
+	-DWANT_LIBART=1
+	%endif
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_datadir}/mime/packages/}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribusicon.png $RPM_BUILD_ROOT%{_pixmapsdir}
+
+mv $RPM_BUILD_ROOT%{_ulibdir}/scribus/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_ulibdir}/scribus/%{name}.lt.qm
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
 
@@ -182,10 +174,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_ulibdir}/%{name}/keysets
 %dir %{_ulibdir}/%{name}/plugins
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
-%{_ulibdir}/%{name}/plugins/*.la
 %dir %{_ulibdir}/%{name}/plugins/gettext
 %attr(755,root,root) %{_ulibdir}/%{name}/plugins/gettext/*.so*
-%{_ulibdir}/%{name}/plugins/gettext/*.la
 %dir %{_ulibdir}/scribus/profiles
 %lang(af) %{_ulibdir}/scribus/scribus.af.qm
 %lang(bg) %{_ulibdir}/scribus/scribus.bg.qm
@@ -198,9 +188,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de_OL) %{_ulibdir}/scribus/scribus.de_ol.qm
 %lang(dz) %{_ulibdir}/scribus/scribus.dz.qm
 %lang(el) %{_ulibdir}/scribus/scribus.el.qm
-%lang(en_AU) %{_ulibdir}/scribus/scribus.en_AU.qm
+#%lang(en_AU) %{_ulibdir}/scribus/scribus.en_AU.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
-%lang(en_US) %{_ulibdir}/scribus/scribus.en_US.qm
+#%lang(en_US) %{_ulibdir}/scribus/scribus.en_US.qm
 %lang(eo) %{_ulibdir}/scribus/scribus.eo.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
 %lang(es_LA) %{_ulibdir}/scribus/scribus.es_LA.qm
@@ -247,9 +237,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_mandir}/pl/man1/%{name}.*
 %{_pixmapsdir}/%{name}icon.png
 
-%files devel
-%defattr(644,root,root,755)
-%{_includedir}/scribus
+#%files devel
+#%defattr(644,root,root,755)
+#%{_includedir}/scribus
 
 %files docs
 %defattr(644,root,root,755)
@@ -260,8 +250,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(cs) %dir %{_docdir}/%{name}/cs/tutorials
 %lang(cs) %dir %{_docdir}/%{name}/cs/tutorials/scribus-short-words
 %lang(cs) %{_docdir}/%{name}/cs/tutorials/scribus-short-words/*
-%lang(de) %dir %{_docdir}/%{name}/de
-%lang(de) %{_docdir}/%{name}/de/*
 %lang(fr) %dir %{_docdir}/%{name}/fr
 %lang(fr) %{_docdir}/%{name}/fr/*.html
 %lang(fr) %dir %{_docdir}/%{name}/fr/tutorials
@@ -284,8 +272,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/templates/br1/*
 %dir %{_datadir}/%{name}/templates/nl1
 %{_datadir}/%{name}/templates/nl1/*
-%dir %{_datadir}/%{name}/templates/nl2
-%{_datadir}/%{name}/templates/nl2/*
 %dir %{_datadir}/%{name}/templates/sc_presentation
 %{_datadir}/%{name}/templates/sc_presentation/*
 %dir %{_datadir}/%{name}/templates/textbased
