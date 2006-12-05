@@ -10,7 +10,7 @@ Version:	1.3.3.6
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	a9a47ecdedb4032ccaa7612afd7f068c
 Source1:	%{name}.desktop
 Source2:	%{name}.pl.qm
@@ -123,6 +123,10 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %build
 export QTDIR=%{_prefix}
 export KDEDIR=%{_prefix}
+export CC="%{__cc}"
+export CXX="%{__cxx}"
+export CFLAGS="%{rpmcflags}"
+export CXXFLAGS="%{rpmcxxflags}"
 
 cmake . -DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
 	%if %{with cairo }
