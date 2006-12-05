@@ -38,6 +38,7 @@ BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	qt-devel >= 6:3.0.5
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 Requires:	python-PIL
@@ -123,17 +124,14 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %build
 export QTDIR=%{_prefix}
 export KDEDIR=%{_prefix}
-export CC="%{__cc}"
-export CXX="%{__cxx}"
-export CFLAGS="%{rpmcflags}"
-export CXXFLAGS="%{rpmcxxflags}"
 
-cmake . -DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
-	%if %{with cairo }
+%cmake . \
+	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
+%if %{with cairo}
 	-DWANT_CAIRO=1
-	%else
+%else
 	-DWANT_LIBART=1
-	%endif
+%endif
 
 %{__make}
 
