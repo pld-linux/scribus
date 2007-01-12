@@ -6,17 +6,14 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.6
+Version:	1.3.3.7
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	a9a47ecdedb4032ccaa7612afd7f068c
+# Source0-md5:	9d20ef9010d94b504f6c8cd6acd215ca
 Source1:	%{name}.desktop
-Source2:	%{name}.pl.qm
 Patch1:		%{name}-standard-font-paths.patch
-Patch2:		%{name}-cmake.patch
-Patch3:		%{name}-docdir.patch
 URL:		http://www.scribus.net/
 %{?with_cairo:BuildRequires:	cairo-devel >= 1.2.0}
 BuildRequires:	cmake >= 2.4.5
@@ -118,8 +115,6 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 %prep
 %setup -q
 %patch1	-p1
-%patch2 -p1
-%patch3	-p1
 
 %build
 export QTDIR=%{_prefix}
@@ -148,12 +143,8 @@ install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribusicon.png $RPM_BUILD_ROOT
 mv $RPM_BUILD_ROOT%{_ulibdir}/scribus/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_ulibdir}/scribus/%{name}.lt.qm
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
-install %{SOURCE2} $RPM_BUILD_ROOT%{_ulibdir}/scribus/
 
 rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,INSTALL,NEWS,PACKAGING,README,README.MacOSX,TODO}
-
-# can't use %{_docdir}/%{name}-%{version} and %doc in same specfile -- rpm removes the docdir
-mv $RPM_BUILD_ROOT%{_docdir}/%{name}{-%{version},}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -253,6 +244,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(cs) %dir %{_docdir}/%{name}/cs/tutorials
 %lang(cs) %dir %{_docdir}/%{name}/cs/tutorials/scribus-short-words
 %lang(cs) %{_docdir}/%{name}/cs/tutorials/scribus-short-words/*
+%lang(de) %dir %{_docdir}/%{name}/de
+%lang(de) %{_docdir}/%{name}/de/*
 %lang(fr) %dir %{_docdir}/%{name}/fr
 %lang(fr) %{_docdir}/%{name}/fr/*.html
 %lang(fr) %dir %{_docdir}/%{name}/fr/tutorials
