@@ -7,13 +7,14 @@ Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.3.3.7
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
 # Source0-md5:	9d20ef9010d94b504f6c8cd6acd215ca
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
+Patch2:		%{name}-version.patch
 URL:		http://www.scribus.net/
 %{?with_cairo:BuildRequires:	cairo-devel >= 1.2.0}
 BuildRequires:	cmake >= 2.4.5
@@ -114,7 +115,8 @@ Domy¶lne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
 %setup -q
-%patch1	-p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 export QTDIR=%{_prefix}
