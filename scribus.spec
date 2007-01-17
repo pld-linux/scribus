@@ -39,6 +39,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
+Requires:	desktop-file-utils
 Requires:	python-PIL
 Requires:	python-tkinter
 Obsoletes:	scribus-scripting
