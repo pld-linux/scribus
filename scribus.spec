@@ -4,7 +4,7 @@
 %bcond_without	cups	# build without CUPS support
 #
 Summary:	Scribus - Open Source Desktop Publishing
-Summary(pl):	Scribus - DTP dla Wolnego Oprogramowania
+Summary(pl.UTF-8):   Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.3.3.7
 Release:	2
@@ -55,14 +55,14 @@ Scribus is an open source desktop page layout program with the aim of
 producing commerical grade output in PDF and Postscript, primarily,
 though not exclusively for Linux(R).
 
-%description -l pl
-Scribus jest to program do tworzenia publikacji z za≥oøenia generuj±cy
-dokumenty PDF oraz Postscript nadaj±ce siÍ do uøytku komercyjnego,
-przeznaczony g≥Ûwnie, lecz nie tylko, dla systemu Linux(R).
+%description -l pl.UTF-8
+Scribus jest to program do tworzenia publikacji z za≈Ço≈ºenia generujƒÖcy
+dokumenty PDF oraz Postscript nadajƒÖce siƒô do u≈ºytku komercyjnego,
+przeznaczony g≈Ç√≥wnie, lecz nie tylko, dla systemu Linux(R).
 
 %package devel
 Summary:	Header files for Scribus plugins development
-Summary(pl):	Pliki nag≥Ûwkowe do tworzenia wtyczek Scribusa
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe do tworzenia wtyczek Scribusa
 Group:		Development/Libraries
 # currently it doesn't require base
 Requires:	qt-devel
@@ -70,24 +70,24 @@ Requires:	qt-devel
 %description devel
 Header files for Scribus plugins development.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe do tworzenia wtyczek Scribusa.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe do tworzenia wtyczek Scribusa.
 
 %package docs
 Summary:	Documentation for Scribus
-Summary(pl):	Dokumentacja dla Scribusa
+Summary(pl.UTF-8):   Dokumentacja dla Scribusa
 License:	custom OPL (see License),FDL
 Group:		X11/Applications/Publishing
 
 %description docs
 User documentation for Scribus.
 
-%description docs -l pl
-Dokumentacja uøytkownika dla Scribusa.
+%description docs -l pl.UTF-8
+Dokumentacja u≈ºytkownika dla Scribusa.
 
 %package icc
 Summary:	ICC profiles for Scribus
-Summary(pl):	Profile ICC dla Scribusa
+Summary(pl.UTF-8):   Profile ICC dla Scribusa
 License:	freely distributable
 Group:		X11/Applications/Publishing
 Requires:	%{name} = %{version}-%{release}
@@ -96,13 +96,13 @@ Requires:	%{name} = %{version}-%{release}
 Some standard ICM CMYK and RGB profiles for use with Scribus. You
 should take care to use custom ones!
 
-%description icc -l pl
-Standardowe profile ICM w formacie CMYK i RGB do uøycia w Scribusie.
-Zalecane jest uøywanie w≥asnych profili zamiast nich!
+%description icc -l pl.UTF-8
+Standardowe profile ICM w formacie CMYK i RGB do u≈ºycia w Scribusie.
+Zalecane jest u≈ºywanie w≈Çasnych profili zamiast nich!
 
 %package templates-base
 Summary:	Default document templates
-Summary(pl):	Domy∂lne szablony dokumentÛw
+Summary(pl.UTF-8):   Domy≈õlne szablony dokument√≥w
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Requires:	%{name} = %{version}-%{release}
@@ -111,8 +111,8 @@ Obsoletes:	scribus-templates < 1.2.1
 %description templates-base
 Default document templates shipped with Scribus.
 
-%description templates-base -l pl
-Domy∂lne szablony dokumentÛw dostarczane wraz ze Scribusem.
+%description templates-base -l pl.UTF-8
+Domy≈õlne szablony dokument√≥w dostarczane wraz ze Scribusem.
 
 %prep
 %setup -q
