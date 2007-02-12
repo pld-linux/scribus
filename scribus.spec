@@ -4,7 +4,7 @@
 %bcond_without	cups	# build without CUPS support
 #
 Summary:	Scribus - Open Source Desktop Publishing
-Summary(pl.UTF-8):   Scribus - DTP dla Wolnego Oprogramowania
+Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.3.3.7
 Release:	2
@@ -62,7 +62,7 @@ przeznaczony głównie, lecz nie tylko, dla systemu Linux(R).
 
 %package devel
 Summary:	Header files for Scribus plugins development
-Summary(pl.UTF-8):   Pliki nagłówkowe do tworzenia wtyczek Scribusa
+Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek Scribusa
 Group:		Development/Libraries
 # currently it doesn't require base
 Requires:	qt-devel
@@ -75,7 +75,7 @@ Pliki nagłówkowe do tworzenia wtyczek Scribusa.
 
 %package docs
 Summary:	Documentation for Scribus
-Summary(pl.UTF-8):   Dokumentacja dla Scribusa
+Summary(pl.UTF-8):	Dokumentacja dla Scribusa
 License:	custom OPL (see License),FDL
 Group:		X11/Applications/Publishing
 
@@ -87,7 +87,7 @@ Dokumentacja użytkownika dla Scribusa.
 
 %package icc
 Summary:	ICC profiles for Scribus
-Summary(pl.UTF-8):   Profile ICC dla Scribusa
+Summary(pl.UTF-8):	Profile ICC dla Scribusa
 License:	freely distributable
 Group:		X11/Applications/Publishing
 Requires:	%{name} = %{version}-%{release}
@@ -102,7 +102,7 @@ Zalecane jest używanie własnych profili zamiast nich!
 
 %package templates-base
 Summary:	Default document templates
-Summary(pl.UTF-8):   Domyślne szablony dokumentów
+Summary(pl.UTF-8):	Domyślne szablony dokumentów
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Requires:	%{name} = %{version}-%{release}
