@@ -181,7 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(da) %{_ulibdir}/scribus/scribus.da.qm
 %lang(de) %{_ulibdir}/scribus/scribus.de.qm
 %lang(de_CH) %{_ulibdir}/scribus/scribus.de_CH.qm
-%lang(de_OL) %{_ulibdir}/scribus/scribus.de_ol.qm
+%lang(de) %{_ulibdir}/scribus/scribus.de_ol.qm
 %lang(dz) %{_ulibdir}/scribus/scribus.dz.qm
 %lang(el) %{_ulibdir}/scribus/scribus.el.qm
 #%lang(en_AU) %{_ulibdir}/scribus/scribus.en_AU.qm
