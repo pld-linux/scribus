@@ -1,0 +1,25 @@
+--- scribus-1.3.1/configure.in.orig	2005-10-03 02:04:41.000000000 +0200
++++ scribus-1.3.1/configure.in	2005-10-05 13:03:41.000000000 +0200
+@@ -339,18 +339,18 @@
+ fi
+ 
+ dnl check for -lsocket
+-AC_CHECK_LIB(socket,socket,
++AC_CHECK_FUNC(socket,,[AC_CHECK_LIB(socket,socket,
+ if test "$uname" != "IRIX"; then
+ 	LIBS="-lsocket $LIBS"
+ else
+ 	echo "Not using -lsocket since you are running IRIX."
+-fi)
+-AC_CHECK_LIB(nsl,gethostbyaddr,
++fi)])
++AC_CHECK_FUNC(gethostbyaddr,,[AC_CHECK_LIB(nsl,gethostbyaddr,
+ if test "$uname" != "IRIX"; then
+ 	LIBS="-lnsl $LIBS"
+ else
+ 	echo "Not using -lnsl since you are running IRIX."
+-fi)
++fi)])
+ 
+ dnl Check for lcms
+ dnl TODO look for lcms using pkg-config too

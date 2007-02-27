@@ -1,0 +1,1564 @@
+diff -Nur scribus-1.3.3.6/cmake/modules/CAIROConfig.cmake scribus-1.3.3.6-cmake/cmake/modules/CAIROConfig.cmake
+--- scribus-1.3.3.6/cmake/modules/CAIROConfig.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/CAIROConfig.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,69 @@
++#
++# Find the native cairo includes and library
++#
++
++# This module defines
++# CAIRO_INCLUDE_DIR, where to find art*.h etc
++# CAIRO_LIBRARY, the libraries to link against to use LIBART.
++# CAIRO_FOUND, If false, do not try to use LIBART.
++# CAIRO_LIBS, link information
++# CAIRO_CFLAGS, cflags for include information
++
++
++INCLUDE(UsePkgConfig)
++
++# use pkg-config to get the directories and then use these values
++# in the FIND_PATH() and FIND_LIBRARY() calls
++PKGCONFIG(cairo _libCairoIncDir _libCairoLinkDir _libCairoLinkFlags _libCairoCflags)
++
++SET(CAIRO_LIBS ${_libCairoCflags})
++
++IF(PREFIX_CAIRO)
++	SET(PREFIX_CAIRO_INCLUDE "${PREFIX_CAIRO}/include")
++	SET(PREFIX_CAIRO_LIB "${PREFIX_CAIRO}/lib")
++	SET(PREFIX_CAIRO_BIN "${PREFIX_CAIRO}/bin")
++ENDIF(PREFIX_CAIRO)
++
++FIND_PATH(CAIRO_INCLUDE_DIR 
++NAMES cairo.h
++PATHS ${PREFIX_CAIRO_INCLUDE} ${_libCairoIncDir} /usr/local/include /usr/include
++PATH_SUFFIXES cairo
++NO_DEFAULT_PATH
++)
++
++FIND_LIBRARY(CAIRO_LIBRARY
++NAMES cairo
++PATHS ${PREFIX_CAIRO_LIB} ${_libCairoLinkDir} /usr/local/lib /usr/lib
++NO_DEFAULT_PATH
++)
++
++#If we had no cairo prefix specify it, set PREFIX_CAIRO_LIB most importantly, for the 
++# IF(NOT PREFIX_CAIRO)
++# 	GET_FILENAME_COMPONENT(CAIRO_DIR ${CAIRO_LIBRARY} PATH)
++# 	GET_FILENAME_COMPONENT(CAIRO_DIR ${CAIRO_DIR} PATH)
++# 	SET(PREFIX_CAIRO ${CAIRO_DIR})
++# 	IF(PREFIX_CAIRO)
++# 		SET(PREFIX_CAIRO_INCLUDE "${PREFIX_CAIRO}/include")
++# 		SET(PREFIX_CAIRO_LIB "${PREFIX_CAIRO}/lib")
++# 		SET(PREFIX_CAIRO_BIN "${PREFIX_CAIRO}/bin")
++# 	ENDIF(PREFIX_CAIRO)
++# ENDIF(NOT PREFIX_CAIRO)
++
++SET(CAIRO_FIND_QUIETLY 1)
++
++IF (CAIRO_LIBRARY)
++  IF (CAIRO_INCLUDE_DIR)
++    SET( CAIRO_FOUND "YES" )
++    IF(NOT CAIRO_FIND_QUIETLY)
++      MESSAGE(STATUS "Found cairo: ${CAIRO_LIBRARY}")
++    ENDIF(NOT CAIRO_FIND_QUIETLY)
++    SET( CAIRO_LIBRARIES ${CAIRO_LIBRARY} )
++#     CB: We dont use this yet anyway
++#     FIND_PROGRAM(CAIRO_CONFIG 
++#       NAMES pkg-config
++#       PATHS ${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin /usr/bin /usr/nekoware/bin /usr/X11/bin
++#     )
++#     EXEC_PROGRAM(${CAIRO_CONFIG} ARGS "--libs cairo" OUTPUT_VARIABLE CAIRO_LIBS)
++#     EXEC_PROGRAM(${CAIRO_CONFIG} ARGS "--cflags cairo" OUTPUT_VARIABLE CAIRO_CFLAGS)
++  ENDIF (CAIRO_INCLUDE_DIR)
++ENDIF (CAIRO_LIBRARY)
+diff -Nur scribus-1.3.3.6/cmake/modules/CUPSConfig.cmake scribus-1.3.3.6-cmake/cmake/modules/CUPSConfig.cmake
+--- scribus-1.3.3.6/cmake/modules/CUPSConfig.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/CUPSConfig.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,31 @@
++# - Try to find Cups
++# Once done this will define
++#
++#  CUPS_FOUND - system has Cups
++#  CUPS_INCLUDE_DIR - the Cups include directory
++#  CUPS_LIBRARY - Link these to use CUPS
++#
++
++FIND_PATH(CUPS_INCLUDE_DIR cups/cups.h
++  /usr/include
++  /usr/local/include
++)
++
++FIND_LIBRARY(CUPS_LIBRARY NAMES cups PATHS /usr/lib /usr/local/lib)
++
++IF(CUPS_INCLUDE_DIR AND CUPS_LIBRARY)
++   SET(CUPS_FOUND TRUE)
++ENDIF(CUPS_INCLUDE_DIR AND CUPS_LIBRARY)
++
++SET(Cups_FIND_QUIETLY 1)
++
++IF(CUPS_FOUND)
++  SET( CUPS_LIBRARIES ${CUPS_LIBRARY} )
++  IF(NOT Cups_FIND_QUIETLY)
++    MESSAGE(STATUS "Found Cups: ${CUPS_LIBRARY}")
++  ENDIF(NOT Cups_FIND_QUIETLY)
++ELSE(CUPS_FOUND)
++  IF(Cups_FIND_REQUIRED)
++    MESSAGE(SEND_ERROR "Could not find Cups")
++  ENDIF(Cups_FIND_REQUIRED)
++ENDIF(CUPS_FOUND)
+\ Brak znaku nowej linii na koñcu pliku
+diff -Nur scribus-1.3.3.6/cmake/modules/FindLCMS.cmake scribus-1.3.3.6-cmake/cmake/modules/FindLCMS.cmake
+--- scribus-1.3.3.6/cmake/modules/FindLCMS.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/FindLCMS.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,46 @@
++#
++# Find the native LCMS includes and library
++#
++
++# This module defines
++# LCMS_INCLUDE_DIR, where to find art*.h etc
++# LCMS_LIBRARY, the libraries
++# LCMS_FOUND, If false, do not try to use LCMS.
++# LIBLCMS_LIBS, link information
++# LIBLCMS_CFLAGS, cflags for include information
++
++
++# INCLUDE(UsePkgConfig)
++
++# use pkg-config to get the directories and then use these values
++# in the FIND_PATH() and FIND_LIBRARY() calls
++# PKGCONFIG(lcms _lcmsIncDir _lcmsLinkDir _lcmsLinkFlags _lcmsCflags)
++
++# SET(LCMS_LIBS ${_lcmsCflags})
++
++FIND_PATH(LCMS_INCLUDE_DIR lcms.h
++/usr/include
++/usr/local/include
++)
++
++FIND_LIBRARY(LCMS_LIBRARY
++  NAMES lcms liblcms
++  PATHS /usr/lib /usr/local/lib
++)
++
++IF (LCMS_LIBRARY AND LCMS_INCLUDE_DIR)
++  SET( LCMS_FOUND 1 )
++  SET( LCMS_LIBRARIES ${LCMS_LIBRARY} )
++ELSE (LCMS_LIBRARY AND LCMS_INCLUDE_DIR)
++  SET( LCMS_FOUND 0 )
++ENDIF (LCMS_LIBRARY AND LCMS_INCLUDE_DIR)
++
++IF (LCMS_FOUND)
++  IF (NOT LCMS_FIND_QUIETLY)
++    MESSAGE(STATUS "Found LittleCMS: ${LCMS_LIBRARY}")
++  ENDIF (NOT LCMS_FIND_QUIETLY)
++ELSE (LCMS_FOUND)
++  IF (LCMS_FIND_REQUIRED)
++    MESSAGE(FATAL_ERROR "Could not find LittleCMS")
++  ENDIF (LCMS_FIND_REQUIRED)
++ENDIF (LCMS_FOUND)
+\ Brak znaku nowej linii na koñcu pliku
+diff -Nur scribus-1.3.3.6/cmake/modules/FindQt3.cmake scribus-1.3.3.6-cmake/cmake/modules/FindQt3.cmake
+--- scribus-1.3.3.6/cmake/modules/FindQt3.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/FindQt3.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,302 @@
++# - Locate Qt include paths and libraries
++# This module defines:
++#  QT_INCLUDE_DIR - where to find qt.h, etc.
++#  QT_LIBRARIES   - the libraries to link against to use Qt.
++#  QT_DEFINITIONS - definitions to use when 
++#                   compiling code that uses Qt.
++#  QT_FOUND       - If false, don't try to use Qt.
++#
++# If you need the multithreaded version of Qt, set QT_MT_REQUIRED to TRUE
++#
++# Also defined, but not for general use are:
++#  QT_MOC_EXECUTABLE, where to find the moc tool.
++#  QT_UIC_EXECUTABLE, where to find the uic tool.
++#  QT_QT_LIBRARY, where to find the Qt library.
++#  QT_QTMAIN_LIBRARY, where to find the qtmain 
++#   library. This is only required by Qt3 on Windows.
++
++# These are around for backwards compatibility 
++# they will be set
++#  QT_WRAP_CPP, set true if QT_MOC_EXECUTABLE is found
++#  QT_WRAP_UI set true if QT_UIC_EXECUTABLE is found
++
++FILE(GLOB GLOB_PATHS_BIN /usr/lib/qt-3*/bin/)
++FIND_PATH(QT_INCLUDE_DIR qt.h
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/include/Qt"
++  $ENV{QTDIR}/include
++  ${GLOB_PATHS_BIN}
++  /usr/local/qt/include
++  /usr/local/include
++  /usr/lib/qt/include
++  /usr/include/qt
++  /usr/include
++  /usr/share/qt3/include
++  C:/Progra~1/qt/include
++  /usr/include/qt3
++  /usr/X11R6/include
++  )
++
++# if qglobal.h is not in the qt_include_dir then set
++# QT_INCLUDE_DIR to NOTFOUND
++IF(NOT EXISTS ${QT_INCLUDE_DIR}/qglobal.h)
++  SET(QT_INCLUDE_DIR QT_INCLUDE_DIR-NOTFOUND CACHE PATH "path to qt3 include directory" FORCE)
++ENDIF(NOT EXISTS ${QT_INCLUDE_DIR}/qglobal.h)
++
++IF(QT_INCLUDE_DIR)
++  #extract the version string from qglobal.h
++  FILE(READ ${QT_INCLUDE_DIR}/qglobal.h QGLOBAL_H)
++  STRING(REGEX MATCH "#define[\t ]+QT_VERSION_STR[\t ]+\"([0-9]+.[0-9]+.[0-9]+)\"" QGLOBAL_H "${QGLOBAL_H}")
++  STRING(REGEX REPLACE ".*\"([0-9]+.[0-9]+.[0-9]+)\".*" "\\1" qt_version_str "${QGLOBAL_H}")
++
++  # Under windows the qt library (MSVC) has the format qt-mtXYZ where XYZ is the
++  # version X.Y.Z, so we need to remove the dots from version
++  STRING(REGEX REPLACE "\\." "" qt_version_str_lib "${qt_version_str}")
++ELSE(QT_INCLUDE_DIR)
++ENDIF(QT_INCLUDE_DIR)
++
++FILE(GLOB GLOB_PATHS_LIB /usr/lib/qt-3*/lib/)
++IF (QT_MT_REQUIRED)
++  FIND_LIBRARY(QT_QT_LIBRARY
++    NAMES
++    qt-mt qt-mt${qt_version_str_lib} qt-mtnc${qt_version_str_lib}
++    qt-mtedu${qt_version_str_lib} qt-mt230nc qt-mtnc321
++    PATHS
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++    $ENV{QTDIR}/lib
++    ${GLOB_PATHS_LIB}
++    /usr/local/qt/lib
++    /usr/local/lib
++    /usr/lib/qt/lib
++    /usr/lib
++    /usr/share/qt3/lib
++    C:/Progra~1/qt/lib
++    /usr/X11R6/lib
++    )
++
++ELSE (QT_MT_REQUIRED)
++  FIND_LIBRARY(QT_QT_LIBRARY
++    NAMES 
++    qt qt-${qt_version_str_lib} qt-edu${qt_version_str_lib} 
++    qt-mt qt-mt${qt_version_str_lib} qt-mtnc${qt_version_str_lib}
++    qt-mtedu${qt_version_str_lib} qt-mt230nc qt-mtnc321
++    PATHS
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++    $ENV{QTDIR}/lib
++    ${GLOB_PATHS_LIB}
++    /usr/local/qt/lib
++    /usr/local/lib
++    /usr/lib/qt/lib
++    /usr/lib
++    /usr/share/qt3/lib
++    C:/Progra~1/qt/lib
++    /usr/X11R6/lib
++    )
++ENDIF (QT_MT_REQUIRED)
++
++IF(QT_QT_LIBRARY)
++ELSE(QT_QT_LIBRARY)
++ENDIF(QT_QT_LIBRARY)
++
++
++FIND_LIBRARY(QT_QASSISTANTCLIENT_LIBRARY
++  NAMES qassistantclient
++  PATHS
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++  $ENV{QTDIR}/lib
++  ${GLOB_PATHS_LIB}
++  /usr/local/qt/lib
++  /usr/local/lib
++  /usr/lib
++  /usr/share/qt3/lib
++  C:/Progra~1/qt/lib
++  /usr/X11R6/lib
++  )
++
++# qt 3 should prefer QTDIR over the PATH
++FIND_PROGRAM(QT_MOC_EXECUTABLE 
++  NAMES moc moc-qt3
++  PATHS 
++  $ENV{QTDIR}/bin 
++  NO_DEFAULT_PATH
++)
++
++FIND_PROGRAM(QT_MOC_EXECUTABLE 
++  NAMES moc moc-qt3
++  PATHS 
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/include/Qt"
++  $ENV{QTDIR}/bin 
++  ${GLOB_PATHS_BIN}
++  /usr/local/qt/bin
++  /usr/lib/qt/bin
++  /usr/share/qt3/bin
++  C:/Progra~1/qt/bin
++  /usr/X11R6/bin
++  )
++
++IF(QT_MOC_EXECUTABLE)
++  SET ( QT_WRAP_CPP "YES")
++ELSE(QT_MOC_EXECUTABLE)
++ENDIF(QT_MOC_EXECUTABLE)
++
++# qt 3 should prefer QTDIR over the PATH
++FIND_PROGRAM(QT_UIC_EXECUTABLE uic
++  PATHS 
++  $ENV{QTDIR}/bin 
++  NO_DEFAULT_PATH
++)
++FIND_PROGRAM(QT_UIC_EXECUTABLE uic
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/include/Qt"
++  $ENV{QTDIR}/bin 
++  ${GLOB_PATHS_BIN}
++  /usr/local/qt/bin
++  /usr/lib/qt/bin
++  /usr/share/qt3/bin
++  C:/Progra~1/qt/bin
++  /usr/X11R6/bin
++  )
++
++IF(QT_UIC_EXECUTABLE)
++  SET ( QT_WRAP_UI "YES")
++ELSE(QT_UIC_EXECUTABLE)
++ENDIF(QT_UIC_EXECUTABLE)
++
++IF (WIN32)
++  FIND_LIBRARY(QT_QTMAIN_LIBRARY qtmain
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++    "$ENV{ProgramFiles}/qt/lib"
++    $ENV{QTDIR}/lib "C:/Program Files/qt/lib"
++    DOC "This Library is only needed by and included with Qt3 on MSWindows. It should be NOTFOUND, undefined or IGNORE otherwise."
++    )
++ENDIF (WIN32)
++
++
++IF (QT_MIN_VERSION)
++
++  STRING(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+" "\\1" qt_major_vers "${qt_version_str}")
++  STRING(REGEX REPLACE "[0-9]+\\.([0-9]+)\\.[0-9]+" "\\1" qt_minor_vers "${qt_version_str}")
++  STRING(REGEX REPLACE "[0-9]+\\.[0-9]+\\.([0-9]+)" "\\1" qt_patch_vers "${qt_version_str}")
++  
++  #now parse the parts of the user given version string into variables 
++  STRING(REGEX MATCH "^[0-9]+\\.[0-9]+\\.[0-9]+$" req_qt_major_vers "${QT_MIN_VERSION}")
++  IF (NOT req_qt_major_vers)
++    MESSAGE( FATAL_ERROR "Invalid Qt version string given: \"${QT_MIN_VERSION}\", expected e.g. \"3.1.5\"")
++  ENDIF (NOT req_qt_major_vers)
++  
++  STRING(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+" "\\1" req_qt_major_vers "${QT_MIN_VERSION}")
++  STRING(REGEX REPLACE "[0-9]+\\.([0-9])+\\.[0-9]+" "\\1" req_qt_minor_vers "${QT_MIN_VERSION}")
++  STRING(REGEX REPLACE "[0-9]+\\.[0-9]+\\.([0-9]+)" "\\1" req_qt_patch_vers "${QT_MIN_VERSION}")
++  
++  # req = "6.5.4", qt = "3.2.1"
++  
++  IF (req_qt_major_vers GREATER qt_major_vers)                  # (6 > 3) ?
++    MESSAGE(  FATAL_ERROR "Qt major version not matched (required: ${QT_MIN_VERSION}, found: ${qt_version_str})")            # yes
++  ELSE  (req_qt_major_vers GREATER qt_major_vers)               # no
++    IF (req_qt_major_vers LESS qt_major_vers)                  # (6 < 3) ?
++      SET( QT_VERSION_BIG_ENOUGH "YES" )                      # yes
++    ELSE (req_qt_major_vers LESS qt_major_vers)                # ( 6==3) ?
++      IF (req_qt_minor_vers GREATER qt_minor_vers)            # (5>2) ?
++        MESSAGE(  FATAL_ERROR "Qt minor version not matched (required: ${QT_MIN_VERSION}, found: ${qt_version_str})")      # yes
++      ELSE (req_qt_minor_vers GREATER qt_minor_vers)          # no
++        IF (req_qt_minor_vers LESS qt_minor_vers)            # (5<2) ?
++          SET( QT_VERSION_BIG_ENOUGH "YES" )                # yes
++        ELSE (req_qt_minor_vers LESS qt_minor_vers)          # (5==2)
++          IF (req_qt_patch_vers GREATER qt_patch_vers)      # (4>1) ?
++            MESSAGE( FATAL_ERROR "Qt patch level not matched (required: ${QT_MIN_VERSION}, found: ${qt_version_str})")  # yes
++          ELSE (req_qt_patch_vers GREATER qt_patch_vers)    # (4>1) ?
++            SET( QT_VERSION_BIG_ENOUGH "YES" )             # yes
++          ENDIF (req_qt_patch_vers GREATER qt_patch_vers)   # (4>1) ?
++        ENDIF (req_qt_minor_vers LESS qt_minor_vers)
++      ENDIF (req_qt_minor_vers GREATER qt_minor_vers)
++    ENDIF (req_qt_major_vers LESS qt_major_vers)
++  ENDIF (req_qt_major_vers GREATER qt_major_vers)
++ENDIF (QT_MIN_VERSION)
++
++# if the include a library are found then we have it
++IF(QT_INCLUDE_DIR)
++  IF(QT_QT_LIBRARY)
++    SET( QT_FOUND "YES" )
++  ENDIF(QT_QT_LIBRARY)
++ENDIF(QT_INCLUDE_DIR)
++
++IF(QT_FOUND)
++  SET( QT_LIBRARIES ${QT_LIBRARIES} ${QT_QT_LIBRARY} )
++  SET( QT_DEFINITIONS "")
++  
++  IF (WIN32 AND NOT CYGWIN)
++    IF (QT_QTMAIN_LIBRARY)
++      # for version 3
++      SET (QT_DEFINITIONS -DQT_DLL -DQT_THREAD_SUPPORT -DNO_DEBUG)
++      SET (QT_LIBRARIES imm32.lib ${QT_QT_LIBRARY} ${QT_QTMAIN_LIBRARY} )
++      SET (QT_LIBRARIES ${QT_LIBRARIES} winmm wsock32)
++    ELSE (QT_QTMAIN_LIBRARY)
++      # for version 2
++      SET (QT_LIBRARIES imm32.lib ws2_32.lib ${QT_QT_LIBRARY} )
++    ENDIF (QT_QTMAIN_LIBRARY)
++  ELSE (WIN32 AND NOT CYGWIN)
++    SET (QT_LIBRARIES ${QT_QT_LIBRARY} )
++    
++    SET (QT_DEFINITIONS -DQT_SHARED -DQT_NO_DEBUG)
++    IF(QT_QT_LIBRARY MATCHES "qt-mt")
++      SET (QT_DEFINITIONS ${QT_DEFINITIONS} -DQT_THREAD_SUPPORT -D_REENTRANT)
++    ENDIF(QT_QT_LIBRARY MATCHES "qt-mt")
++    
++  ENDIF (WIN32 AND NOT CYGWIN)
++  
++  IF (QT_QASSISTANTCLIENT_LIBRARY)
++    SET (QT_LIBRARIES ${QT_QASSISTANTCLIENT_LIBRARY} ${QT_LIBRARIES})
++  ENDIF (QT_QASSISTANTCLIENT_LIBRARY)
++  
++  # Backwards compatibility for CMake1.4 and 1.2
++  SET (QT_MOC_EXE ${QT_MOC_EXECUTABLE} )
++  SET (QT_UIC_EXE ${QT_UIC_EXECUTABLE} )
++  # for unix add X11 stuff
++  IF(UNIX)
++    FIND_PACKAGE(X11)
++    IF (X11_FOUND)
++      SET (QT_LIBRARIES ${QT_LIBRARIES} ${X11_LIBRARIES})
++    ENDIF (X11_FOUND)
++    IF (CMAKE_DL_LIBS)
++      SET (QT_LIBRARIES ${QT_LIBRARIES} ${CMAKE_DL_LIBS})
++    ENDIF (CMAKE_DL_LIBS)
++  ENDIF(UNIX)
++  IF(QT_QT_LIBRARY MATCHES "qt-mt")
++    FIND_PACKAGE(Threads)
++    SET(QT_LIBRARIES ${QT_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
++  ENDIF(QT_QT_LIBRARY MATCHES "qt-mt")
++ENDIF(QT_FOUND)
++
++
++IF (QT_MOC_EXECUTABLE)   
++  SET ( QT_WRAP_CPP "YES")   
++ENDIF (QT_MOC_EXECUTABLE)   
++
++IF (QT_UIC_EXECUTABLE)   
++  SET ( QT_WRAP_UI "YES")   
++ENDIF (QT_UIC_EXECUTABLE)   
++
++
++
++MARK_AS_ADVANCED(
++  QT_INCLUDE_DIR
++  QT_QT_LIBRARY
++  QT_QTMAIN_LIBRARY
++  QT_QASSISTANTCLIENT_LIBRARY
++  QT_UIC_EXECUTABLE
++  QT_MOC_EXECUTABLE
++  QT_WRAP_CPP
++  QT_WRAP_UI
++  ) 
+diff -Nur scribus-1.3.3.6/cmake/modules/FONTCONFIGConfig.cmake scribus-1.3.3.6-cmake/cmake/modules/FONTCONFIGConfig.cmake
+--- scribus-1.3.3.6/cmake/modules/FONTCONFIGConfig.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/FONTCONFIGConfig.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,48 @@
++#
++# Find the native FONTCONFIG includes and library
++#
++
++# This module defines
++# FONTCONFIG_INCLUDE_DIR, where to find art*.h etc
++# FONTCONFIG_LIBRARY, the libraries to link against to use FONTCONFIG.
++# FONTCONFIG_FOUND, If false, do not try to use FONTCONFIG.
++# LIBFONTCONFIG_LIBS, link information
++# LIBFONTCONFIG_CFLAGS, cflags for include information
++
++
++INCLUDE(UsePkgConfig)
++
++# use pkg-config to get the directories and then use these values
++# in the FIND_PATH() and FIND_LIBRARY() calls
++PKGCONFIG(fontconfig _fontconfigIncDir _fontconfigLinkDir _fontconfigLinkFlags _fontconfigCflags)
++
++SET(FONTCONFIG_LIBS ${_fontconfigCflags})
++
++FIND_PATH(FONTCONFIG_INCLUDE_DIR fontconfig/fontconfig.h
++${_fontconfigIncDir}
++/usr/include
++/usr/local/include
++PATH_SUFFIXES
++fontconfig
++)
++# quick hack as the above finds it nicely but our source includes the libart_lgpl text at the moment
++#STRING(REGEX REPLACE "/libart_lgpl" "" FONTCONFIG_INCLUDE_DIR ${FONTCONFIG_INCLUDE_DIR})
++FIND_LIBRARY(FONTCONFIG_LIBRARY NAMES fontconfig
++  PATHS /usr/lib /usr/local/lib
++)
++
++# MESSAGE(STATUS "fclib ${FONTCONFIG_LIBRARY}")
++# MESSAGE(STATUS "fcinclude ${FONTCONFIG_INCLUDE_DIR}")
++
++
++IF (FONTCONFIG_LIBRARY)
++  IF (FONTCONFIG_INCLUDE_DIR)
++    SET( FONTCONFIG_FOUND "YES" )
++    SET( FONTCONFIG_LIBRARIES ${FONTCONFIG_LIBRARY} )
++	FIND_PROGRAM(FONTCONFIG_CONFIG NAMES fontconfig-config PATHS ${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin /usr/bin /usr/nekoware/bin /usr/X11/bin)
++# 	EXEC_PROGRAM(${FONTCONFIG_CONFIG} ARGS --libs OUTPUT_VARIABLE FONTCONFIG_LIBS)
++# 	EXEC_PROGRAM(${FONTCONFIG_CONFIG} ARGS --cflags OUTPUT_VARIABLE FONTCONFIG_CFLAGS)
++#  	MESSAGE(STATUS ${FONTCONFIG_LIBS})
++#  	MESSAGE(STATUS ${FONTCONFIG_CFLAGS})
++  ENDIF (FONTCONFIG_INCLUDE_DIR)
++ENDIF (FONTCONFIG_LIBRARY)
+\ Brak znaku nowej linii na koñcu pliku
+diff -Nur scribus-1.3.3.6/cmake/modules/FREETYPEConfig.cmake scribus-1.3.3.6-cmake/cmake/modules/FREETYPEConfig.cmake
+--- scribus-1.3.3.6/cmake/modules/FREETYPEConfig.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/FREETYPEConfig.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,43 @@
++#
++# Find the native FREETYPE includes and library
++#
++
++# This module defines
++# FREETYPE_INCLUDE_DIR, where to find ft2build.h, ftheader.h, ...
++# FREETYPE_LIBRARIES, the libraries to link against to use FREETYPE.
++# FREETYPE_FOUND, If false, do not try to use FREETYPE.
++
++# also defined, but not for general use are
++# FREETYPE_LIBRARY, where to find the FREETYPE library.
++
++FIND_PATH(FREETYPE_INCLUDE_DIR_FT2BUILD ft2build.h
++  /usr/include/
++  /usr/local/include/
++)
++
++FIND_PATH(FREETYPE_INCLUDE_DIR_FTHEADER freetype/config/ftheader.h
++  /usr/include/freetype2
++  /usr/local/include/freetype2
++)
++
++FIND_LIBRARY(FREETYPE_LIBRARY freetype
++  PATHS /usr/lib /usr/local/lib
++)
++
++SET(FREETYPE_FIND_QUIETLY 1)
++
++IF (FREETYPE_LIBRARY)
++  IF (NOT FREETYPE_FIND_QUIETLY)
++    MESSAGE(STATUS "Found Freetype2: ${FREETYPE_LIBRARY}")
++  ENDIF (NOT FREETYPE_FIND_QUIETLY)
++  IF (FREETYPE_INCLUDE_DIR_FTHEADER AND FREETYPE_INCLUDE_DIR_FT2BUILD)
++    SET( FREETYPE_FOUND "YES" )
++    SET( FREETYPE_INCLUDE_DIR
++      ${FREETYPE_INCLUDE_DIR_FT2BUILD}
++      ${FREETYPE_INCLUDE_DIR_FTHEADER} )
++    SET( FREETYPE_LIBRARIES ${FREETYPE_LIBRARY} )
++    FIND_PROGRAM(FREETYPE_CONFIG NAMES freetype-config PATHS ${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin /usr/bin /usr/nekoware/bin /usr/X11/bin)
++    EXEC_PROGRAM(${FREETYPE_CONFIG} ARGS --libs OUTPUT_VARIABLE LIBFREETYPE_LIBS)
++    EXEC_PROGRAM(${FREETYPE_CONFIG} ARGS --cflags OUTPUT_VARIABLE LIBFREETYPE_CFLAGS)
++  ENDIF (FREETYPE_INCLUDE_DIR_FTHEADER AND FREETYPE_INCLUDE_DIR_FT2BUILD)
++ENDIF (FREETYPE_LIBRARY)
+\ Brak znaku nowej linii na koñcu pliku
+diff -Nur scribus-1.3.3.6/cmake/modules/LIBART_LGPLConfig.cmake scribus-1.3.3.6-cmake/cmake/modules/LIBART_LGPLConfig.cmake
+--- scribus-1.3.3.6/cmake/modules/LIBART_LGPLConfig.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/LIBART_LGPLConfig.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,49 @@
++#
++# Find the native LIBART includes and library
++#
++
++# This module defines
++# LIBART_LGPL_INCLUDE_DIR, where to find art*.h etc
++# LIBART_LGPL_LIBRARY, the libraries to link against to use LIBART.
++# LIBART_LGPL_FOUND, If false, do not try to use LIBART.
++# LIBART_LGPL_LIBS, link information
++# LIBART_LGPL_CFLAGS, cflags for include information
++
++
++INCLUDE(UsePkgConfig)
++
++# use pkg-config to get the directories and then use these values
++# in the FIND_PATH() and FIND_LIBRARY() calls
++PKGCONFIG(libart-2.0 _libArtIncDir _libArtLinkDir _libArtLinkFlags _libArtCflags)
++
++SET(LIBART_LGPL_LIBS ${_libArtCflags})
++
++FIND_PATH(LIBART_LGPL_INCLUDE_DIR libart_lgpl/libart.h
++${_libArtIncDir}
++/usr/include
++/usr/local/include/
++PATH_SUFFIXES
++libart-2.0
++)
++
++FIND_LIBRARY(LIBART_LGPL_LIBRARY NAMES art_lgpl_2
++PATHS
++${_libArtLinkDir}
++/usr/lib
++/usr/local/lib
++)
++
++SET(LIBART_LGPL_FIND_QUIETLY 1)
++
++IF (LIBART_LGPL_LIBRARY)
++  IF (LIBART_LGPL_INCLUDE_DIR)
++    SET( LIBART_LGPL_FOUND "YES" )
++    IF(NOT LIBART_LGPL_FIND_QUIETLY)
++      MESSAGE(STATUS "Found Libart_LGPL: ${LIBART_LGPL_LIBRARY}")
++    ENDIF(NOT LIBART_LGPL_FIND_QUIETLY)
++    SET( LIBART_LGPL_LIBRARIES ${LIBART_LGPL_LIBRARY} )
++    FIND_PROGRAM(LIBART_LGPL_CONFIG NAMES libart2-config PATHS ${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin /usr/bin /usr/nekoware/bin /usr/X11/bin)
++    EXEC_PROGRAM(${LIBART_LGPL_CONFIG} ARGS --libs OUTPUT_VARIABLE LIBART_LGPL_LIBS)
++    EXEC_PROGRAM(${LIBART_LGPL_CONFIG} ARGS --cflags OUTPUT_VARIABLE LIBART_LGPL_CFLAGS)
++  ENDIF (LIBART_LGPL_INCLUDE_DIR)
++ENDIF (LIBART_LGPL_LIBRARY)
+\ Brak znaku nowej linii na koñcu pliku
+diff -Nur scribus-1.3.3.6/cmake/modules/LIBXML2Config.cmake scribus-1.3.3.6-cmake/cmake/modules/LIBXML2Config.cmake
+--- scribus-1.3.3.6/cmake/modules/LIBXML2Config.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/LIBXML2Config.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,43 @@
++# - Try to find LibXml2
++# Once done this will define
++#
++#  LIBXML2_FOUND - system has LibXml2
++#  LIBXML2_INCLUDE_DIR - the LibXml2 include directory
++#  LIBXML2_LIBRARIES - the libraries needed to use LibXml2
++#  LIBXML2_DEFINITIONS - Compiler switches required for using LibXml2
++#
++# use pkg-config to get the directories and then use these values
++# in the FIND_PATH() and FIND_LIBRARY() calls
++
++
++INCLUDE(UsePkgConfig)
++
++PKGCONFIG(libxml-2.0 _LibXml2IncDir _LibXml2LinkDir _LibXml2LinkFlags _LibXml2Cflags)
++
++SET(LIBXML2_DEFINITIONS ${_LibXml2Cflags})
++
++FIND_PATH(LIBXML2_INCLUDE_DIR libxml/xpath.h
++  PATHS ${_LibXml2IncDir} PATH_SUFFIXES libxml2
++)
++
++FIND_LIBRARY(LIBXML2_LIBRARIES NAMES xml2 libxml2
++  PATHS ${_LibXml2LinkDir}
++)
++
++IF (LIBXML2_INCLUDE_DIR AND LIBXML2_LIBRARIES)
++   SET(LIBXML2_FOUND TRUE)
++ENDIF (LIBXML2_INCLUDE_DIR AND LIBXML2_LIBRARIES)
++
++SET(LibXml2_FIND_QUIETLY 1)
++
++IF (LIBXML2_FOUND)
++  IF (NOT LibXml2_FIND_QUIETLY)
++    MESSAGE(STATUS "Found LibXml2: ${LIBXML2_LIBRARIES}")
++  ENDIF (NOT LibXml2_FIND_QUIETLY)
++ELSE (LIBXML2_FOUND)
++  IF (LibXml2_FIND_REQUIRED)
++    MESSAGE(SEND_ERROR "Could NOT find LibXml2")
++  ENDIF (LibXml2_FIND_REQUIRED)
++ENDIF (LIBXML2_FOUND)
++
++MARK_AS_ADVANCED(LIBXML2_INCLUDE_DIR LIBXML2_LIBRARIES)
+\ Brak znaku nowej linii na koñcu pliku
+diff -Nur scribus-1.3.3.6/cmake/modules/oldFindQt3.cmake scribus-1.3.3.6-cmake/cmake/modules/oldFindQt3.cmake
+--- scribus-1.3.3.6/cmake/modules/oldFindQt3.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/oldFindQt3.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,290 @@
++# - Locate Qt include paths and libraries
++# This module defines:
++#  QT_INCLUDE_DIR - where to find qt.h, etc.
++#  QT_LIBRARIES   - the libraries to link against to use Qt.
++#  QT_DEFINITIONS - definitions to use when 
++#                   compiling code that uses Qt.
++#  QT_FOUND       - If false, don't try to use Qt.
++#
++# If you need the multithreaded version of Qt, set QT_MT_REQUIRED to TRUE
++#
++# Also defined, but not for general use are:
++#  QT_MOC_EXECUTABLE, where to find the moc tool.
++#  QT_UIC_EXECUTABLE, where to find the uic tool.
++#  QT_QT_LIBRARY, where to find the Qt library.
++#  QT_QTMAIN_LIBRARY, where to find the qtmain 
++#   library. This is only required by Qt3 on Windows.
++
++# These are around for backwards compatibility 
++# they will be set
++#  QT_WRAP_CPP, set true if QT_MOC_EXECUTABLE is found
++#  QT_WRAP_UI set true if QT_UIC_EXECUTABLE is found
++
++FILE(GLOB GLOB_PATHS_BIN /usr/lib/qt-3*/bin/)
++FIND_PATH(QT_INCLUDE_DIR qt.h
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/include/Qt"
++  $ENV{QTDIR}/include
++  ${GLOB_PATHS_BIN}
++  /usr/local/qt/include
++  /usr/local/include
++  /usr/lib/qt/include
++  /usr/include/qt
++  /usr/include
++  /usr/share/qt3/include
++  C:/Progra~1/qt/include
++  /usr/include/qt3
++  /usr/X11R6/include
++  )
++
++# if qglobal.h is not in the qt_include_dir then set
++# QT_INCLUDE_DIR to NOTFOUND
++IF(NOT EXISTS ${QT_INCLUDE_DIR}/qglobal.h)
++  SET(QT_INCLUDE_DIR QT_INCLUDE_DIR-NOTFOUND CACHE PATH "path to qt3 include directory" FORCE)
++ENDIF(NOT EXISTS ${QT_INCLUDE_DIR}/qglobal.h)
++
++IF(QT_INCLUDE_DIR)
++  #extract the version string from qglobal.h
++  FILE(READ ${QT_INCLUDE_DIR}/qglobal.h QGLOBAL_H)
++  STRING(REGEX MATCH "#define[\t ]+QT_VERSION_STR[\t ]+\"([0-9]+.[0-9]+.[0-9]+)\"" QGLOBAL_H "${QGLOBAL_H}")
++  STRING(REGEX REPLACE ".*\"([0-9]+.[0-9]+.[0-9]+)\".*" "\\1" QGLOBAL_H "${QGLOBAL_H}")
++
++  # Under windows the qt library (MSVC) has the format qt-mtXYZ where XYZ is the
++  # version X.Y.Z, so we need to remove the dots from version
++  STRING(REGEX REPLACE "\\." "" qt_version_str_lib "${QGLOBAL_H}")
++ELSE(QT_INCLUDE_DIR)
++ENDIF(QT_INCLUDE_DIR)
++
++FILE(GLOB GLOB_PATHS_LIB /usr/lib/qt-3*/lib/)
++IF (QT_MT_REQUIRED)
++  FIND_LIBRARY(QT_QT_LIBRARY
++    NAMES
++    qt-mt qt-mt${qt_version_str_lib} qt-mtnc${qt_version_str_lib}
++    qt-mtedu${qt_version_str_lib} qt-mt230nc qt-mtnc321
++    PATHS
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++    $ENV{QTDIR}/lib
++    ${GLOB_PATHS_LIB}
++    /usr/local/qt/lib
++    /usr/local/lib
++    /usr/lib/qt/lib
++    /usr/lib
++    /usr/share/qt3/lib
++    C:/Progra~1/qt/lib
++    /usr/X11R6/lib
++    )
++
++ELSE (QT_MT_REQUIRED)
++  FIND_LIBRARY(QT_QT_LIBRARY
++    NAMES 
++    qt qt-${qt_version_str_lib} qt-edu${qt_version_str_lib} 
++    qt-mt qt-mt${qt_version_str_lib} qt-mtnc${qt_version_str_lib}
++    qt-mtedu${qt_version_str_lib} qt-mt230nc qt-mtnc321
++    PATHS
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++    $ENV{QTDIR}/lib
++    ${GLOB_PATHS_LIB}
++    /usr/local/qt/lib
++    /usr/local/lib
++    /usr/lib/qt/lib
++    /usr/lib
++    /usr/share/qt3/lib
++    C:/Progra~1/qt/lib
++    /usr/X11R6/lib
++    )
++ENDIF (QT_MT_REQUIRED)
++
++IF(QT_QT_LIBRARY)
++ELSE(QT_QT_LIBRARY)
++ENDIF(QT_QT_LIBRARY)
++
++
++FIND_LIBRARY(QT_QASSISTANTCLIENT_LIBRARY
++  NAMES qassistantclient
++  PATHS
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++  $ENV{QTDIR}/lib
++  ${GLOB_PATHS_LIB}
++  /usr/local/qt/lib
++  /usr/local/lib
++  /usr/lib
++  /usr/share/qt3/lib
++  C:/Progra~1/qt/lib
++  /usr/X11R6/lib
++  )
++
++FIND_PROGRAM(QT_MOC_EXECUTABLE 
++  NAMES moc moc-qt3
++  PATHS 
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/include/Qt"
++  $ENV{QTDIR}/bin 
++  ${GLOB_PATHS_BIN}
++  /usr/local/qt/bin
++  /usr/lib/qt/bin
++  /usr/share/qt3/bin
++  C:/Progra~1/qt/bin
++  /usr/X11R6/bin
++  NO_DEFAULT_PATH
++  )
++
++IF(QT_MOC_EXECUTABLE)
++  SET ( QT_WRAP_CPP "YES")
++ELSE(QT_MOC_EXECUTABLE)
++ENDIF(QT_MOC_EXECUTABLE)
++
++FIND_PROGRAM(QT_UIC_EXECUTABLE uic
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/include/Qt"
++  "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/include/Qt"
++  $ENV{QTDIR}/bin 
++  ${GLOB_PATHS_BIN}
++  /usr/local/qt/bin
++  /usr/lib/qt/bin
++  /usr/share/qt3/bin
++  C:/Progra~1/qt/bin
++  /usr/X11R6/bin
++  NO_DEFAULT_PATH
++  )
++
++IF(QT_UIC_EXECUTABLE)
++  SET ( QT_WRAP_UI "YES")
++ELSE(QT_UIC_EXECUTABLE)
++ENDIF(QT_UIC_EXECUTABLE)
++
++IF (WIN32)
++  FIND_LIBRARY(QT_QTMAIN_LIBRARY qtmain
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.1;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.2.0;InstallDir]/lib"
++    "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\3.1.0;InstallDir]/lib"
++    "$ENV{ProgramFiles}/qt/lib"
++    $ENV{QTDIR}/lib "C:/Program Files/qt/lib"
++    DOC "This Library is only needed by and included with Qt3 on MSWindows. It should be NOTFOUND, undefined or IGNORE otherwise."
++    )
++ENDIF (WIN32)
++
++
++IF (QT_MIN_VERSION)
++
++  STRING(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+" "\\1" qt_major_vers "${qt_version_str}")
++  STRING(REGEX REPLACE "[0-9]+\\.([0-9]+)\\.[0-9]+" "\\1" qt_minor_vers "${qt_version_str}")
++  STRING(REGEX REPLACE "[0-9]+\\.[0-9]+\\.([0-9]+)" "\\1" qt_patch_vers "${qt_version_str}")
++  
++  #now parse the parts of the user given version string into variables 
++  STRING(REGEX MATCH "^[0-9]+\\.[0-9]+\\.[0-9]+$" req_qt_major_vers "${QT_MIN_VERSION}")
++  IF (NOT req_qt_major_vers)
++    MESSAGE( FATAL_ERROR "Invalid Qt version string given: \"${QT_MIN_VERSION}\", expected e.g. \"3.1.5\"")
++  ENDIF (NOT req_qt_major_vers)
++  
++  STRING(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+" "\\1" req_qt_major_vers "${QT_MIN_VERSION}")
++  STRING(REGEX REPLACE "[0-9]+\\.([0-9])+\\.[0-9]+" "\\1" req_qt_minor_vers "${QT_MIN_VERSION}")
++  STRING(REGEX REPLACE "[0-9]+\\.[0-9]+\\.([0-9]+)" "\\1" req_qt_patch_vers "${QT_MIN_VERSION}")
++  
++  # req = "6.5.4", qt = "3.2.1"
++  
++  IF (req_qt_major_vers GREATER qt_major_vers)                  # (6 > 3) ?
++    MESSAGE(  FATAL_ERROR "Qt major version not matched (required: ${QT_MIN_VERSION}, found: ${qt_version_str})")            # yes
++  ELSE  (req_qt_major_vers GREATER qt_major_vers)               # no
++    IF (req_qt_major_vers LESS qt_major_vers)                  # (6 < 3) ?
++      SET( QT_VERSION_BIG_ENOUGH "YES" )                      # yes
++    ELSE (req_qt_major_vers LESS qt_major_vers)                # ( 6==3) ?
++      IF (req_qt_minor_vers GREATER qt_minor_vers)            # (5>2) ?
++        MESSAGE(  FATAL_ERROR "Qt minor version not matched (required: ${QT_MIN_VERSION}, found: ${qt_version_str})")      # yes
++      ELSE (req_qt_minor_vers GREATER qt_minor_vers)          # no
++        IF (req_qt_minor_vers LESS qt_minor_vers)            # (5<2) ?
++          SET( QT_VERSION_BIG_ENOUGH "YES" )                # yes
++        ELSE (req_qt_minor_vers LESS qt_minor_vers)          # (5==2)
++          IF (req_qt_patch_vers GREATER qt_patch_vers)      # (4>1) ?
++            MESSAGE( FATAL_ERROR "Qt patch level not matched (required: ${QT_MIN_VERSION}, found: ${qt_version_str})")  # yes
++          ELSE (req_qt_patch_vers GREATER qt_patch_vers)    # (4>1) ?
++            SET( QT_VERSION_BIG_ENOUGH "YES" )             # yes
++          ENDIF (req_qt_patch_vers GREATER qt_patch_vers)   # (4>1) ?
++        ENDIF (req_qt_minor_vers LESS qt_minor_vers)
++      ENDIF (req_qt_minor_vers GREATER qt_minor_vers)
++    ENDIF (req_qt_major_vers LESS qt_major_vers)
++  ENDIF (req_qt_major_vers GREATER qt_major_vers)
++ENDIF (QT_MIN_VERSION)
++
++# if the include a library are found then we have it
++IF(QT_INCLUDE_DIR)
++  IF(QT_QT_LIBRARY)
++    SET( QT_FOUND "YES" )
++  ENDIF(QT_QT_LIBRARY)
++ENDIF(QT_INCLUDE_DIR)
++
++IF(QT_FOUND)
++  SET( QT_LIBRARIES ${QT_LIBRARIES} ${QT_QT_LIBRARY} )
++  SET( QT_DEFINITIONS "")
++  
++  IF (WIN32 AND NOT CYGWIN)
++    IF (QT_QTMAIN_LIBRARY)
++      # for version 3
++      SET (QT_DEFINITIONS -DQT_DLL -DQT_THREAD_SUPPORT -DNO_DEBUG)
++      SET (QT_LIBRARIES imm32.lib ${QT_QT_LIBRARY} ${QT_QTMAIN_LIBRARY} )
++      SET (QT_LIBRARIES ${QT_LIBRARIES} winmm wsock32)
++    ELSE (QT_QTMAIN_LIBRARY)
++      # for version 2
++      SET (QT_LIBRARIES imm32.lib ws2_32.lib ${QT_QT_LIBRARY} )
++    ENDIF (QT_QTMAIN_LIBRARY)
++  ELSE (WIN32 AND NOT CYGWIN)
++    SET (QT_LIBRARIES ${QT_QT_LIBRARY} )
++    
++    SET (QT_DEFINITIONS -DQT_SHARED -DQT_NO_DEBUG)
++    IF(QT_QT_LIBRARY MATCHES "qt-mt")
++      SET (QT_DEFINITIONS ${QT_DEFINITIONS} -DQT_THREAD_SUPPORT -D_REENTRANT)
++    ENDIF(QT_QT_LIBRARY MATCHES "qt-mt")
++    
++  ENDIF (WIN32 AND NOT CYGWIN)
++  
++  IF (QT_QASSISTANTCLIENT_LIBRARY)
++    SET (QT_LIBRARIES ${QT_QASSISTANTCLIENT_LIBRARY} ${QT_LIBRARIES})
++  ENDIF (QT_QASSISTANTCLIENT_LIBRARY)
++  
++  # Backwards compatibility for CMake1.4 and 1.2
++  SET (QT_MOC_EXE ${QT_MOC_EXECUTABLE} )
++  SET (QT_UIC_EXE ${QT_UIC_EXECUTABLE} )
++  # for unix add X11 stuff
++  IF(UNIX)
++    FIND_PACKAGE(X11)
++    IF (X11_FOUND)
++      SET (QT_LIBRARIES ${QT_LIBRARIES} ${X11_LIBRARIES})
++    ENDIF (X11_FOUND)
++    IF (CMAKE_DL_LIBS)
++      SET (QT_LIBRARIES ${QT_LIBRARIES} ${CMAKE_DL_LIBS})
++    ENDIF (CMAKE_DL_LIBS)
++  ENDIF(UNIX)
++  IF(QT_QT_LIBRARY MATCHES "qt-mt")
++    FIND_PACKAGE(Threads)
++    SET(QT_LIBRARIES ${QT_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
++  ENDIF(QT_QT_LIBRARY MATCHES "qt-mt")
++ENDIF(QT_FOUND)
++
++
++IF (QT_MOC_EXECUTABLE)   
++  SET ( QT_WRAP_CPP "YES")   
++ENDIF (QT_MOC_EXECUTABLE)   
++
++IF (QT_UIC_EXECUTABLE)   
++  SET ( QT_WRAP_UI "YES")   
++ENDIF (QT_UIC_EXECUTABLE)   
++
++
++
++MARK_AS_ADVANCED(
++  QT_INCLUDE_DIR
++  QT_QT_LIBRARY
++  QT_QTMAIN_LIBRARY
++  QT_QASSISTANTCLIENT_LIBRARY
++  QT_UIC_EXECUTABLE
++  QT_MOC_EXECUTABLE
++  QT_WRAP_CPP
++  QT_WRAP_UI
++  ) 
+diff -Nur scribus-1.3.3.6/cmake/modules/SCRIBUSQTConfig.cmake scribus-1.3.3.6-cmake/cmake/modules/SCRIBUSQTConfig.cmake
+--- scribus-1.3.3.6/cmake/modules/SCRIBUSQTConfig.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake/modules/SCRIBUSQTConfig.cmake	2006-11-12 00:36:50.000000000 +0100
+@@ -0,0 +1,41 @@
++#Based on QT4_QRAP_UI/CPP from cmake 2.3.4
++  MACRO(SCRIBUS_QT_WRAP_UI outfiles )
++
++    FOREACH(it ${ARGN})
++      GET_FILENAME_COMPONENT(outfile ${it} NAME_WE)
++      SET(infile ${CMAKE_CURRENT_SOURCE_DIR}/${it})
++      SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/ui_${outfile}.h)
++      ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
++        COMMAND ${QT_UIC_EXECUTABLE}
++        ARGS -o ${outfile} ${infile}
++        MAIN_DEPENDENCY ${infile})
++      SET(${outfiles} ${${outfiles}} ${outfile})
++    ENDFOREACH(it)
++
++  ENDMACRO(SCRIBUS_QT_WRAP_UI)
++
++  MACRO(SCRIBUS_QT_WRAP_CPP outfiles )
++
++    # get include dirs
++    GET_DIRECTORY_PROPERTY(moc_includes_tmp INCLUDE_DIRECTORIES)
++    SET(moc_includes)
++    #FOREACH(it ${moc_includes_tmp})
++    #  SET(moc_includes ${moc_includes} "-I${it}")
++    #ENDFOREACH(it)
++
++    FOREACH(it ${ARGN})
++      GET_FILENAME_COMPONENT(outfilename ${it} NAME_WE)
++	
++      GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
++#       SET(infile ${CMAKE_CURRENT_SOURCE_DIR}/${it})
++      SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfilename}.moc)
++      ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
++        COMMAND ${QT_MOC_EXECUTABLE}
++#         ARGS ${moc_includes} -o ${outfile} ${infile}
++          ARGS -o ${outfile} ${infile}
++#         MAIN_DEPENDENCY ${infile})
++        DEPENDS ${infile})
++      SET(${outfiles} ${${outfiles}} ${outfile})
++    ENDFOREACH(it)
++
++  ENDMACRO(SCRIBUS_QT_WRAP_CPP)
+diff -Nur scribus-1.3.3.6/CMakeLists.txt scribus-1.3.3.6-cmake/CMakeLists.txt
+--- scribus-1.3.3.6/CMakeLists.txt	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/CMakeLists.txt	2006-12-05 17:06:55.000000000 +0100
+@@ -0,0 +1,393 @@
++#CMAKE SETUP
++#Require 2.4.2 for Qt finding
++#Require 2.4.3 for moc change detection
++#Require 2.4.3 for rpath updates for custom cairo install
++CMAKE_MINIMUM_REQUIRED(VERSION 2.4.3 FATAL_ERROR)
++
++SET(CMAKE_COLOR_MAKEFILE ON)
++SET(CMAKE_VERBOSE_MAKEFILE ON)
++SET(CMAKE_INCLUDE_CURRENT_DIR TRUE)
++SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
++#SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
++#SET(CMAKE_SKIP_RPATH:BOOL NO)
++SET(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
++
++SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
++# SET(CMAKE_SHARED_MODULE_LINK_FLAGS "${CMAKE_SHARED_MODULE_LINK_FLAGS} -export-dynamic")
++# SET(CMAKE_SHARED_MODULE_LINK_CXX_FLAGS "${CMAKE_SHARED_MODULE_LINK_CXX_FLAGS} -export-dynamic")
++# SET(CMAKE_SHARED_LIBRARY_C_FLAGS "${CMAKE_SHARED_LIBRARY_C_FLAGS} -export-dynamic")
++# SET(CMAKE_SHARED_LIBRARY_CXX_FLAGS "${CMAKE_SHARED_LIBRARY_CXX_FLAGS} -export-dynamic")
++# MESSAGE(STATUS ${CMAKE_SHARED_MODULE_LINK_FLAGS})
++# MESSAGE(STATUS ${CMAKE_SHARED_MODULE_LINK_CXX_FLAGS})
++# MESSAGE(STATUS ${CMAKE_SHARED_LIBRARY_C_FLAGS})
++# MESSAGE(STATUS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
++# MESSAGE(STATUS ${CMAKE_CXX_CREATE_SHARED_MODULE})
++# MESSAGE(STATUS ${CMAKE_CXX_CREATE_SHARED_LIBRARY})
++
++#IMPORT FROM COMMANDLINE
++# SET with cmake -DWANT_CAIRO=1, etc
++# MESSAGE(STATUS ${WANT_CAIRO})
++# MESSAGE(STATUS ${WANT_LIBART})
++# MESSAGE(STATUS ${WANT_DEBUG})
++
++# SET(WANT_CAIRO 0)
++# SET(WANT_LIBART 1)
++
++#PROJECT SETUP
++PROJECT(scribus)
++SET (VERSION_MAJOR "1")
++SET (VERSION_MINOR "3")
++SET (VERSION_PATCH "3.6")
++SET (VERSION_SUFFIX "")
++SET (VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX})
++MESSAGE(STATUS "Scribus ${VERSION} will be built to install into ${CMAKE_INSTALL_PREFIX}")
++
++SET(PLUGIN_PERMISSIONS WORLD_EXECUTE GROUP_EXECUTE OWNER_EXECUTE WORLD_READ GROUP_READ OWNER_READ OWNER_WRITE)
++
++SET(MAIN_DIR_NAME "scribus")
++IF(TAG_VERSION)
++  MESSAGE(STATUS "Previously selected version tag: ${TAG_VERSION}")
++  SET(WANT_VERSIONING 1)
++  SET(CACHED_VERSIONING 1)
++ENDIF(TAG_VERSION)
++IF (WANT_VERSIONING AND NOT CACHED_VERSIONING)
++  IF (NOT CUSTOM_VERSIONTAG)
++    SET(TAG_VERSION "-${VERSION}" CACHE TYPE STRING)
++  ELSE (NOT CUSTOM_VERSIONTAG)
++    SET(TAG_VERSION ${CUSTOM_VERSIONTAG} CACHE TYPE STRING)
++  ENDIF (NOT CUSTOM_VERSIONTAG)
++ENDIF (WANT_VERSIONING AND NOT CACHED_VERSIONING)
++
++SET(MANDIR "share/man/")
++SET(SHAREDIR "share/${MAIN_DIR_NAME}${TAG_VERSION}/")
++ADD_DEFINITIONS("-DSHAREDIR=\\\"${CMAKE_INSTALL_PREFIX}/${SHAREDIR}\\\"")
++IF(TAG_VERSION)
++    SET(DOCDIR "share/doc/${MAIN_DIR_NAME}${TAG_VERSION}/")
++ELSE(TAG_VERSION)
++    SET(DOCDIR "share/doc/${MAIN_DIR_NAME}-${VERSION}/")
++ENDIF (TAG_VERSION)
++ADD_DEFINITIONS("-DDOCDIR=\\\"${CMAKE_INSTALL_PREFIX}/${DOCDIR}\\\"")
++SET(PLDDOCDIR "share/doc/${MAIN_DIR_NAME}/")
++ADD_DEFINITIONS("-DPLDDOCDIR=\\\"${CMAKE_INSTALL_PREFIX}/${PLDDOCDIR}\\\"")
++SET(ICONDIR "share/${MAIN_DIR_NAME}${TAG_VERSION}/icons/")
++ADD_DEFINITIONS("-DICONDIR=\\\"${CMAKE_INSTALL_PREFIX}/${ICONDIR}\\\"")
++SET(SAMPLESDIR "share/${MAIN_DIR_NAME}${TAG_VERSION}/samples/")
++ADD_DEFINITIONS("-DSAMPLESDIR=\\\"${CMAKE_INSTALL_PREFIX}/${SAMPLESDIR}\\\"")
++SET(SCRIPTSDIR "share/${MAIN_DIR_NAME}${TAG_VERSION}/scripts/")
++ADD_DEFINITIONS("-DSCRIPTSDIR=\\\"${CMAKE_INSTALL_PREFIX}/${SCRIPTSDIR}\\\"")
++SET(TEMPLATEDIR "share/${MAIN_DIR_NAME}${TAG_VERSION}/templates/")
++ADD_DEFINITIONS("-DTEMPLATEDIR=\\\"${CMAKE_INSTALL_PREFIX}/${TEMPLATEDIR}\\\"")
++SET(LIBDIR "lib/${MAIN_DIR_NAME}${TAG_VERSION}/")
++ADD_DEFINITIONS("-DLIBDIR=\\\"${CMAKE_INSTALL_PREFIX}/${LIBDIR}\\\"")
++SET(PLUGINDIR "lib/${MAIN_DIR_NAME}${TAG_VERSION}/plugins/")
++ADD_DEFINITIONS("-DPLUGINDIR=\\\"${CMAKE_INSTALL_PREFIX}/${PLUGINDIR}\\\"")
++set(CMAKE_INSTALL_RPATH ${PLUGINDIR})
++
++# Set the XDG mime stuff
++SET(MIMEDIR "share/mime/packages/")
++
++
++#BUILD SETUP
++#None, Debug, Release, .. or custom ones
++SET(WANT_DEBUG 1)
++IF(WANT_DEBUG)
++  SET(CMAKE_BUILD_TYPE Debug)
++ELSE(WANT_DEBUG)
++  SET(CMAKE_BUILD_TYPE RELEASE)
++ENDIF(WANT_DEBUG)
++
++IF(APPLE)
++  SET( ENV{MACOSX_DEPLOYMENT_TARGET} 10.3 ) 
++  SET( ENV{LD_PREBIND} 1 )
++  SET( ENV{LD_PREBIND_ALLOW_OVERLAP} 1 )
++  SET(CMAKE_CXX_FLAGS_DEBUG "-O2 -g3 -fno-inline-functions -Wall")
++  SET(CMAKE_C_FLAGS_DEBUG "-O2 -g3 -fno-inline-functions -Wall")
++  SET(BUILD_MAC_BUNDLE 1)
++ELSE(APPLE)
++  SET(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3 -Wall")
++  SET(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -Wall")
++ENDIF(APPLE)
++SET(CMAKE_CXX_FLAGS_RELEASE "-O2 -Wall")
++SET(CMAKE_C_FLAGS_RELEASE "-O2 -Wall")
++
++
++INCLUDE (${CMAKE_ROOT}/Modules/TestBigEndian.cmake)
++TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
++
++#FIND DEPENDENCIES
++# START QT
++SET (QT_MT_REQUIRED true)
++SET (QT_MIN_VERSION "3.3.4")
++FIND_PACKAGE(Qt3 REQUIRED)
++IF (QT_FOUND)
++  MESSAGE("Qt3 Found OK (${qt_version_str})")
++#   MESSAGE("$ENV{QTDIR}")
++#   MESSAGE("${QT_MOC_EXECUTABLE}")
++#   MESSAGE("${QT_UIC_EXECUTABLE}")
++#   MESSAGE("${QT_QT_LIBRARY}")
++#   MESSAGE("${QT_INCLUDE_DIR}")
++#   MESSAGE("${qt_version_str}")
++#   MESSAGE(${qt_version_str_lib})
++ELSE(QT_FOUND)
++  MESSAGE(FATAL_ERROR "No Qt3")
++ENDIF(QT_FOUND)
++# END QT
++# START PNG, JPEG, TIFF
++FIND_PACKAGE(PNG REQUIRED)
++IF (PNG_FOUND)
++  MESSAGE("PNG Library Found OK")
++ENDIF(PNG_FOUND)
++FIND_PACKAGE(JPEG REQUIRED)
++IF (JPEG_FOUND)
++  MESSAGE("JPEG Library Found OK")
++ENDIF(JPEG_FOUND)
++FIND_PACKAGE(TIFF REQUIRED)
++IF (TIFF_FOUND)
++  MESSAGE("TIFF Library Found OK")
++  SET(HAVE_TIFF 1)
++ELSE(TIFF_FOUND)
++  MESSAGE(FATAL_ERROR "Could not find the TIFF Library")
++ENDIF(TIFF_FOUND)
++FIND_PACKAGE(ZLIB REQUIRED)
++IF (ZLIB_FOUND)
++  MESSAGE("ZLIB Library Found OK")
++  SET(HAVE_LIBZ 1)
++ENDIF(ZLIB_FOUND)
++FIND_PACKAGE(PythonLibs REQUIRED)
++IF (PYTHON_LIBRARY)
++  MESSAGE("Python Library Found OK")
++  SET(HAVE_PYTHON 1)
++  SET(COMPILE_PYTHON 1)
++ENDIF(PYTHON_LIBRARY)
++
++# START FREETYPE
++SET(FREETYPE_DIR ${CMAKE_MODULE_PATH})
++FIND_PACKAGE(FREETYPE REQUIRED)
++IF (FREETYPE_FOUND)
++  MESSAGE("FreeType2 Library Found OK")
++  CHECK_LIBRARY_EXISTS(libfreetype.so FT_Get_First_Char "" HAVE_FREETYPE_FIRST)
++  CHECK_LIBRARY_EXISTS(libfreetype.so FT_Get_Next_Char "" HAVE_FREETYPE_NEXT)
++ENDIF(FREETYPE_FOUND)
++#FIXME: if cflags empty add, otherwise replace as now
++SET(CFLAGS "${LIBFREETYPE_CFLAGS}")
++# END FREETYPE
++
++# If we have a RENDER_LIB selected from a previous cmake run, then use it
++# otherwise, we should be defaulting to Libart_LGPL for 1.3.3.x
++IF(RENDER_LIB)
++  MESSAGE(STATUS "Previously selected rendering system: ${RENDER_LIB}")
++ELSE(RENDER_LIB)
++  IF (NOT WANT_CAIRO)
++    SET(WANT_LIBART 1)
++  ENDIF (NOT WANT_CAIRO)
++ENDIF(RENDER_LIB)
++
++# START LIBART_LGPL
++IF (WANT_LIBART OR RENDER_LIB STREQUAL "LIBART")
++  SET(LIBART_LGPL_DIR ${CMAKE_MODULE_PATH})
++  FIND_PACKAGE(LIBART_LGPL REQUIRED)
++  IF(LIBART_LGPL_FOUND)
++    SET(RENDER_LIB "LIBART" CACHE TYPE STRING)
++    MESSAGE("Libart_LGPL Library Found OK")
++  ELSE(LIBART_LGPL_FOUND)
++    SET(OLDRENDERLIBLOST TRUE)
++  ENDIF(LIBART_LGPL_FOUND)
++ELSE (WANT_LIBART OR RENDER_LIB STREQUAL "LIBART")
++  # START CAIRO
++  SET(CAIRO_DIR ${CMAKE_MODULE_PATH})
++  FIND_PACKAGE(CAIRO)
++  IF(CAIRO_FOUND)
++    MESSAGE("CAIRO Library Found OK")
++    SET(RENDER_LIB "CAIRO" CACHE TYPE STRING)
++  ELSE(CAIRO_FOUND)
++    SET(OLDRENDERLIBLOST TRUE)
++  ENDIF(CAIRO_FOUND)
++  # END CAIRO
++ENDIF (WANT_LIBART OR RENDER_LIB STREQUAL "LIBART")
++# END LIBART_LGPL
++
++IF(NOT RENDER_LIB OR OLDRENDERLIBLOST)
++  MESSAGE(FATAL_ERROR "ERROR: Neither LibArt_LGPL nor cairo have been selected or found, please correct and restart cmake")
++ENDIF(NOT RENDER_LIB OR OLDRENDERLIBLOST)
++
++
++# START CUPS
++SET(CUPS_DIR ${CMAKE_MODULE_PATH})
++FIND_PACKAGE(CUPS REQUIRED)
++IF(CUPS_FOUND)
++  SET(HAVE_CUPS 1)
++  MESSAGE("CUPS Library Found OK")
++ENDIF(CUPS_FOUND)
++# END CUPS
++
++# START LIBXML2
++SET(LIBXML2_DIR ${CMAKE_MODULE_PATH})
++FIND_PACKAGE(LIBXML2 REQUIRED)
++IF(LIBXML2_FOUND)
++  SET(HAVE_XML 1)
++  MESSAGE("LIBXML2 Library Found OK")
++ENDIF(LIBXML2_FOUND)
++# END LIBXML2
++
++# START LCMS
++SET(LCMS_DIR ${CMAKE_MODULE_PATH})
++FIND_PACKAGE(LCMS REQUIRED)
++IF(LCMS_FOUND)
++  SET(HAVE_CMS 1)
++  SET(CMS_INC "lcms.h")
++  MESSAGE("LittleCMS Library Found OK")
++ELSE(LCMS_FOUND)
++  MESSAGE(FATAL_ERROR "Could not find the LittleCMS Library")
++ENDIF(LCMS_FOUND)
++# END LCMS
++
++# START FONTCONFIG
++SET(FONTCONFIG_DIR ${CMAKE_MODULE_PATH})
++FIND_PACKAGE(FONTCONFIG)
++IF(FONTCONFIG_FOUND)
++	MESSAGE("FontConfig Found OK")
++	SET(HAVE_FONTCONFIG 1)
++ENDIF(FONTCONFIG_FOUND)
++# END FONTCONFIG
++
++ADD_DEFINITIONS(${QT_DEFINITIONS})
++
++CHECK_INCLUDE_FILE("dlfcn.h" HAVE_DLFCN_H)
++IF(HAVE_DLFCN_H)
++  ADD_DEFINITIONS(-DHAVE_DLFCN_H)
++ENDIF(HAVE_DLFCN_H)
++
++CHECK_INCLUDE_FILE("unistd.h" HAVE_UNISTD_H)
++IF(HAVE_UNISTD_H)
++  ADD_DEFINITIONS(-DHAVE_UNISTD_H)
++ENDIF(HAVE_UNISTD_H)
++
++CHECK_INCLUDE_FILE("sys/types.h" HAVE_SYS_TYPES_H)
++# IF(HAVE_SYS_TYPES_H)
++#   ADD_DEFINITIONS(-DHAVE_SYS_TYPES_H)
++# ENDIF(HAVE_SYS_TYPES_H)
++
++CHECK_INCLUDE_FILE("sys/stat.h" HAVE_SYS_STAT_H)
++# IF(HAVE_SYS_STAT_H)
++#   ADD_DEFINITIONS(-DHAVE_SYS_STAT_H)
++# ENDIF(HAVE_SYS_STAT_H)
++
++
++#Create configure files.. config.h and uninstall
++#config.h
++INCLUDE (ConfigureChecks.cmake)
++CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
++ADD_DEFINITIONS("-DHAVE_CONFIG_H")
++#uninstall
++CONFIGURE_FILE(
++  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
++  "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
++  IMMEDIATE @ONLY)
++
++ADD_CUSTOM_TARGET(uninstall
++  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
++
++#Load our SCRIBUSQT package which gives us filename.moc instead of moc_filename.*
++SET(SCRIBUSQT_DIR ${CMAKE_MODULE_PATH})
++FIND_PACKAGE(SCRIBUSQT)
++
++#Set up include dirs with all found packages
++INCLUDE_DIRECTORIES(
++${CMAKE_BINARY_DIR}
++${CMAKE_BINARY_DIR}/scribus
++${QT_INCLUDE_DIR}
++${QT_INCLUDE_PATH}
++${CUPS_INCLUDE_DIR}
++${FREETYPE_INCLUDE_DIR}
++${FONTCONFIG_INCLUDE_DIR}
++${LCMS_INCLUDE_DIR}
++${LIBXML2_INCLUDE_DIR}
++${PYTHON_INCLUDE_PATH}
++${TIFF_INCLUDE_DIR}
++${ZLIB_INCLUDE_DIR}
++)
++
++#Set up libraries to link with all found packages
++
++#Select Libart_LGPL or Cairo
++IF(RENDER_LIB STREQUAL "LIBART")
++  INCLUDE_DIRECTORIES(${LIBART_LGPL_INCLUDE_DIR})
++  LINK_LIBRARIES(${LIBART_LGPL_LIBRARIES})
++ENDIF(RENDER_LIB STREQUAL "LIBART")
++IF(RENDER_LIB STREQUAL "CAIRO")
++  INCLUDE_DIRECTORIES(${CAIRO_INCLUDE_DIR})
++  LINK_LIBRARIES(${CAIRO_LIBRARIES})
++  LINK_DIRECTORIES(${PREFIX_CAIRO_LIB})
++  SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_RPATH};${PREFIX_CAIRO_LIB}")
++ENDIF(RENDER_LIB STREQUAL "CAIRO")
++
++MESSAGE("RPATH: ${CMAKE_INSTALL_RPATH}")
++
++LINK_LIBRARIES (
++${QT_QT_LIBRARY}
++${CUPS_LIBRARIES}
++${FREETYPE_LIBRARIES}
++${FONTCONFIG_LIBRARIES}
++${LCMS_LIBRARIES}
++${LIBXML2_LIBRARIES}
++${PYTHON_LIBRARIES}
++${TIFF_LIBRARIES}
++${JPEG_LIBRARIES}
++${ZLIB_LIBRARIES}
++)
++
++IF(WIN32)
++  LINK_LIBRARIES(
++    ${QT_QTMAIN_LIBRARY}
++  )
++ENDIF(WIN32)
++
++IF(WIN32)
++  ADD_DEFINITIONS(-DQT_DLL)
++ENDIF(WIN32)
++
++IF(APPLE)
++  LINK_LIBRARIES( "-undefined dynamic_lookup" ) 
++  LINK_LIBRARIES( "-framework CoreFoundation" ) 
++ENDIF(APPLE)
++
++#Add our source subdirs
++ADD_SUBDIRECTORY(scribus)
++
++#Install our READMEs etc.
++INSTALL(FILES
++AUTHORS
++BUILDING
++ChangeLog
++ChangeLogCVS
++COPYING
++INSTALL
++NEWS
++PACKAGING
++README
++README.MacOSX
++TODO
++
++  DESTINATION ${DOCDIR}
++)
++INSTALL(FILES
++scribus.xml
++DESTINATION ${MIMEDIR}
++)
++
++# If the cmake version includes cpack, use it
++IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
++  SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Scribus is an open source publishing application for Linux, Mac OSX and Windows")
++  SET(CPACK_PACKAGE_VENDOR "Scribus Team")
++  SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
++  SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README")
++  SET(CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
++  SET(CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
++  SET(CPACK_PACKAGE_VERSION_PATCH "${VERSION_PATCH}")
++  SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Scribus ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
++  SET(CPACK_PACKAGE_EXECUTABLES "scribus${TAG_VERSION}")
++  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "scribus${TAG_VERSION}")
++  SET(CPACK_SOURCE_GENERATOR TBZ2)
++
++  INCLUDE(CPack)
++ENDIF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
+diff -Nur scribus-1.3.3.6/cmake_uninstall.cmake.in scribus-1.3.3.6-cmake/cmake_uninstall.cmake.in
+--- scribus-1.3.3.6/cmake_uninstall.cmake.in	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/cmake_uninstall.cmake.in	2006-12-05 12:19:45.000000000 +0100
+@@ -0,0 +1,18 @@
++IF(NOT EXISTS "@CMAKE_CURRENT_BINARY_DIR@/install_manifest.txt")
++  MESSAGE(FATAL_ERROR "Cannot find install manifest: \"@CMAKE_CURRENT_BINARY_DIR@/install_manifest.txt\"")
++ENDIF(NOT EXISTS "@CMAKE_CURRENT_BINARY_DIR@/install_manifest.txt")
++
++FILE(READ "@CMAKE_CURRENT_BINARY_DIR@/install_manifest.txt" files)
++STRING(REGEX REPLACE "\n" ";" files "${files}")
++FOREACH(file ${files})
++  MESSAGE(STATUS "Uninstalling \"${file}\"")
++  IF(NOT EXISTS "${file}")
++    MESSAGE(FATAL_ERROR "File \"${file}\" does not exists.")
++  ENDIF(NOT EXISTS "${file}")
++  EXEC_PROGRAM("@CMAKE_COMMAND@" ARGS "-E remove \"${file}\""
++    OUTPUT_VARIABLE rm_out
++    RETURN_VARIABLE rm_retval)
++  IF("${rm_retval}" GREATER 0)
++    MESSAGE(FATAL_ERROR "Problem when removing \"${file}\"")
++  ENDIF("${rm_retval}" GREATER 0)
++ENDFOREACH(file)
+\ Brak znaku nowej linii na koñcu pliku
+diff -Nur scribus-1.3.3.6/config.h.cmake scribus-1.3.3.6-cmake/config.h.cmake
+--- scribus-1.3.3.6/config.h.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/config.h.cmake	2006-12-05 14:25:22.000000000 +0100
+@@ -0,0 +1,27 @@
++
++
++/*
++ * Prevent code from including config.h directly. You should include
++ * scconfig.h instead. This lets us handle win-config.h correctly, and
++ * may do more later.
++ */
++#ifndef _SCCONFIG_H
++#error "Include <scconfig.h> rather than using <config.h> directly"
++#endif
++
++#cmakedefine VERSION "1.3.3.6"
++
++#cmakedefine BUILD_MAC_BUNDLE
++#cmakedefine HAVE_CMS 1
++#cmakedefine HAVE_XML 1
++#cmakedefine CMS_INC "lcms.h"
++#cmakedefine HAVE_CAIRO 1
++#cmakedefine HAVE_CUPS 1
++#cmakedefine HAVE_TIFF 1
++#cmakedefine HAVE_LIBZ 1
++#cmakedefine HAVE_FONTCONFIG 1
++#cmakedefine HAVE_SYS_TYPES_H 1
++#cmakedefine HAVE_SYS_STAT_H 1
++#cmakedefine FT_FREETYPE_H
++#cmakedefine COMPILE_PYTHON 1
++#cmakedefine WORDS_BIGENDIAN 1
+diff -Nur scribus-1.3.3.6/ConfigureChecks.cmake scribus-1.3.3.6-cmake/ConfigureChecks.cmake
+--- scribus-1.3.3.6/ConfigureChecks.cmake	1970-01-01 01:00:00.000000000 +0100
++++ scribus-1.3.3.6-cmake/ConfigureChecks.cmake	2006-12-05 12:19:45.000000000 +0100
+@@ -0,0 +1,101 @@
++#http://websvn.kde.org/trunk/KDE/kdeaddons/ConfigureChecks.cmake?rev=520160&view=log
++
++include(CheckIncludeFile)
++include(CheckIncludeFiles)
++#include(CheckSymbolExists)
++include(CheckFunctionExists)
++include(CheckLibraryExists)
++#include(CheckPrototypeExists)
++include(CheckTypeSize)
++
++
++#check for libz using the cmake supplied FindZLIB.cmake
++if(ZLIB_FOUND)
++   set(HAVE_LIBZ 1)
++else(ZLIB_FOUND)
++   set(HAVE_LIBZ 0)
++endif(ZLIB_FOUND)
++
++if(JPEG_FOUND)
++   set(HAVE_LIBJPEG 1)
++else(JPEG_FOUND)
++   set(HAVE_LIBJPEG 0)
++endif(JPEG_FOUND)
++
++#check for png
++if(PNG_FOUND)
++   set(HAVE_LIBPNG 1)
++else(PNG_FOUND)
++   set(HAVE_LIBPNG 0)
++endif(PNG_FOUND)
++
++if(BZIP2_FOUND)
++   set(HAVE_BZIP2_SUPPORT 1)
++   if(BZIP2_NEED_PREFIX)
++      set(NEED_BZ2_PREFIX 1)
++   endif(BZIP2_NEED_PREFIX)
++else(BZIP2_FOUND)
++   set(HAVE_BZIP2_SUPPORT 0)
++endif(BZIP2_FOUND)
++
++if(LIBART_LGPL_FOUND)
++   set(HAVE_LIBART 1)
++   set(HAVE_CAIRO 0)
++else(LIBART_LGPL_FOUND)
++   set(HAVE_LIBART 0)
++   set(HAVE_CAIRO 1)
++endif(LIBART_LGPL_FOUND)
++
++if(CARBON_FOUND)
++        set(HAVE_CARBON 1)
++else(CARBON_FOUND)
++        set(HAVE_CARBON 0)
++endif(CARBON_FOUND)
++
++if(OPENSSL_FOUND)
++   set(HAVE_SSL 1)
++else(OPENSSL_FOUND)
++   set(HAVE_SSL 0)
++endif(OPENSSL_FOUND)
++
++
++check_include_files(endian.h HAVE_ENDIAN_H)
++check_include_files(fcntl.h HAVE_FCNTL_H)
++check_include_files(dlfcn.h HAVE_DLFCN_H)
++#check_include_files(crt_externs.h HAVE_CRT_EXTERNS_H)
++#check_include_files(inttypes.h HAVE_INTTYPES_H)
++#check_include_files(memory.h HAVE_MEMORY_H)
++#check_include_files(stdint.h HAVE_STDINT_H)
++#check_include_files(stdlib.h HAVE_STDLIB_H)
++#check_include_files(strings.h HAVE_STRINGS_H)
++#check_include_files(string.h HAVE_STRING_H)
++#check_include_files(sys/bitypes.h HAVE_SYS_BITYPES_H)
++#check_include_files(sys/stat.h HAVE_SYS_STAT_H)
++#check_include_files(sys/types.h HAVE_SYS_TYPES_H)
++check_include_files(unistd.h HAVE_UNISTD_H)
++
++#check_function_exists(_NSGetEnviron   HAVE_NSGETENVIRON)
++#check_function_exists(initgroups HAVE_INITGROUPS)
++#check_function_exists(setenv     HAVE_SETENV)
++#check_function_exists(strlcat    HAVE_STRLCAT)
++#check_function_exists(strlcpy    HAVE_STRLCPY)
++
++#check_symbol_exists(res_init        "sys/types.h;netinet/in.h;arpa/nameser.h;resolv.h" HAVE_RES_INIT)
++#check_symbol_exists(snprintf        "stdio.h"                  HAVE_SNPRINTF)
++#check_symbol_exists(vsnprintf       "stdio.h"                  HAVE_VSNPRINTF)
++
++
++#check_prototype_exists(res_init "sys/types.h;netinet/in.h;arpa/nameser.h;resolv.h" HAVE_RES_INIT_PROTO)
++#check_prototype_exists(initgroups "unistd.h;sys/types.h;unistd.h;grp.h" HAVE_INITGROUPS_PROTO)
++#check_prototype_exists(setenv stdlib.h HAVE_SETENV_PROTO)
++#check_prototype_exists(strlcat string.h HAVE_STRLCAT_PROTO)
++#check_prototype_exists(strlcpy string.h HAVE_STRLCPY_PROTO)
++
++
++#check_type_size("int" SIZEOF_INT)
++#check_type_size("char *"  SIZEOF_CHAR_P)
++#check_type_size("long" SIZEOF_LONG)
++#check_type_size("short" SIZEOF_SHORT)
++#check_type_size("size_t" SIZEOF_SIZE_T)
++#check_type_size("unsigned long" SIZEOF_UNSIGNED_LONG)
++

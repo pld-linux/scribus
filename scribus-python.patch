@@ -1,0 +1,45 @@
+diff -ur scribus-1.2.1/acinclude.m4 scribus-1.2.1-patch/acinclude.m4
+--- scribus-1.2.1/acinclude.m4	2004-11-17 10:49:56.000000000 +0100
++++ scribus-1.2.1-patch/acinclude.m4	2004-11-18 13:30:11.421704096 +0100
+@@ -4114,7 +4114,7 @@
+ 
+ PYTHONINC=-I$python_incdir
+ 
+-python_libdirs="$ac_python_dir/lib$kdelibsuff /usr/lib$kdelibsuff /usr/local /usr/lib$kdelibsuff $kde_extra_libs"
++python_libdirs="$ac_python_dir/lib$kdelibsuff /usr/lib$kdelibsuff /usr/share /usr/local /usr/lib64 /usr/lib$kdelibsuff $kde_extra_libs"
+ AC_FIND_FILE(libpython$version.so, $python_libdirs, python_libdir)
+ if test ! -r $python_libdir/libpython$version.so; then
+   AC_FIND_FILE(libpython$version.a, $python_libdirs, python_libdir)
+@@ -4133,9 +4133,9 @@
+   LIBPYTHON=-lpython$version
+ fi
+ 
+-AC_FIND_FILE(python$version/copy.py, $python_libdirs, python_moddir)
++AC_FIND_FILE(python$version/copy.pyo, $python_libdirs, python_moddir)
+ python_moddir=$python_moddir/python$version
+-if test ! -r $python_moddir/copy.py; then
++if test ! -r $python_moddir/copy.pyo; then
+   python_moddir=no
+ fi
+ 
+diff -ur scribus-1.3.3.4-python/acinclude.m4 scribus-1.3.3.4/acinclude.m4
+--- scribus-1.3.3.4-python/acinclude.m4	2006-10-03 01:07:35.000000000 +0200
++++ scribus-1.3.3.4/acinclude.m4	2006-10-24 11:40:07.000000000 +0200
+@@ -4183,7 +4183,8 @@
+ 
+ AC_DEFUN([KDE_CHECK_PYTHON],
+ [
+-  KDE_CHECK_PYTHON_INTERN("2.4",
++ KDE_CHECK_PYTHON_INTERN("2.5",
++  [KDE_CHECK_PYTHON_INTERN("2.4",
+    [KDE_CHECK_PYTHON_INTERN("2.3", 
+     [KDE_CHECK_PYTHON_INTERN("2.2", 
+      [KDE_CHECK_PYTHON_INTERN("2.1", 
+@@ -4193,6 +4194,7 @@
+      ])
+     ])
+    ])
++  ])
+ ])
+ 
+ AC_DEFUN([KDE_CHECK_STL],
