@@ -6,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.9
+Version:	1.3.4
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	137941773eaa6975393c1aa97236e1e8
+# Source0-md5:	cd3bc6cc6c2e2826eb689342e439443d
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 URL:		http://www.scribus.net/
@@ -237,27 +237,6 @@ rm -rf $RPM_BUILD_ROOT
 #%defattr(644,root,root,755)
 #%{_includedir}/scribus
 
-%files docs
-%defattr(644,root,root,755)
-%dir %{_docdir}/%{name}
-%dir %{_docdir}/%{name}/en
-%{_docdir}/%{name}/en/*
-%lang(cs) %dir %{_docdir}/%{name}/cs
-%lang(cs) %dir %{_docdir}/%{name}/cs/tutorials
-%lang(cs) %dir %{_docdir}/%{name}/cs/tutorials/scribus-short-words
-%lang(cs) %{_docdir}/%{name}/cs/tutorials/scribus-short-words/*
-%lang(de) %dir %{_docdir}/%{name}/de
-%lang(de) %{_docdir}/%{name}/de/*
-%lang(fr) %dir %{_docdir}/%{name}/fr
-%lang(fr) %{_docdir}/%{name}/fr/*.html
-%lang(fr) %dir %{_docdir}/%{name}/fr/tutorials
-%lang(fr) %dir %{_docdir}/%{name}/fr/tutorials/scribus-short-words
-%lang(fr) %{_docdir}/%{name}/fr/tutorials/scribus-short-words/*
-%lang(pl) %dir %{_docdir}/%{name}/pl
-%lang(pl) %dir %{_docdir}/%{name}/pl/tutorials
-%lang(pl) %dir %{_docdir}/%{name}/pl/tutorials/scribus-short-words
-%lang(pl) %{_docdir}/%{name}/pl/tutorials/scribus-short-words/*
-
 %files icc
 %defattr(644,root,root,755)
 %{_ulibdir}/scribus/profiles/*
@@ -274,3 +253,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/templates/sc_presentation/*
 %dir %{_datadir}/%{name}/templates/textbased
 %{_datadir}/%{name}/templates/textbased/*
+
+%if 0
+  /usr/lib/scribus/import_la.prolog
+   /usr/lib/scribus/scribus.en_AU.qm
+   /usr/lib/scribus/scribus.en_US.qm
+   /usr/lib/scribus/scribus.pt.qm
+   /usr/lib/scribus/scribus.zh_TW.qm
+   /usr/share/man/de/man1/scribus.1.gz
+   /usr/share/scribus/scripts/ChangeLog
+   /usr/share/scribus/scripts/NEWS
+   /usr/share/scribus/scripts/ReadMe
+   /usr/share/scribus/scripts/TODO
+   /usr/share/scribus/unicodenameslist.txt
+%endif
