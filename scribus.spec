@@ -184,9 +184,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de) %{_ulibdir}/scribus/scribus.de_ol.qm
 %lang(dz) %{_ulibdir}/scribus/scribus.dz.qm
 %lang(el) %{_ulibdir}/scribus/scribus.el.qm
-#%lang(en_AU) %{_ulibdir}/scribus/scribus.en_AU.qm
+%lang(en_AU) %{_ulibdir}/scribus/scribus.en_AU.qm
 %lang(en_GB) %{_ulibdir}/scribus/scribus.en_GB.qm
-#%lang(en_US) %{_ulibdir}/scribus/scribus.en_US.qm
+%lang(en_US) %{_ulibdir}/scribus/scribus.en_US.qm
 %lang(eo) %{_ulibdir}/scribus/scribus.eo.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es.qm
 %lang(es) %{_ulibdir}/scribus/scribus.es_LA.qm
@@ -204,6 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nl) %{_ulibdir}/scribus/scribus.nl.qm
 %lang(nb) %{_ulibdir}/scribus/scribus.nb.qm
 %lang(pl) %{_ulibdir}/scribus/scribus.pl.qm
+%lang(pt) %{_ulibdir}/scribus/scribus.pt.qm
 %lang(pt_BR) %{_ulibdir}/scribus/scribus.pt_BR.qm
 %lang(ru) %{_ulibdir}/scribus/scribus.ru.qm
 %lang(se) %{_ulibdir}/scribus/scribus.se.qm
@@ -215,6 +216,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(tr) %{_ulibdir}/scribus/scribus.tr.qm
 %lang(uk) %{_ulibdir}/scribus/scribus.uk.qm
 %lang(zh_CN) %{_ulibdir}/scribus/scribus.zh.qm
+%lang(zh_TW) %{_ulibdir}/scribus/scribus.zh_TW.qm
 %dir %{_ulibdir}/%{name}/swatches
 %{_ulibdir}/%{name}/swatches/*
 %dir %{_datadir}/%{name}
@@ -229,13 +231,18 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*.py
 %{_desktopdir}/%{name}.desktop
-%{_mandir}/man1/%{name}.*
-%lang(pl) %{_mandir}/pl/man1/%{name}.*
+%{_mandir}/man1/%{name}.1*
+%lang(de) %{_mandir}/de/man1/%{name}.1*
+%lang(pl) %{_mandir}/pl/man1/%{name}.1*
 %{_pixmapsdir}/%{name}icon.png
 
 #%files devel
 #%defattr(644,root,root,755)
 #%{_includedir}/scribus
+
+%files doc
+%defattr(644,root,root,755)
+RESTORE-OR-OBSOLETE-ME
 
 %files icc
 %defattr(644,root,root,755)
@@ -256,11 +263,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if 0
   /usr/lib/scribus/import_la.prolog
-   /usr/lib/scribus/scribus.en_AU.qm
-   /usr/lib/scribus/scribus.en_US.qm
-   /usr/lib/scribus/scribus.pt.qm
-   /usr/lib/scribus/scribus.zh_TW.qm
-   /usr/share/man/de/man1/scribus.1.gz
    /usr/share/scribus/scripts/ChangeLog
    /usr/share/scribus/scripts/NEWS
    /usr/share/scribus/scripts/ReadMe
