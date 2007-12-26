@@ -1,6 +1,5 @@
 [Desktop Entry]
 Version=1.0
-Encoding=UTF-8
 Name=Scribus
 Name[fa]=اسکریباس
 Name[lo]=ສະຄຣີບັດສ໌
@@ -48,9 +47,9 @@ GenericName[zu]=Ukushicilelwa kwe-Desktop
 FilePattern=scribus
 TryExec=scribus
 Exec=scribus %f
-MimeType=application/x-scribus
+MimeType=application/x-scribus;
 Terminal=false
-Icon=scribusicon.png
+Icon=scribusicon
 Type=Application
 X-StandardInstall=false
 Categories=Qt;Office;X-Misc;
