@@ -6,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.10
+Version:	1.3.3.11
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	a39de265be245f8dcc6815147c6c1feb
+# Source0-md5:	472432b6ae85e005c98bc11c79572ec9
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -147,7 +147,7 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt_LT.qm $RPM_BUILD_R
 
 rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
 
-rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,ChangeLogSVN,INSTALL,NEWS,PACKAGING,README,README.MacOSX,README,OS2,TODO}
+rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,ChangeLogSVN,INSTALL,NEWS,PACKAGING,README,README.MacOSX,README.OS2,TODO}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
