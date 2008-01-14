@@ -1,0 +1,6 @@
+- 1.3.4 moved to DEVEL as it is unstable
+- updated to 1.3.3.10
+- added Patch2 to fix docs location and restored them
+- make -j1, because build breaks with more
+- small changelog cleanup
+- rel. 1
