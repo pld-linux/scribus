@@ -7,7 +7,7 @@ Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.3.3.11
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
@@ -48,7 +48,6 @@ Obsoletes:	scribus-svg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
-%define		_ulibdir	%{_prefix}/lib
 
 %description
 Scribus is an open source desktop page layout program with the aim of
@@ -145,7 +144,7 @@ install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribusicon.png $RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt.qm
 
-rm -f $RPM_BUILD_ROOT%{_ulibdir}/scribus/*.no.qm
+rm -f $RPM_BUILD_ROOT%{_libdir}/scribus/*.no.qm
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,ChangeLogSVN,INSTALL,NEWS,PACKAGING,README,README.MacOSX,README.OS2,TODO}
 
@@ -164,16 +163,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog ChangeLogSVN NEWS README
 %attr(755,root,root) %{_bindir}/scribus
-%dir %{_ulibdir}/%{name}
-%{_ulibdir}/%{name}/import.prolog
+%dir %{_libdir}/%{name}
+%{_libdir}/%{name}/import.prolog
 # don't mark dictionaries with lang() --misiek
 %{_datadir}/%{name}/dicts
-%{_ulibdir}/%{name}/keysets
-%dir %{_ulibdir}/%{name}/plugins
-%attr(755,root,root) %{_ulibdir}/%{name}/plugins/*.so*
-%dir %{_ulibdir}/%{name}/plugins/gettext
-%attr(755,root,root) %{_ulibdir}/%{name}/plugins/gettext/*.so*
-%dir %{_ulibdir}/scribus/profiles
+%{_libdir}/%{name}/keysets
+%dir %{_libdir}/%{name}/plugins
+%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
+%dir %{_libdir}/%{name}/plugins/gettext
+%attr(755,root,root) %{_libdir}/%{name}/plugins/gettext/*.so*
+%dir %{_libdir}/scribus/profiles
 %dir %{_datadir}/%{name}/translations
 %lang(af) %{_datadir}/%{name}/translations/scribus.af.qm
 %lang(ar) %{_datadir}/%{name}/translations/scribus.ar.qm
@@ -218,8 +217,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(uk) %{_datadir}/%{name}/translations/scribus.uk.qm
 %lang(zh_CN) %{_datadir}/%{name}/translations/scribus.zh.qm
 %lang(zh_TW) %{_datadir}/%{name}/translations/scribus.zh_TW.qm
-%dir %{_ulibdir}/%{name}/swatches
-%{_ulibdir}/%{name}/swatches/*
+%dir %{_libdir}/%{name}/swatches
+%{_libdir}/%{name}/swatches/*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/dtd
 %{_datadir}/%{name}/icons
@@ -264,7 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files icc
 %defattr(644,root,root,755)
-%{_ulibdir}/scribus/profiles/*
+%{_libdir}/scribus/profiles/*
 
 %files templates-base
 %defattr(644,root,root,755)
