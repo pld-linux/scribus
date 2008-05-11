@@ -15,6 +15,7 @@ Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
+Patch3:		%{name}-sparc.patch
 URL:		http://www.scribus.net/
 %{?with_cairo:BuildRequires:	cairo-devel >= 1.2.0}
 BuildRequires:	cmake >= 2.4.5
@@ -117,6 +118,7 @@ Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 %setup -q
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 export QTDIR=%{_prefix}
