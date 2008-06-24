@@ -1,4 +1,8 @@
 #
+# TODO:
+#	- mimelnk integration? IMHO an unneeded dep, although
+#	  Patrys will disagree propably (WRT to his latest posts ;)
+#
 # Conditional build:
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
@@ -6,12 +10,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.11
-Release:	2
+Version:	1.3.3.12
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	472432b6ae85e005c98bc11c79572ec9
+# Source0-md5:	48f6d762809ad714b366d8d4fc82d5c3
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
