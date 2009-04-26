@@ -10,12 +10,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.12
-Release:	5
+Version:	1.3.3.13
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	48f6d762809ad714b366d8d4fc82d5c3
+# Source0-md5:	e698b0d118c7f037e57163cba302d96e
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -146,7 +146,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribusicon.png $RPM_BUILD_ROOT%{_pixmapsdir}
+install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribus.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt.qm
 
@@ -239,7 +239,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/%{name}.1*
 %lang(pl) %{_mandir}/pl/man1/%{name}.1*
-%{_pixmapsdir}/%{name}icon.png
+%{_pixmapsdir}/%{name}.png
 
 #%files devel
 #%defattr(644,root,root,755)
