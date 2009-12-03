@@ -37,6 +37,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
 BuildRequires:	perl-base
+BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	qt-devel >= 6:3.0.5
