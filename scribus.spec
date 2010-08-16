@@ -1,8 +1,4 @@
 #
-# TODO:
-#	- mimelnk integration? IMHO an unneeded dep, although
-#	  Patrys will disagree propably (WRT to his latest posts ;)
-#
 # Conditional build:
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
@@ -10,12 +6,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.3.13
-Release:	7
+Version:	1.3.8
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Publishing
 Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	e698b0d118c7f037e57163cba302d96e
+# Source0-md5:	660b946ea3ba19e894fb5701832a6b54
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -38,6 +34,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
+BuildRequires:	podofo-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	qt-devel >= 6:3.0.5
@@ -48,6 +45,7 @@ BuildRequires:	zlib-devel
 Requires:	desktop-file-utils
 Requires:	python-PIL
 Requires:	python-tkinter
+Requires:	shared-mime-info
 Obsoletes:	scribus-scripting
 Obsoletes:	scribus-short-words
 Obsoletes:	scribus-svg
@@ -131,6 +129,9 @@ export KDEDIR=%{_prefix}
 
 %cmake . \
 	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
+%if "%{_lib}" == "lib64"
+	-DLIB_SUFFIX=64 \
+%endif
 %if %{with cairo}
 	-DWANT_CAIRO=1
 %else
@@ -149,11 +150,16 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribus.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
+mv $RPM_BUILD_ROOT%{_datadir}/mimelnk/* $RPM_BUILD_ROOT%{_datadir}/mime/
+
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt.qm
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/scribus/*.no.qm
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,ChangeLogSVN,INSTALL,NEWS,PACKAGING,README,README.MacOSX,README.OS2,TODO}
+
+# currently not used, -devel subpackage?
+rm -rf $RPM_BUILD_ROOT%{_includedir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -172,9 +178,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/scribus
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/import.prolog
+%{_datadir}/%{name}/unicodenameslist.txt
 # don't mark dictionaries with lang() --misiek
 %{_datadir}/%{name}/dicts
-%{_libdir}/%{name}/keysets
+%{_datadir}/%{name}/editorconfig
+%{_datadir}/%{name}/keysets
 %dir %{_libdir}/%{name}/plugins
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
 %dir %{_libdir}/%{name}/plugins/gettext
@@ -184,6 +192,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(af) %{_datadir}/%{name}/translations/scribus.af.qm
 %lang(ar) %{_datadir}/%{name}/translations/scribus.ar.qm
 %lang(bg) %{_datadir}/%{name}/translations/scribus.bg.qm
+%lang(bn) %{_datadir}/%{name}/translations/scribus.bn.qm
 %lang(br) %{_datadir}/%{name}/translations/scribus.br.qm
 %lang(ca) %{_datadir}/%{name}/translations/scribus.ca.qm
 %lang(cs) %{_datadir}/%{name}/translations/scribus.cs.qm
@@ -194,7 +203,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de) %{_datadir}/%{name}/translations/scribus.de_ol.qm
 %lang(dz) %{_datadir}/%{name}/translations/scribus.dz.qm
 %lang(el) %{_datadir}/%{name}/translations/scribus.el.qm
+%lang(en_AU) %{_datadir}/%{name}/translations/scribus.en_AU.qm
 %lang(en_GB) %{_datadir}/%{name}/translations/scribus.en_GB.qm
+%lang(en_US) %{_datadir}/%{name}/translations/scribus.en_US.qm
 %lang(eo) %{_datadir}/%{name}/translations/scribus.eo.qm
 %lang(es) %{_datadir}/%{name}/translations/scribus.es.qm
 %lang(es) %{_datadir}/%{name}/translations/scribus.es_LA.qm
@@ -212,8 +223,10 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nl) %{_datadir}/%{name}/translations/scribus.nl.qm
 %lang(nb) %{_datadir}/%{name}/translations/scribus.nb.qm
 %lang(pl) %{_datadir}/%{name}/translations/scribus.pl.qm
+%lang(pt) %{_datadir}/%{name}/translations/scribus.pt.qm
 %lang(pt_BR) %{_datadir}/%{name}/translations/scribus.pt_BR.qm
 %lang(ru) %{_datadir}/%{name}/translations/scribus.ru.qm
+%lang(sa) %{_datadir}/%{name}/translations/scribus.sa.qm
 %lang(sk) %{_datadir}/%{name}/translations/scribus.sk.qm
 %lang(sl) %{_datadir}/%{name}/translations/scribus.sl.qm
 %lang(sq) %{_datadir}/%{name}/translations/scribus.sq.qm
@@ -240,7 +253,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/%{name}.1*
 %lang(pl) %{_mandir}/pl/man1/%{name}.1*
+%lang(de) %{_mandir}/de/man1/%{name}.1*
 %{_pixmapsdir}/%{name}.png
+%{_datadir}/mime/application/vnd.scribus.desktop
 
 #%files devel
 #%defattr(644,root,root,755)
