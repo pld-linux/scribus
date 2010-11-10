@@ -10,7 +10,7 @@ Version:	1.3.8
 Release:	4
 License:	GPL v2
 Group:		X11/Applications/Publishing
-Source0:	http://dl.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
 # Source0-md5:	660b946ea3ba19e894fb5701832a6b54
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
