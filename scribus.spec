@@ -1,4 +1,6 @@
 #
+# TODO: files (docs and some translations)
+#
 # Conditional build:
 %bcond_with	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
@@ -6,12 +8,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.8
-Release:	4
-License:	GPL v2
+Version:	1.3.9
+Release:	1
+License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	660b946ea3ba19e894fb5701832a6b54
+# Source0-md5:	a54dbf2e10cd88d683d0d34565d29378
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -39,7 +41,7 @@ BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	qt-devel >= 6:3.0.5
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.293
+BuildRequires:	rpmbuild(macros) >= 1.577
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 Requires:	desktop-file-utils
@@ -128,10 +130,6 @@ export QTDIR=%{_prefix}
 export KDEDIR=%{_prefix}
 
 %cmake . \
-	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
-%if "%{_lib}" == "lib64"
-	-DLIB_SUFFIX=64 \
-%endif
 %if %{with cairo}
 	-DWANT_CAIRO=1
 %else
@@ -154,12 +152,10 @@ mv $RPM_BUILD_ROOT%{_datadir}/mimelnk/* $RPM_BUILD_ROOT%{_datadir}/mime/
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt.qm
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/scribus/*.no.qm
-
-rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogCVS,ChangeLogSVN,INSTALL,NEWS,PACKAGING,README,README.MacOSX,README.OS2,TODO}
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogSVN,NEWS,PACKAGING,README,README.MacOSX,TODO}
 
 # currently not used, -devel subpackage?
-rm -rf $RPM_BUILD_ROOT%{_includedir}/%{name}
+%{__rm} -r $RPM_BUILD_ROOT%{_includedir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -192,23 +188,23 @@ rm -rf $RPM_BUILD_ROOT
 %lang(af) %{_datadir}/%{name}/translations/scribus.af.qm
 %lang(ar) %{_datadir}/%{name}/translations/scribus.ar.qm
 %lang(bg) %{_datadir}/%{name}/translations/scribus.bg.qm
-%lang(bn) %{_datadir}/%{name}/translations/scribus.bn.qm
+#%%lang(bn) %{_datadir}/%{name}/translations/scribus.bn.qm
 %lang(br) %{_datadir}/%{name}/translations/scribus.br.qm
-%lang(ca) %{_datadir}/%{name}/translations/scribus.ca.qm
+#%%lang(ca) %{_datadir}/%{name}/translations/scribus.ca.qm
 %lang(cs) %{_datadir}/%{name}/translations/scribus.cs.qm
 %lang(cy) %{_datadir}/%{name}/translations/scribus.cy.qm
-%lang(da) %{_datadir}/%{name}/translations/scribus.da.qm
+#%%lang(da) %{_datadir}/%{name}/translations/scribus.da.qm
 %lang(de) %{_datadir}/%{name}/translations/scribus.de.qm
 %lang(de_CH) %{_datadir}/%{name}/translations/scribus.de_CH.qm
-%lang(de) %{_datadir}/%{name}/translations/scribus.de_ol.qm
-%lang(dz) %{_datadir}/%{name}/translations/scribus.dz.qm
+#%%lang(de) %{_datadir}/%{name}/translations/scribus.de_ol.qm
+#%%lang(dz) %{_datadir}/%{name}/translations/scribus.dz.qm
 %lang(el) %{_datadir}/%{name}/translations/scribus.el.qm
 %lang(en_AU) %{_datadir}/%{name}/translations/scribus.en_AU.qm
 %lang(en_GB) %{_datadir}/%{name}/translations/scribus.en_GB.qm
 %lang(en_US) %{_datadir}/%{name}/translations/scribus.en_US.qm
-%lang(eo) %{_datadir}/%{name}/translations/scribus.eo.qm
-%lang(es) %{_datadir}/%{name}/translations/scribus.es.qm
-%lang(es) %{_datadir}/%{name}/translations/scribus.es_LA.qm
+#%%lang(eo) %{_datadir}/%{name}/translations/scribus.eo.qm
+#%%lang(es) %{_datadir}/%{name}/translations/scribus.es.qm
+#%%lang(es) %{_datadir}/%{name}/translations/scribus.es_LA.qm
 %lang(et) %{_datadir}/%{name}/translations/scribus.et.qm
 %lang(eu) %{_datadir}/%{name}/translations/scribus.eu.qm
 %lang(fi) %{_datadir}/%{name}/translations/scribus.fi.qm
@@ -221,13 +217,13 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ko) %{_datadir}/%{name}/translations/scribus.ko.qm
 %lang(lt) %{_datadir}/%{name}/translations/scribus.lt.qm
 %lang(nl) %{_datadir}/%{name}/translations/scribus.nl.qm
-%lang(nb) %{_datadir}/%{name}/translations/scribus.nb.qm
-%lang(pl) %{_datadir}/%{name}/translations/scribus.pl.qm
+#%%lang(nb) %{_datadir}/%{name}/translations/scribus.nb.qm
+#%%lang(pl) %{_datadir}/%{name}/translations/scribus.pl.qm
 %lang(pt) %{_datadir}/%{name}/translations/scribus.pt.qm
 %lang(pt_BR) %{_datadir}/%{name}/translations/scribus.pt_BR.qm
 %lang(ru) %{_datadir}/%{name}/translations/scribus.ru.qm
 %lang(sa) %{_datadir}/%{name}/translations/scribus.sa.qm
-%lang(sk) %{_datadir}/%{name}/translations/scribus.sk.qm
+#%%lang(sk) %{_datadir}/%{name}/translations/scribus.sk.qm
 %lang(sl) %{_datadir}/%{name}/translations/scribus.sl.qm
 %lang(sq) %{_datadir}/%{name}/translations/scribus.sq.qm
 %lang(sr) %{_datadir}/%{name}/translations/scribus.sr.qm
@@ -235,7 +231,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(th) %{_datadir}/%{name}/translations/scribus.th_TH.qm
 %lang(tr) %{_datadir}/%{name}/translations/scribus.tr.qm
 %lang(uk) %{_datadir}/%{name}/translations/scribus.uk.qm
-%lang(zh_CN) %{_datadir}/%{name}/translations/scribus.zh.qm
+#%%lang(zh_CN) %{_datadir}/%{name}/translations/scribus.zh.qm
 %lang(zh_TW) %{_datadir}/%{name}/translations/scribus.zh_TW.qm
 %dir %{_libdir}/%{name}/swatches
 %{_libdir}/%{name}/swatches/*
@@ -266,21 +262,21 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/doc
 %dir %{_datadir}/%{name}/doc/en
 %{_datadir}/%{name}/doc/en/*
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials
-%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words
-%lang(cs) %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words/*
-%lang(de) %dir %{_datadir}/%{name}/doc/de
-%lang(de) %{_datadir}/%{name}/doc/de/*
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr
-%lang(fr) %{_datadir}/%{name}/doc/fr/*.*ml
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials
-%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words
-%lang(fr) %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words/*
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
-%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
-%lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
+#%%lang(cs) %dir %{_datadir}/%{name}/doc/cs
+#%%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials
+#%%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words
+#%%lang(cs) %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words/*
+#%%lang(de) %dir %{_datadir}/%{name}/doc/de
+#%%lang(de) %{_datadir}/%{name}/doc/de/*
+#%%lang(fr) %dir %{_datadir}/%{name}/doc/fr
+#%%lang(fr) %{_datadir}/%{name}/doc/fr/*.*ml
+#%%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials
+#%%lang(fr) %dir %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words
+#%%lang(fr) %{_datadir}/%{name}/doc/fr/tutorials/scribus-short-words/*
+#%%lang(pl) %dir %{_datadir}/%{name}/doc/pl
+#%%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
+#%%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
+#%%lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
 
 
 %files icc
@@ -295,8 +291,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/templates/br1/*
 %dir %{_datadir}/%{name}/templates/nl1
 %{_datadir}/%{name}/templates/nl1/*
-%dir %{_datadir}/%{name}/templates/sc_presentation
-%{_datadir}/%{name}/templates/sc_presentation/*
+#%%dir %{_datadir}/%{name}/templates/sc_presentation
+#%%{_datadir}/%{name}/templates/sc_presentation/*
 %dir %{_datadir}/%{name}/templates/textbased
 %{_datadir}/%{name}/templates/textbased/*
 
