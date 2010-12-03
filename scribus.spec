@@ -190,8 +190,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(bg) %{_datadir}/%{name}/translations/scribus.bg.qm
 #%%lang(bn) %{_datadir}/%{name}/translations/scribus.bn.qm
 %lang(br) %{_datadir}/%{name}/translations/scribus.br.qm
-#%%lang(ca) %{_datadir}/%{name}/translations/scribus.ca.qm
-%lang(cs) %{_datadir}/%{name}/translations/scribus.cs.qm
+%lang(ca) %{_datadir}/%{name}/translations/scribus.ca.qm
+#%%lang(cs) %{_datadir}/%{name}/translations/scribus.cs.qm
 %lang(cy) %{_datadir}/%{name}/translations/scribus.cy.qm
 #%%lang(da) %{_datadir}/%{name}/translations/scribus.da.qm
 %lang(de) %{_datadir}/%{name}/translations/scribus.de.qm
