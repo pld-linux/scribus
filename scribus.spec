@@ -2,7 +2,7 @@
 # TODO: files (docs and some translations)
 #
 # Conditional build:
-%bcond_with	cairo	# build with cairo support
+%bcond_without	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
 #
 Summary:	Scribus - Open Source Desktop Publishing
@@ -19,6 +19,10 @@ Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
 Patch3:		%{name}-sparc.patch
 URL:		http://www.scribus.net/
+BuildRequires:	QtCore-devel
+BuildRequires:	QtGui-devel
+BuildRequires:	QtNetwork-devel
+BuildRequires:	QtXml-devel
 %{?with_cairo:BuildRequires:	cairo-devel >= 1.2.0}
 BuildRequires:	cmake >= 2.4.5
 %if %{with cups}
@@ -34,12 +38,13 @@ BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
-BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	podofo-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
-BuildRequires:	qt-devel >= 6:3.0.5
+BuildRequires:	qt4-build
+BuildRequires:	qt4-linguist
+BuildRequires:	qt4-qmake
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.577
 BuildRequires:	sed >= 4.0
