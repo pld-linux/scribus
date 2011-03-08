@@ -5,15 +5,17 @@
 %bcond_without	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
 #
+%define		_rc	rc2
+#
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.9
-Release:	1
+Version:	1.4.0
+Release:	0.%{_rc}.1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
-Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	a54dbf2e10cd88d683d0d34565d29378
+Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.%{_rc}.tar.bz2
+# Source0-md5:	4c1916bcf6ebfabf19d2c676a22cce89
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -125,7 +127,7 @@ Default document templates shipped with Scribus.
 Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}.%{_rc}
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
