@@ -5,7 +5,7 @@
 %bcond_without	cairo	# build with cairo support
 %bcond_without	cups	# build without CUPS support
 #
-%define		_rc	rc2
+%define		_rc	rc3
 #
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
@@ -15,7 +15,7 @@ Release:	0.%{_rc}.1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.%{_rc}.tar.bz2
-# Source0-md5:	4c1916bcf6ebfabf19d2c676a22cce89
+# Source0-md5:	a004bcd9932b1ee7f2691ecb6702dbed
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -48,7 +48,7 @@ BuildRequires:	qt4-build
 BuildRequires:	qt4-linguist
 BuildRequires:	qt4-qmake
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.577
+BuildRequires:	rpmbuild(macros) >= 1.600
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 Requires:	desktop-file-utils
