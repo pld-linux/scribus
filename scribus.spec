@@ -8,12 +8,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.3.9
-Release:	2
+Version:	1.4.0
+Release:	0.5
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	a54dbf2e10cd88d683d0d34565d29378
+# Source0-md5:	119b23cafcd35ebd8488ff499f97eff5
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -190,54 +190,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/gettext/*.so*
 %dir %{_libdir}/scribus/profiles
 %dir %{_datadir}/%{name}/translations
-%lang(af) %{_datadir}/%{name}/translations/scribus.af.qm
-%lang(ar) %{_datadir}/%{name}/translations/scribus.ar.qm
-%lang(bg) %{_datadir}/%{name}/translations/scribus.bg.qm
-#%%lang(bn) %{_datadir}/%{name}/translations/scribus.bn.qm
-%lang(br) %{_datadir}/%{name}/translations/scribus.br.qm
-%lang(ca) %{_datadir}/%{name}/translations/scribus.ca.qm
-#%%lang(cs) %{_datadir}/%{name}/translations/scribus.cs.qm
-%lang(cy) %{_datadir}/%{name}/translations/scribus.cy.qm
-#%%lang(da) %{_datadir}/%{name}/translations/scribus.da.qm
-%lang(de) %{_datadir}/%{name}/translations/scribus.de.qm
-%lang(de_CH) %{_datadir}/%{name}/translations/scribus.de_CH.qm
-#%%lang(de) %{_datadir}/%{name}/translations/scribus.de_ol.qm
-#%%lang(dz) %{_datadir}/%{name}/translations/scribus.dz.qm
-%lang(el) %{_datadir}/%{name}/translations/scribus.el.qm
-%lang(en_AU) %{_datadir}/%{name}/translations/scribus.en_AU.qm
-%lang(en_GB) %{_datadir}/%{name}/translations/scribus.en_GB.qm
-%lang(en_US) %{_datadir}/%{name}/translations/scribus.en_US.qm
-#%%lang(eo) %{_datadir}/%{name}/translations/scribus.eo.qm
-#%%lang(es) %{_datadir}/%{name}/translations/scribus.es.qm
-#%%lang(es) %{_datadir}/%{name}/translations/scribus.es_LA.qm
-%lang(et) %{_datadir}/%{name}/translations/scribus.et.qm
-%lang(eu) %{_datadir}/%{name}/translations/scribus.eu.qm
-%lang(fi) %{_datadir}/%{name}/translations/scribus.fi.qm
-%lang(fr) %{_datadir}/%{name}/translations/scribus.fr.qm
-%lang(gl) %{_datadir}/%{name}/translations/scribus.gl.qm
-%lang(hu) %{_datadir}/%{name}/translations/scribus.hu.qm
-%lang(id) %{_datadir}/%{name}/translations/scribus.id.qm
-%lang(it) %{_datadir}/%{name}/translations/scribus.it.qm
-%lang(ja) %{_datadir}/%{name}/translations/scribus.ja.qm
-%lang(ko) %{_datadir}/%{name}/translations/scribus.ko.qm
-%lang(lt) %{_datadir}/%{name}/translations/scribus.lt.qm
-%lang(nl) %{_datadir}/%{name}/translations/scribus.nl.qm
-#%%lang(nb) %{_datadir}/%{name}/translations/scribus.nb.qm
-#%%lang(pl) %{_datadir}/%{name}/translations/scribus.pl.qm
-%lang(pt) %{_datadir}/%{name}/translations/scribus.pt.qm
-%lang(pt_BR) %{_datadir}/%{name}/translations/scribus.pt_BR.qm
-%lang(ru) %{_datadir}/%{name}/translations/scribus.ru.qm
-%lang(sa) %{_datadir}/%{name}/translations/scribus.sa.qm
-#%%lang(sk) %{_datadir}/%{name}/translations/scribus.sk.qm
-%lang(sl) %{_datadir}/%{name}/translations/scribus.sl.qm
-%lang(sq) %{_datadir}/%{name}/translations/scribus.sq.qm
-%lang(sr) %{_datadir}/%{name}/translations/scribus.sr.qm
-%lang(sv) %{_datadir}/%{name}/translations/scribus.sv.qm
-%lang(th) %{_datadir}/%{name}/translations/scribus.th_TH.qm
-%lang(tr) %{_datadir}/%{name}/translations/scribus.tr.qm
-%lang(uk) %{_datadir}/%{name}/translations/scribus.uk.qm
-#%%lang(zh_CN) %{_datadir}/%{name}/translations/scribus.zh.qm
-%lang(zh_TW) %{_datadir}/%{name}/translations/scribus.zh_TW.qm
+%{_datadir}/%%{name}/translations/scribus*.qm
 %dir %{_libdir}/%{name}/swatches
 %{_libdir}/%{name}/swatches/*
 %dir %{_datadir}/%{name}
@@ -250,7 +203,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/samples
 %{_datadir}/%{name}/samples/*.py
 %dir %{_datadir}/%{name}/scripts
-%{_datadir}/%{name}/scripts/*.py
+%{_datadir}/%{name}/scripts/*
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/%{name}.1*
 %lang(pl) %{_mandir}/pl/man1/%{name}.1*
@@ -265,8 +218,11 @@ rm -rf $RPM_BUILD_ROOT
 %files docs
 %defattr(644,root,root,755)
 %dir %{_datadir}/%{name}/doc
-%dir %{_datadir}/%{name}/doc/en
-%{_datadir}/%{name}/doc/en/*
+%{_datadir}/%{name}/doc/*
+##%dir %{_datadir}/%{name}/doc/en
+##%{_datadir}/%{name}/doc/en/*
+##%dir %{_datadir}/%{name}/doc/it
+##%{_datadir}/%{name}/doc/it/*
 #%%lang(cs) %dir %{_datadir}/%{name}/doc/cs
 #%%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials
 #%%lang(cs) %dir %{_datadir}/%{name}/doc/cs/tutorials/scribus-short-words
@@ -300,6 +256,18 @@ rm -rf $RPM_BUILD_ROOT
 #%%{_datadir}/%{name}/templates/sc_presentation/*
 %dir %{_datadir}/%{name}/templates/textbased
 %{_datadir}/%{name}/templates/textbased/*
+%dir %{_datadir}/%{name}/templates/buscard*
+%{_datadir}/%{name}/templates/buscard*/*
+%dir %{_datadir}/%{name}/templates/cover*
+%{_datadir}/%{name}/templates/cover*/*
+%dir %{_datadir}/%{name}/templates/grid_*
+%{_datadir}/%{name}/templates/grid_*/*
+%dir %{_datadir}/%{name}/templates/cc
+%{_datadir}/%{name}/templates/cc/*
+%dir %{_datadir}/%{name}/templates/mc
+%{_datadir}/%{name}/templates/mc/*
+%dir %{_datadir}/%{name}/templates/pres_backgr*
+%{_datadir}/%{name}/templates/pres_backgr*/*
 
 %if 0
   /usr/lib/scribus/import_la.prolog
