@@ -8,12 +8,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.4.0
+Version:	1.4.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	119b23cafcd35ebd8488ff499f97eff5
+# Source0-md5:	aa6b74528c295153ab3bda88c86ba0d6
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -125,7 +125,7 @@ Default document templates shipped with Scribus.
 Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
-%setup -q
+%setup -q -n Scribus
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -135,6 +135,7 @@ export QTDIR=%{_prefix}
 export KDEDIR=%{_prefix}
 
 %cmake . \
+	-DASPELL_EXECUTABLE=%{_bindir}/aspell \
 %if %{with cairo}
 	-DWANT_CAIRO=1
 %else
@@ -188,11 +189,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so*
 %dir %{_libdir}/%{name}/plugins/gettext
 %attr(755,root,root) %{_libdir}/%{name}/plugins/gettext/*.so*
-%dir %{_libdir}/scribus/profiles
+%dir %{_datadir}/%{name}/profiles
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%%{name}/translations/scribus*.qm
-%dir %{_libdir}/%{name}/swatches
-%{_libdir}/%{name}/swatches/*
+%dir %{_datadir}/%{name}/swatches
+%{_datadir}/%{name}/swatches/*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/dtd
 %{_datadir}/%{name}/icons
@@ -242,7 +243,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files icc
 %defattr(644,root,root,755)
-%{_libdir}/scribus/profiles/*
+%{_datadir}/scribus/profiles/*
 
 %files templates-base
 %defattr(644,root,root,755)
