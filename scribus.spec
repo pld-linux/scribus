@@ -154,8 +154,6 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribus.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
-mv $RPM_BUILD_ROOT%{_datadir}/mimelnk/* $RPM_BUILD_ROOT%{_datadir}/mime/
-
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt.qm
 
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogSVN,NEWS,PACKAGING,README,README.MacOSX,TODO}
@@ -207,10 +205,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/scripts/*
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/%{name}.1*
-%lang(pl) %{_mandir}/pl/man1/%{name}.1*
 %lang(de) %{_mandir}/de/man1/%{name}.1*
+%lang(pl) %{_mandir}/pl/man1/%{name}.1*
 %{_pixmapsdir}/%{name}.png
-%{_datadir}/mime/application/vnd.scribus.desktop
+%{_datadir}/mimelnk/application/vnd.scribus.desktop
 
 #%files devel
 #%defattr(644,root,root,755)
@@ -239,7 +237,6 @@ rm -rf $RPM_BUILD_ROOT
 #%%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials
 #%%lang(pl) %dir %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words
 #%%lang(pl) %{_datadir}/%{name}/doc/pl/tutorials/scribus-short-words/*
-
 
 %files icc
 %defattr(644,root,root,755)
