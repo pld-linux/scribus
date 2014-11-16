@@ -156,7 +156,7 @@ install $RPM_BUILD_ROOT%{_datadir}/%{name}/icons/scribus.png $RPM_BUILD_ROOT%{_p
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt_LT.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.lt.qm
 
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogSVN,NEWS,PACKAGING,README,README.MacOSX,TODO}
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,BUILDING,COPYING,ChangeLog,ChangeLogSVN,NEWS,PACKAGING,README,TODO}
 
 # currently not used, -devel subpackage?
 %{__rm} -r $RPM_BUILD_ROOT%{_includedir}/%{name}
