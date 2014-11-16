@@ -8,12 +8,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.4.1
+Version:	1.4.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
-Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.bz2
-# Source0-md5:	aa6b74528c295153ab3bda88c86ba0d6
+Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
+# Source0-md5:	a5714ee53074d4b8b77b59612f5e27a8
 Source1:	%{name}.desktop
 Patch1:		%{name}-standard-font-paths.patch
 Patch2:		%{name}-docs.patch
@@ -125,7 +125,7 @@ Default document templates shipped with Scribus.
 Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
-%setup -q -n Scribus
+%setup -q
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
