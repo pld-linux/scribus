@@ -1,0 +1,201 @@
+--- scribus-1.5.6/scribus/plugins/import/pdf/importpdf.cpp
++++ scribus-1.5.6/scribus/plugins/import/pdf/importpdf.cpp
+@@ -792,14 +792,15 @@ bool PdfPlug::convert(const QString& fn)
+ 								names = catDict.dictLookup("OpenAction");
+ 								if (names.isDict())
+ 								{
+-									LinkAction *linkAction = nullptr;
++									std::unique_ptr<::LinkAction> linkAction;
+ 									linkAction = LinkAction::parseAction(&names, pdfDoc->getCatalog()->getBaseURI());
+ 									if (linkAction)
+ 									{
+-										LinkJavaScript *jsa = (LinkJavaScript*)linkAction;
++										LinkJavaScript *jsa = static_cast<LinkJavaScript *>(linkAction.get());
+ 										if (jsa->isOk())
+ 										{
+-											QString script = UnicodeParsedString(jsa->getScript());
++											const GooString scriptGooString(jsa->getScript());
++											QString script = UnicodeParsedString(&scriptGooString);
+ 											if (script.startsWith("this."))
+ 											{
+ 												script.remove(0, 5);
+--- scribus-1.5.6/scribus/plugins/import/pdf/slaoutput.cpp
++++ scribus-1.5.6/scribus/plugins/import/pdf/slaoutput.cpp
+@@ -324,7 +324,7 @@ LinkAction* SlaOutputDev::SC_getAddition
+ 		{
+ 			Object actionObject = additionalActionsObject.dictLookup(key);
+ 			if (actionObject.isDict())
+-				linkAction = LinkAction::parseAction(&actionObject, pdfDoc->getCatalog()->getBaseURI());
++				linkAction = (LinkAction::parseAction(&actionObject, pdfDoc->getCatalog()->getBaseURI())).release();
+ 		}
+ 	}
+ 	return linkAction;
+@@ -455,7 +455,7 @@ bool SlaOutputDev::handleLinkAnnot(Annot
+ 			POPPLER_CONST GooString *ndst = gto->getNamedDest();
+ 			if (ndst)
+ 			{
+-				LinkDest *dstn = pdfDoc->findDest(ndst);
++				std::unique_ptr<LinkDest> dstn = pdfDoc->findDest(ndst);
+ 				if (dstn)
+ 				{
+ 					if (dstn->getKind() == destXYZ)
+@@ -499,7 +499,7 @@ bool SlaOutputDev::handleLinkAnnot(Annot
+ 			POPPLER_CONST GooString *ndst = gto->getNamedDest();
+ 			if (ndst)
+ 			{
+-				LinkDest *dstn = pdfDoc->findDest(ndst);
++				std::unique_ptr<LinkDest> dstn = pdfDoc->findDest(ndst);
+ 				if (dstn)
+ 				{
+ 					if (dstn->getKind() == destXYZ)
+@@ -516,8 +516,9 @@ bool SlaOutputDev::handleLinkAnnot(Annot
+ 	else if (act->getKind() == actionURI)
+ 	{
+ 		LinkURI *gto = (LinkURI*)act;
++		const GooString uriGooString(gto->getURI());
+ 		validLink = true;
+-		fileName = UnicodeParsedString(gto->getURI());
++		fileName = UnicodeParsedString(&uriGooString);
+ 	}
+ 	if (validLink)
+ 	{
+@@ -929,8 +930,9 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Lact;
+ 			if (jsa->isOk())
+ 			{
++				const GooString scriptGooString(jsa->getScript());
+ 				ite->annotation().setActionType(1);
+-				ite->annotation().setAction(UnicodeParsedString(jsa->getScript()));
++				ite->annotation().setAction(UnicodeParsedString(&scriptGooString));
+ 			}
+ 		}
+ 		else if (Lact->getKind() == actionGoTo)
+@@ -967,7 +969,7 @@ void SlaOutputDev::handleActions(PageIte
+ 				POPPLER_CONST GooString *ndst = gto->getNamedDest();
+ 				if (ndst)
+ 				{
+-					LinkDest *dstn = pdfDoc->findDest(ndst);
++					std::unique_ptr<LinkDest> dstn = pdfDoc->findDest(ndst);
+ 					if (dstn)
+ 					{
+ 						if (dstn->getKind() == destXYZ)
+@@ -1019,7 +1021,7 @@ void SlaOutputDev::handleActions(PageIte
+ 				POPPLER_CONST GooString *ndst = gto->getNamedDest();
+ 				if (ndst)
+ 				{
+-					LinkDest *dstn = pdfDoc->findDest(ndst);
++					std::unique_ptr<LinkDest> dstn = pdfDoc->findDest(ndst);
+ 					if (dstn)
+ 					{
+ 						if (dstn->getKind() == destXYZ)
+@@ -1039,7 +1041,8 @@ void SlaOutputDev::handleActions(PageIte
+ 		else if (Lact->getKind() == actionUnknown)
+ 		{
+ 			LinkUnknown *uno = (LinkUnknown*)Lact;
+-			QString actString = UnicodeParsedString(uno->getAction());
++			const GooString actionGooString(uno->getAction());
++			QString actString = UnicodeParsedString(&actionGooString);
+ 			if (actString == "ResetForm")
+ 			{
+ 				ite->annotation().setActionType(4);
+@@ -1082,8 +1085,9 @@ void SlaOutputDev::handleActions(PageIte
+ 		else if (Lact->getKind() == actionNamed)
+ 		{
+ 			LinkNamed *uno = (LinkNamed*)Lact;
++			const GooString nameGooString(uno->getName());
+ 			ite->annotation().setActionType(10);
+-			ite->annotation().setAction(UnicodeParsedString(uno->getName()));
++			ite->annotation().setAction(UnicodeParsedString(&nameGooString));
+ 		}
+ 		else
+ 			qDebug() << "Found unsupported Action of type" << Lact->getKind();
+@@ -1096,7 +1100,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setD_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setD_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 			}
+ 		}
+@@ -1110,7 +1115,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setE_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setE_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 			}
+ 		}
+@@ -1124,7 +1130,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setX_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setX_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 			}
+ 		}
+@@ -1138,7 +1145,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setFo_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setFo_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 			}
+ 		}
+@@ -1152,7 +1160,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setBl_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setBl_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 			}
+ 		}
+@@ -1166,7 +1175,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setC_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setC_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 			}
+ 		}
+@@ -1180,7 +1190,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setF_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setF_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 				ite->annotation().setFormat(5);
+ 			}
+@@ -1195,7 +1206,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setK_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setK_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 				ite->annotation().setFormat(5);
+ 			}
+@@ -1210,7 +1222,8 @@ void SlaOutputDev::handleActions(PageIte
+ 			LinkJavaScript *jsa = (LinkJavaScript*)Aact;
+ 			if (jsa->isOk())
+ 			{
+-				ite->annotation().setV_act(UnicodeParsedString(jsa->getScript()));
++				const GooString scriptGooString(jsa->getScript());
++				ite->annotation().setV_act(UnicodeParsedString(&scriptGooString));
+ 				ite->annotation().setAAact(true);
+ 			}
+ 		}
