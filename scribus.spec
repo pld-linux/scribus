@@ -205,7 +205,7 @@ echo '%%defattr(644,root,root,755)' >%{name}.lang
 for f in $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.*.qm ; do
 	bn="$(basename $f .qm)"
 	lang="${bn#%{name}.}"
-	echo "%%lang(${lang}) $f" >>%{name}.lang
+	echo "%%lang(${lang}) ${f#${RPM_BUILD_ROOT}}" >>%{name}.lang
 done
 
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/doc/{AUTHORS,COPYING,ChangeLog,README,LINKS,TRANSLATION}
