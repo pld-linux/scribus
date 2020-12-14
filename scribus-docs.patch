@@ -1,6 +1,6 @@
---- scribus-1.5.5/CMakeLists.txt~	2019-07-31 00:34:43.000000000 +0200
-+++ scribus-1.5.5/CMakeLists.txt	2020-08-01 11:43:01.688045033 +0200
-@@ -316,11 +316,11 @@
+--- scribus-1.5.6.1/CMakeLists_Directories.cmake.orig	2020-11-14 23:37:41.000000000 +0100
++++ scribus-1.5.6.1/CMakeLists_Directories.cmake	2020-12-13 06:30:34.902088690 +0100
+@@ -39,11 +39,11 @@
  if(WIN32 OR OS2)
  	set(DOCDIR "${CMAKE_INSTALL_DATAROOTDIR}/doc/")
  elseif(TAG_VERSION OR BUILD_OSX_BUNDLE)

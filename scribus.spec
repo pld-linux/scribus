@@ -6,24 +6,18 @@
 # Conditional build:
 %bcond_without	cups	# CUPS support
 #
-%define	qt_ver	5.7.0
+%define	qt_ver	5.11.0
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.5.5
-Release:	3
+Version:	1.5.6.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
-# Source0-md5:	6a9ddc8c45356d3c6c741e4c7bb0565a
-Patch1:		%{name}-standard-font-paths.patch
-Patch2:		%{name}-docs.patch
-Patch3:		%{name}-sparc.patch
-Patch4:		qt-5.15.patch
-Patch5:		poppler-0.84.0.patch
-Patch6:		poppler-0.86.0.patch
-Patch7:		gcc10.patch
-URL:		http://www.scribus.net/
+# Source0-md5:	12700cd8c6f08ef02f50495d2ef2d3ce
+Patch0:		%{name}-docs.patch
+URL:		https://www.scribus.net/
 BuildRequires:	GraphicsMagick-devel
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
 BuildRequires:	Qt5Gui-devel >= %{qt_ver}
@@ -34,7 +28,7 @@ BuildRequires:	Qt5Widgets-devel >= %{qt_ver}
 BuildRequires:	Qt5Xml-devel >= %{qt_ver}
 BuildRequires:	boost-devel
 BuildRequires:	cairo-devel >= 1.2.0
-BuildRequires:	cmake >= 3.2.0
+BuildRequires:	cmake >= 3.12.0
 %if %{with cups}
 BuildRequires:	cups-devel
 %else
@@ -54,8 +48,7 @@ BuildRequires:	libicu-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmspub-devel >= 0.1
 BuildRequires:	libpagemaker-devel
-# disabled in 1.5.5
-#BuildRequires:	libpng-devel
+BuildRequires:	libpng-devel >= 1.6
 BuildRequires:	libqxp-devel
 BuildRequires:	librevenge-devel
 BuildRequires:	libstdc++-devel >= 6:4.7
@@ -162,13 +155,7 @@ Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
+%patch0 -p1
 
 %build
 mkdir -p build
@@ -195,6 +182,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.{kn_IN,kn}.qm
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.{lt_LT,lt}.qm
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.{mn_MN,mn}.qm
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.{ms_MY,ms}.qm
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.{nb_NO,nb}.qm
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.{pl_PL,pl}.qm
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/%{name}/translations/%{name}.{pt_PT,pt}.qm
@@ -263,6 +251,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/doc/en
 %lang(de) %{_datadir}/%{name}/doc/de
 %lang(it) %{_datadir}/%{name}/doc/it
+%lang(ru) %{_datadir}/%{name}/doc/ru
 
 %files icc
 %defattr(644,root,root,755)
