@@ -11,12 +11,13 @@ Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.5.6.1
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
 # Source0-md5:	12700cd8c6f08ef02f50495d2ef2d3ce
 Patch0:		%{name}-docs.patch
+Patch1:		poppler.patch
 URL:		https://www.scribus.net/
 BuildRequires:	GraphicsMagick-devel
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
@@ -91,6 +92,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
 
+%define		_debugsource_packages	0
+
 %description
 Scribus is an open source desktop page layout program with the aim of
 producing commerical grade output in PDF and Postscript, primarily,
@@ -156,6 +159,7 @@ Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 mkdir -p build
