@@ -14,7 +14,7 @@ Version:	1.5.7
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
-Source0:	http://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
+Source0:	https://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
 # Source0-md5:	4d0c63cfdade8a9abf225a4415e43694
 Patch0:		%{name}-docs.patch
 URL:		https://www.scribus.net/
