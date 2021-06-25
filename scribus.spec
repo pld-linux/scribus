@@ -67,7 +67,7 @@ BuildRequires:	qt5-build >= %{qt_ver}
 BuildRequires:	qt5-linguist >= %{qt_ver}
 BuildRequires:	qt5-qmake >= %{qt_ver}
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.577
+BuildRequires:	rpmbuild(macros) >= 2.005
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
