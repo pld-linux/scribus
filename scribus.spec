@@ -10,14 +10,13 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.5.7
-Release:	4
+Version:	1.5.8
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	https://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
-# Source0-md5:	4d0c63cfdade8a9abf225a4415e43694
+# Source0-md5:	ff9e966a2251a6c8800bb26fcb4b7c59
 Patch0:		%{name}-docs.patch
-Patch1:		harfbuzz.patch
 URL:		https://www.scribus.net/
 BuildRequires:	GraphicsMagick-devel
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
@@ -62,8 +61,8 @@ BuildRequires:	pkgconfig
 BuildRequires:	podofo-devel
 BuildRequires:	poppler-cpp-devel >= 0.58.0
 BuildRequires:	poppler-devel >= 0.58.0
-BuildRequires:	python-devel >= 2
-BuildRequires:	python-modules >= 2
+BuildRequires:	python3-devel
+BuildRequires:	python3-modules
 BuildRequires:	qt5-build >= %{qt_ver}
 BuildRequires:	qt5-linguist >= %{qt_ver}
 BuildRequires:	qt5-qmake >= %{qt_ver}
@@ -84,8 +83,8 @@ Requires:	Qt5Widgets >= %{qt_ver}
 Requires:	Qt5Xml >= %{qt_ver}
 Requires:	harfbuzz >= 0.9.42
 Requires:	hicolor-icon-theme
-Requires:	python-PIL
-Requires:	python-tkinter
+Requires:	python3-PIL
+Requires:	python3-tkinter
 Requires:	shared-mime-info
 Obsoletes:	scribus-scripting
 Obsoletes:	scribus-short-words
@@ -161,13 +160,13 @@ Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 mkdir -p build
 cd build
 
 %cmake .. \
+	-DWANT_CPP17=ON \
 	-DWANT_GRAPHICSMAGICK:BOOL=ON
 
 %{__make}
