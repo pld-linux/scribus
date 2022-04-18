@@ -17,6 +17,7 @@ Group:		X11/Applications/Publishing
 Source0:	https://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
 # Source0-md5:	ff9e966a2251a6c8800bb26fcb4b7c59
 Patch0:		%{name}-docs.patch
+Patch1:		%{name}-poppler.patch
 URL:		https://www.scribus.net/
 BuildRequires:	GraphicsMagick-devel
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
@@ -59,8 +60,8 @@ BuildRequires:	libzmf-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	podofo-devel
-BuildRequires:	poppler-cpp-devel >= 0.58.0
-BuildRequires:	poppler-devel >= 0.58.0
+BuildRequires:	poppler-cpp-devel >= 0.86.0
+BuildRequires:	poppler-devel >= 0.86.0
 BuildRequires:	python3-devel
 BuildRequires:	python3-modules
 BuildRequires:	qt5-build >= %{qt_ver}
@@ -160,6 +161,7 @@ Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 mkdir -p build
