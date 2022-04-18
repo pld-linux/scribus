@@ -87,9 +87,10 @@ Requires:	hicolor-icon-theme
 Requires:	python3-PIL
 Requires:	python3-tkinter
 Requires:	shared-mime-info
-Obsoletes:	scribus-scripting
-Obsoletes:	scribus-short-words
-Obsoletes:	scribus-svg
+Obsoletes:	scribus-devel < 1.3.3.6
+Obsoletes:	scribus-scripting < 0.6
+Obsoletes:	scribus-short-words < 1.3
+Obsoletes:	scribus-svg < 0.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_ia32	-fomit-frame-pointer
@@ -105,17 +106,6 @@ though not exclusively for Linux(R).
 Scribus jest to program do tworzenia publikacji z założenia generujący
 dokumenty PDF oraz Postscript nadające się do użytku komercyjnego,
 przeznaczony głównie, lecz nie tylko, dla systemu Linux(R).
-
-%package devel
-Summary:	Header files for Scribus plugins development
-Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek Scribusa
-Group:		Development/Libraries
-
-%description devel
-Header files for Scribus plugins development.
-
-%description devel -l pl.UTF-8
-Pliki nagłówkowe do tworzenia wtyczek Scribusa.
 
 %package docs
 Summary:	Documentation for Scribus
