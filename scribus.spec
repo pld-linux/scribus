@@ -87,7 +87,7 @@ Requires:	Qt5Xml >= %{qt_ver}
 Requires:	harfbuzz >= 0.9.42
 Requires:	harfbuzz-subset >= 2.4.0
 Requires:	hicolor-icon-theme
-Requires:	python3-PIL
+Requires:	python3-pillow
 Requires:	python3-tkinter
 Requires:	shared-mime-info
 Obsoletes:	scribus-devel < 1.3.3.6
