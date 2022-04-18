@@ -2,11 +2,12 @@
 # - OpenSceneGraph support (WANT_NOOSG to disable)
 # - system hyphen
 # - more system libs, see scribus/third_party (e.g. libwpg)
+# - qt6 bcond? (BR: Qt6{Core,Core5Compat,Gui,Widgets,Network} >= 6.2.0, cmake >= 3.16.0)
 #
 # Conditional build:
 %bcond_without	cups	# CUPS support
 #
-%define	qt_ver	5.11.0
+%define	qt_ver	5.14.0
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
@@ -29,7 +30,7 @@ BuildRequires:	Qt5Widgets-devel >= %{qt_ver}
 BuildRequires:	Qt5Xml-devel >= %{qt_ver}
 BuildRequires:	boost-devel
 BuildRequires:	cairo-devel >= 1.2.0
-BuildRequires:	cmake >= 3.12.0
+BuildRequires:	cmake >= 3.14.0
 %if %{with cups}
 BuildRequires:	cups-devel
 %else
@@ -39,6 +40,7 @@ BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	harfbuzz-devel >= 0.9.42
 BuildRequires:	harfbuzz-icu-devel
+BuildRequires:	harfbuzz-subset-devel >= 2.4.0
 BuildRequires:	hunspell-devel
 # missing find_package(HYPHEN); bundled version is used
 #BuildRequires:	hyphen-devel
@@ -52,7 +54,7 @@ BuildRequires:	libpagemaker-devel
 BuildRequires:	libpng-devel >= 2:1.6
 BuildRequires:	libqxp-devel
 BuildRequires:	librevenge-devel
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtiff-devel
 BuildRequires:	libvisio-devel >= 0.1
 BuildRequires:	libxml2-devel >= 2
@@ -62,8 +64,8 @@ BuildRequires:	pkgconfig
 BuildRequires:	podofo-devel
 BuildRequires:	poppler-cpp-devel >= 0.86.0
 BuildRequires:	poppler-devel >= 0.86.0
-BuildRequires:	python3-devel
-BuildRequires:	python3-modules
+BuildRequires:	python3-devel >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	qt5-build >= %{qt_ver}
 BuildRequires:	qt5-linguist >= %{qt_ver}
 BuildRequires:	qt5-qmake >= %{qt_ver}
@@ -83,6 +85,7 @@ Requires:	Qt5PrintSupport >= %{qt_ver}
 Requires:	Qt5Widgets >= %{qt_ver}
 Requires:	Qt5Xml >= %{qt_ver}
 Requires:	harfbuzz >= 0.9.42
+Requires:	harfbuzz-subset >= 2.4.0
 Requires:	hicolor-icon-theme
 Requires:	python3-PIL
 Requires:	python3-tkinter
