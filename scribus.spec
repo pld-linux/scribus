@@ -12,13 +12,14 @@ Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
 Version:	1.5.8
-Release:	4
+Release:	5
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	https://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
 # Source0-md5:	ff9e966a2251a6c8800bb26fcb4b7c59
 Patch0:		%{name}-docs.patch
 Patch1:		%{name}-poppler.patch
+Patch2:		%{name}-poppler-22.09.0.patch
 URL:		https://www.scribus.net/
 BuildRequires:	GraphicsMagick-devel
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
@@ -155,16 +156,14 @@ Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
-mkdir -p build
-cd build
-
-%cmake .. \
+%cmake -B build \
 	-DWANT_CPP17=ON \
 	-DWANT_GRAPHICSMAGICK:BOOL=ON
 
-%{__make}
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT

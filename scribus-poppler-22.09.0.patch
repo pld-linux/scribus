@@ -1,0 +1,27 @@
+--- scribus-1.5.8/scribus/plugins/import/pdf/slaoutput.cpp
++++ scribus-1.5.8/scribus/plugins/import/pdf/slaoutput.cpp
+@@ -3762,15 +3762,21 @@ void SlaOutputDev::getPenState(GfxState
+ 			break;
+ 	}
+ 	double lw = state->getLineWidth();
+-	double *dashPattern;
++#if POPPLER_ENCODED_VERSION >= POPPLER_VERSION_ENCODE(22, 9, 0)
++	const auto& dashPattern = state->getLineDash(&DashOffset);
++	QVector<double> pattern(dashPattern.size());
++	for (size_t i = 0; i < dashPattern.size(); ++i)
++		pattern[i] = dashPattern[i] / lw;
++	DashValues = pattern;
++#else
++	double* dashPattern;
+ 	int dashLength;
+ 	state->getLineDash(&dashPattern, &dashLength, &DashOffset);
+ 	QVector<double> pattern(dashLength);
+ 	for (int i = 0; i < dashLength; ++i)
+-	{
+ 		pattern[i] = dashPattern[i] / lw;
+-	}
+ 	DashValues = pattern;
++#endif
+ }
+ 
+ int SlaOutputDev::getBlendMode(GfxState *state)
