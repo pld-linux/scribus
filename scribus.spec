@@ -20,6 +20,7 @@ Source0:	https://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
 Patch0:		%{name}-docs.patch
 Patch1:		%{name}-poppler.patch
 Patch2:		%{name}-poppler-22.09.0.patch
+Patch3:		podofo-0.10.patch
 URL:		https://www.scribus.net/
 BuildRequires:	GraphicsMagick-devel
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
@@ -157,6 +158,7 @@ Domyślne szablony dokumentów dostarczane wraz ze Scribusem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %cmake -B build \
