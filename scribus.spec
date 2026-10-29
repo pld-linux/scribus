@@ -11,12 +11,12 @@
 Summary:	Scribus - Open Source Desktop Publishing
 Summary(pl.UTF-8):	Scribus - DTP dla Wolnego Oprogramowania
 Name:		scribus
-Version:	1.6.5
-Release:	2
+Version:	1.6.7
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Publishing
 Source0:	https://downloads.sourceforge.net/scribus/%{name}-%{version}.tar.xz
-# Source0-md5:	82cffe8942b26127a76299b19c1f6402
+# Source0-md5:	6899cb63761f6b626e5496736db46b9b
 Patch0:		%{name}-docs.patch
 URL:		https://www.scribus.net/
 BuildRequires:	GraphicsMagick-devel
